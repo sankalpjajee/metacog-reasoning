@@ -80,15 +80,33 @@ class ModelEvaluator:
     
     def _extract_final_answer(self, text: str) -> str:
         """Extract the final answer from model's reasoning."""
-        # Look for common answer patterns
-        patterns = [
+        # First, try to extract multiple choice answer (A, B, C, D)
+        mc_patterns = [
+            r'(?:answer|option|choice)\s*(?:is|:)?\s*\(?([A-D])\)?',
+            r'\b([A-D])\)\s*(?:is|appears|seems)',
+            r'(?:select|choose)\s*\(?([A-D])\)?',
+            r'\(?([A-D])\)?\s*(?:is correct|is the answer)',
+        ]
+        
+        for pattern in mc_patterns:
+            match = re.search(pattern, text, re.IGNORECASE)
+            if match:
+                return match.group(1).upper()
+        
+        # Look for standalone letter at end
+        match = re.search(r'\b([A-D])\b\.?\s*$', text, re.IGNORECASE)
+        if match:
+            return match.group(1).upper()
+        
+        # Try numerical answer patterns
+        num_patterns = [
             r'(?:final answer|answer|result)\s*(?:is|:)?\s*([\d,\.]+)',
             r'=\s*([\d,\.]+)\s*(?:clips|dollars|items|people|hours|minutes|cents|pounds|feet|inches|meters)?\s*\.?\s*$',
             r'(?:total|altogether)\s*(?:is|:)?\s*([\d,\.]+)',
             r'(?:she|he|they|it)\s+(?:sold|has|had|made|earned)\s*([\d,\.]+)',
         ]
         
-        for pattern in patterns:
+        for pattern in num_patterns:
             match = re.search(pattern, text, re.IGNORECASE)
             if match:
                 return match.group(1).replace(',', '')
@@ -96,8 +114,12 @@ class ModelEvaluator:
         # Fallback: extract last number in text
         numbers = re.findall(r'([\d,\.]+)', text)
         if numbers:
-            # Get the last number
             return numbers[-1].replace(',', '')
+        
+        # Last resort: extract any single letter A-D
+        letters = re.findall(r'\b([A-D])\b', text, re.IGNORECASE)
+        if letters:
+            return letters[-1].upper()
         
         return text
     
