@@ -18,6 +18,12 @@ class EvaluationMetrics:
 
 def normalize_answer(answer: str) -> str:
     """Normalize an answer string for comparison."""
+    # Handle None or empty
+    if answer is None:
+        return ""
+    if not isinstance(answer, str):
+        answer = str(answer)
+    
     # Remove whitespace
     answer = answer.strip()
     
@@ -35,6 +41,12 @@ def normalize_answer(answer: str) -> str:
 
 def extract_number(text: str) -> float:
     """Extract a number from text."""
+    # Handle None
+    if text is None:
+        return None
+    if not isinstance(text, str):
+        text = str(text)
+    
     # Remove commas from numbers
     text = text.replace(',', '')
     
