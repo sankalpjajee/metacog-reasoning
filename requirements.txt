@@ -11,10 +11,9 @@ datasets>=2.16.0
 pandas>=2.0.0
 numpy>=1.24.0
 
-# Translation
-googletrans==4.0.0rc1
-indicnlp-corpus>=0.1.0
-indictrans>=1.0.0
+# Translation (optional, for Phase 2)
+# googletrans==4.0.0rc1
+# Note: Indic NLP packages will be added in Phase 2 for cross-lingual training
 
 # Evaluation metrics
 bert-score>=0.3.13

@@ -8,8 +8,15 @@ echo "Downloading Benchmark Datasets"
 echo "=========================================="
 
 # Activate virtual environment if it exists
-if [ -d "venv" ]; then
+if [ -f "venv/bin/activate" ]; then
+    echo "Activating virtual environment..."
     source venv/bin/activate
+elif [ -f "../venv/bin/activate" ]; then
+    echo "Activating virtual environment..."
+    source ../venv/bin/activate
+else
+    echo "Warning: Virtual environment not found. Using system Python."
+    echo "Make sure required packages are installed."
 fi
 
 # Create data directories
