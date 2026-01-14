@@ -54,7 +54,8 @@ data/generated/*
 !data/generated/.gitkeep
 
 # Logs and outputs
-logs/
+logs/*
+!logs/.gitkeep
 *.log
 wandb/
 results/
