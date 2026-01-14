@@ -10,7 +10,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from tqdm import tqdm
 
 from .benchmarks import load_benchmark, BenchmarkSample
-from .metrics import compute_accuracy, format_metrics
+from .metrics import compute_accuracy, EvaluationMetrics, format_metrics
 
 
 class ModelEvaluator:
@@ -73,13 +73,16 @@ class ModelEvaluator:
         # Extract answer (remove prompt)
         full_response = generated_text[len(prompt):].strip()
         
-        # Extract final numerical answer from reasoning
-        answer = self._extract_final_answer(full_response)
+        # Extract final answer, passing question for MC value mapping
+        answer = self._extract_final_answer(full_response, question)
         
         return answer
     
-    def _extract_final_answer(self, text: str) -> str:
+    def _extract_final_answer(self, text: str, question: str = None) -> str:
         """Extract the final answer from model's reasoning."""
+        # Check if this is a multiple choice question
+        is_mc = question and bool(re.search(r'\n[A-D]\.', question))
+        
         # First, try to extract multiple choice answer (A, B, C, D)
         mc_patterns = [
             r'(?:answer|option|choice)\s*(?:is|:)?\s*\(?([A-D])\)?',
@@ -98,7 +101,32 @@ class ModelEvaluator:
         if match:
             return match.group(1).upper()
         
-        # Try numerical answer patterns
+        # For MC questions: try to map computed value to answer letter
+        if is_mc:
+            # Extract option values from question
+            option_values = {}
+            for letter in ['A', 'B', 'C', 'D']:
+                match = re.search(rf'{letter}\.\s*(.+?)(?:\n|$)', question)
+                if match:
+                    option_values[letter] = match.group(1).strip()
+            
+            # Extract the computed value from model output
+            numbers = re.findall(r'([\d,\.]+)', text)
+            if numbers:
+                computed = numbers[-1].replace(',', '')
+                # Try to match computed value to an option
+                for letter, value in option_values.items():
+                    # Clean the option value
+                    clean_value = re.sub(r'[^\d\.\-]', '', value)
+                    if clean_value == computed:
+                        return letter
+            
+            # Last resort for MC: extract any letter A-D
+            letters = re.findall(r'\b([A-D])\b', text, re.IGNORECASE)
+            if letters:
+                return letters[-1].upper()
+        
+        # Try numerical answer patterns (for non-MC like GSM8k)
         num_patterns = [
             r'(?:final answer|answer|result)\s*(?:is|:)?\s*([\d,\.]+)',
             r'=\s*([\d,\.]+)\s*(?:clips|dollars|items|people|hours|minutes|cents|pounds|feet|inches|meters)?\s*\.?\s*$',
@@ -122,6 +150,55 @@ class ModelEvaluator:
             return letters[-1].upper()
         
         return text
+    
+    def _generate_code(self, sample) -> str:
+        """Generate code for HumanEval problems."""
+        # Use the original prompt from the sample
+        prompt = sample.metadata.get('prompt', sample.question)
+        
+        # Tokenize
+        inputs = self.tokenizer(prompt, return_tensors="pt")
+        inputs = {k: v.to(self.model.device) for k, v in inputs.items()}
+        
+        # Generate with more tokens for code
+        with torch.no_grad():
+            outputs = self.model.generate(
+                **inputs,
+                max_new_tokens=512,
+                temperature=0.2,
+                top_p=0.95,
+                do_sample=True,
+                pad_token_id=self.tokenizer.eos_token_id,
+            )
+        
+        # Decode
+        generated_text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+        
+        # Extract just the function body (after the prompt)
+        code = generated_text[len(prompt):].strip()
+        
+        # Stop at end of function (double newline or next def)
+        if '\n\ndef ' in code:
+            code = code.split('\n\ndef ')[0]
+        if '\n\nclass ' in code:
+            code = code.split('\n\nclass ')[0]
+        
+        return code
+    
+    def _execute_code_test(self, sample, generated_code: str) -> bool:
+        """Execute HumanEval test cases to check correctness."""
+        try:
+            # Combine prompt + generated code + test
+            full_code = sample.metadata['prompt'] + generated_code + "\n" + sample.metadata['test']
+            
+            # Execute in isolated namespace
+            exec_globals = {}
+            exec(full_code, exec_globals)
+            
+            # If we get here without exception, tests passed
+            return True
+        except Exception as e:
+            return False
     
     def _format_prompt(self, question: str) -> str:
         """Format question as a prompt."""
@@ -179,9 +256,15 @@ Solution:"""
         
         # Run evaluation
         predictions = []
+        is_humaneval = benchmark_name.lower() == 'humaneval'
+        
         for sample in tqdm(samples, desc="Evaluating"):
             # Generate answer
-            predicted_answer = self.generate_answer(sample.question)
+            if is_humaneval:
+                # For HumanEval, use code generation prompt
+                predicted_answer = self._generate_code(sample)
+            else:
+                predicted_answer = self.generate_answer(sample.question)
             
             # Store prediction
             predictions.append({
@@ -199,8 +282,23 @@ Solution:"""
         
         # Update is_correct in predictions
         from .metrics import is_correct
-        for pred in predictions:
-            pred['is_correct'] = is_correct(pred['predicted_answer'], pred['target_answer'])
+        for i, pred in enumerate(predictions):
+            if is_humaneval:
+                # For HumanEval, execute the code to check correctness
+                pred['is_correct'] = self._execute_code_test(samples[i], pred['predicted_answer'])
+            else:
+                pred['is_correct'] = is_correct(pred['predicted_answer'], pred['target_answer'])
+        
+        # Recompute metrics after code execution for HumanEval
+        if is_humaneval:
+            num_correct = sum(1 for p in predictions if p['is_correct'])
+            metrics = EvaluationMetrics(
+                accuracy=num_correct / len(predictions) if predictions else 0,
+                num_correct=num_correct,
+                num_incorrect=len(predictions) - num_correct,
+                per_category_accuracy={'code_generation': num_correct / len(predictions) if predictions else 0},
+                per_difficulty_accuracy=None
+            )
         
         # Create results dictionary
         results = {

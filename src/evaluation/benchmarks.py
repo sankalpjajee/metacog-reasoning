@@ -344,6 +344,65 @@ class MMLULoader(BenchmarkLoader):
         return formatted.strip()
 
 
+class MRBenLoader(BenchmarkLoader):
+    """Loader for MR-Ben (Meta-Reasoning Benchmark)."""
+    
+    def load(self, split: str = "test") -> List[BenchmarkSample]:
+        """Load MR-Ben dataset."""
+        cache_path = os.path.join(self.data_dir, f"mrben/{split}.jsonl")
+        
+        # Try to load from cache
+        if os.path.exists(cache_path):
+            print(f"Loading MR-Ben from cache: {cache_path}")
+            return self.load_cache(cache_path)
+        
+        # Download from HuggingFace
+        print(f"Downloading MR-Ben {split} split...")
+        dataset = load_dataset("Randolphzeng/Mr-Ben", split=split)
+        
+        samples = []
+        for idx, item in enumerate(dataset):
+            # Format the meta-reasoning question
+            question = self._format_question(item)
+            
+            # The answer is the error location/analysis
+            answer = item.get('answer', item.get('label', ''))
+            
+            samples.append(BenchmarkSample(
+                id=f"mrben_{idx}",
+                question=question,
+                answer=str(answer),
+                category=item.get('subject', item.get('category', 'meta_reasoning')),
+                difficulty=item.get('difficulty', None),
+                metadata={
+                    'subject': item.get('subject', ''),
+                    'reasoning_steps': item.get('steps', []),
+                }
+            ))
+        
+        # Save to cache
+        os.makedirs(os.path.dirname(cache_path), exist_ok=True)
+        self.save_cache(samples, cache_path)
+        print(f"Saved {len(samples)} samples to {cache_path}")
+        
+        return samples
+    
+    @staticmethod
+    def _format_question(item: dict) -> str:
+        """Format MR-Ben meta-reasoning question."""
+        question = item.get('question', item.get('problem', ''))
+        steps = item.get('steps', item.get('reasoning_steps', []))
+        
+        if steps:
+            formatted = f"{question}\n\nReasoning steps to analyze:\n"
+            for i, step in enumerate(steps, 1):
+                formatted += f"Step {i}: {step}\n"
+            formatted += "\nIdentify any errors in the reasoning above."
+            return formatted
+        
+        return question
+
+
 def load_benchmark(
     benchmark_name: str,
     split: str = "test",
@@ -369,6 +428,7 @@ def load_benchmark(
         'hellaswag': HellaSwagLoader,
         'bigbench': BIGBenchLoader,
         'humaneval': HumanEvalLoader,
+        'mrben': MRBenLoader,
     }
     
     if benchmark_name not in loaders:
