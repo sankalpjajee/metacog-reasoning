@@ -157,6 +157,9 @@ class HellaSwagLoader(BenchmarkLoader):
             )
             
             # Answer is 0, 1, 2, or 3 (convert to A, B, C, D)
+            # Skip samples with empty labels
+            if not item['label'] or item['label'] == '':
+                continue
             answer = ['A', 'B', 'C', 'D'][int(item['label'])]
             
             samples.append(BenchmarkSample(

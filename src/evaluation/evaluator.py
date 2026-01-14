@@ -125,7 +125,17 @@ class ModelEvaluator:
     
     def _format_prompt(self, question: str) -> str:
         """Format question as a prompt."""
-        return f"""Solve the following problem step by step. Provide your final answer at the end.
+        # Detect if this is a multiple choice question
+        is_multiple_choice = bool(re.search(r'\n[A-D]\.', question))
+        
+        if is_multiple_choice:
+            return f"""Answer the following multiple choice question. Think step by step, then provide your final answer as a single letter (A, B, C, or D).
+
+Question: {question}
+
+Solution:"""
+        else:
+            return f"""Solve the following problem step by step. Provide your final answer at the end.
 
 Problem: {question}
 
