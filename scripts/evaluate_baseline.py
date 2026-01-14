@@ -63,11 +63,13 @@ def main():
     )
     
     # Run evaluation
-    evaluator.evaluate_all(
-        benchmarks=benchmarks,
-        output_dir=args.output_dir,
-        max_samples=args.max_samples,
-    )
+    for benchmark in benchmarks:
+        evaluator.evaluate_benchmark(
+            benchmark_name=benchmark,
+            split="test",
+            output_dir=args.output_dir,
+            max_samples=args.max_samples,
+        )
     
     print("\n" + "="*60)
     print("BASELINE EVALUATION COMPLETE")
