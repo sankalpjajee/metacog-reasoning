@@ -21,7 +21,7 @@ def main():
     parser.add_argument(
         "--benchmarks",
         type=str,
-        default="gsm8k,math,mmlu",
+        default="gsm8k,math,mmlu,hellaswag,bigbench,humaneval",
         help="Comma-separated benchmark names"
     )
     parser.add_argument(

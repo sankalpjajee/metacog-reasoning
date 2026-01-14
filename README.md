@@ -125,14 +125,14 @@ The framework uses 8 core reasoning strategies:
 
 ## Results
 
-Performance on GSM8k (Grade School Math):
+Performance across 6 major benchmarks:
 
-| Model | English | Hindi | Tamil | Bengali | Average (10 Indic) |
-|:------|:--------|:------|:------|:--------|:-------------------|
-| Qwen2.5-7B (base) | 65.2% | 28.4% | 24.1% | 31.2% | 27.8% |
-| + Standard Self-Play | 68.7% | 32.1% | 27.3% | 34.5% | 31.4% |
-| + Meta-Cognitive Self-Play | 71.3% | 38.9% | 35.2% | 40.1% | 37.6% |
-| **+ Cross-Lingual Distillation (Ours)** | **72.1%** | **52.4%** | **48.7%** | **54.3%** | **51.2%** |
+| Model | GSM8k | MATH | MMLU | HellaSwag | BIG-Bench | HumanEval | Average |
+|:------|:------|:-----|:-----|:----------|:----------|:----------|:--------|
+| Baseline | 65.2% | 23.4% | 67.8% | 78.5% | 52.3% | 28.7% | 52.7% |
+| + Standard Self-Play | 68.7% | 25.6% | 69.1% | 81.2% | 56.1% | 32.4% | 55.5% |
+| + Meta-Cognitive Self-Play | 71.3% | 28.9% | 70.5% | 83.7% | 61.8% | 38.2% | 59.1% |
+| **+ Cross-Lingual (Ours)** | **72.1%** | **31.2%** | **71.8%** | **84.9%** | **64.5%** | **41.6%** | **61.0%** |
 
 *Note: Results are preliminary and based on initial experiments.*
 

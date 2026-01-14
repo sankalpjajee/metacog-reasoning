@@ -132,6 +132,158 @@ class MATHLoader(BenchmarkLoader):
         return samples
 
 
+class HellaSwagLoader(BenchmarkLoader):
+    """Loader for HellaSwag (Commonsense Reasoning) benchmark."""
+    
+    def load(self, split: str = "validation") -> List[BenchmarkSample]:
+        """Load HellaSwag dataset."""
+        cache_path = os.path.join(self.data_dir, f"hellaswag/{split}.jsonl")
+        
+        # Try to load from cache
+        if os.path.exists(cache_path):
+            print(f"Loading HellaSwag from cache: {cache_path}")
+            return self.load_cache(cache_path)
+        
+        # Download from HuggingFace
+        print(f"Downloading HellaSwag {split} split...")
+        dataset = load_dataset("Rowan/hellaswag", split=split)
+        
+        samples = []
+        for idx, item in enumerate(dataset):
+            # Format multiple choice question
+            question = self._format_question(
+                item['ctx'],
+                item['endings']
+            )
+            
+            # Answer is 0, 1, 2, or 3 (convert to A, B, C, D)
+            answer = ['A', 'B', 'C', 'D'][int(item['label'])]
+            
+            samples.append(BenchmarkSample(
+                id=f"hellaswag_{idx}",
+                question=question,
+                answer=answer,
+                category=item['activity_label'],
+                difficulty=None,
+                metadata={
+                    'ctx': item['ctx'],
+                    'endings': item['endings'],
+                    'activity_label': item['activity_label']
+                }
+            ))
+        
+        # Save to cache
+        self.save_cache(samples, cache_path)
+        print(f"Saved {len(samples)} samples to {cache_path}")
+        
+        return samples
+    
+    @staticmethod
+    def _format_question(context: str, endings: List[str]) -> str:
+        """Format HellaSwag question."""
+        formatted = f"{context}\n\nWhat happens next?\n\n"
+        for i, ending in enumerate(endings):
+            formatted += f"{chr(65+i)}. {ending}\n"
+        return formatted.strip()
+
+
+class BIGBenchLoader(BenchmarkLoader):
+    """Loader for BIG-Bench (Beyond the Imitation Game) benchmark."""
+    
+    def load(self, split: str = "default", task: str = "logical_deduction") -> List[BenchmarkSample]:
+        """Load BIG-Bench dataset."""
+        cache_path = os.path.join(self.data_dir, f"bigbench/{task}_{split}.jsonl")
+        
+        # Try to load from cache
+        if os.path.exists(cache_path):
+            print(f"Loading BIG-Bench ({task}) from cache: {cache_path}")
+            return self.load_cache(cache_path)
+        
+        # Download from HuggingFace
+        print(f"Downloading BIG-Bench {task} task...")
+        try:
+            dataset = load_dataset("bigbench", task, split=split)
+        except Exception as e:
+            print(f"Warning: Could not load task '{task}': {e}")
+            print("Using default task 'logical_deduction'")
+            dataset = load_dataset("bigbench", "logical_deduction", split=split)
+            task = "logical_deduction"
+        
+        samples = []
+        for idx, item in enumerate(dataset):
+            # BIG-Bench format varies by task
+            question = item.get('inputs', item.get('input', ''))
+            answer = item.get('targets', item.get('target', ['']))
+            
+            # Handle list or string answers
+            if isinstance(answer, list):
+                answer = answer[0] if answer else ''
+            
+            samples.append(BenchmarkSample(
+                id=f"bigbench_{task}_{idx}",
+                question=question,
+                answer=str(answer),
+                category=task,
+                difficulty=None,
+                metadata={'task': task}
+            ))
+        
+        # Save to cache
+        self.save_cache(samples, cache_path)
+        print(f"Saved {len(samples)} samples to {cache_path}")
+        
+        return samples
+
+
+class HumanEvalLoader(BenchmarkLoader):
+    """Loader for HumanEval (Code Generation) benchmark."""
+    
+    def load(self, split: str = "test") -> List[BenchmarkSample]:
+        """Load HumanEval dataset."""
+        cache_path = os.path.join(self.data_dir, f"humaneval/{split}.jsonl")
+        
+        # Try to load from cache
+        if os.path.exists(cache_path):
+            print(f"Loading HumanEval from cache: {cache_path}")
+            return self.load_cache(cache_path)
+        
+        # Download from HuggingFace
+        print(f"Downloading HumanEval...")
+        dataset = load_dataset("openai_humaneval", split="test")
+        
+        samples = []
+        for idx, item in enumerate(dataset):
+            # Format coding problem
+            question = self._format_coding_problem(
+                item['prompt'],
+                item['entry_point']
+            )
+            
+            samples.append(BenchmarkSample(
+                id=item['task_id'],
+                question=question,
+                answer=item['canonical_solution'],
+                category="code_generation",
+                difficulty=None,
+                metadata={
+                    'entry_point': item['entry_point'],
+                    'test': item['test'],
+                    'prompt': item['prompt']
+                }
+            ))
+        
+        # Save to cache
+        self.save_cache(samples, cache_path)
+        print(f"Saved {len(samples)} samples to {cache_path}")
+        
+        return samples
+    
+    @staticmethod
+    def _format_coding_problem(prompt: str, entry_point: str) -> str:
+        """Format HumanEval coding problem."""
+        return f"{prompt}\n\n# Complete the function '{entry_point}'"
+
+
 class MMLULoader(BenchmarkLoader):
     """Loader for MMLU (Massive Multitask Language Understanding) benchmark."""
     
@@ -199,10 +351,10 @@ def load_benchmark(
     Load a benchmark dataset.
     
     Args:
-        benchmark_name: Name of the benchmark (gsm8k, math, mmlu)
+        benchmark_name: Name of the benchmark (gsm8k, math, mmlu, hellaswag, bigbench, humaneval)
         split: Dataset split (train, test, validation)
         data_dir: Directory to store benchmark data
-        **kwargs: Additional arguments for specific loaders
+        **kwargs: Additional arguments for specific loaders (e.g., task for bigbench)
     
     Returns:
         List of benchmark samples
@@ -211,6 +363,9 @@ def load_benchmark(
         'gsm8k': GSM8kLoader,
         'math': MATHLoader,
         'mmlu': MMLULoader,
+        'hellaswag': HellaSwagLoader,
+        'bigbench': BIGBenchLoader,
+        'humaneval': HumanEvalLoader,
     }
     
     if benchmark_name not in loaders:
@@ -236,3 +391,18 @@ if __name__ == "__main__":
     mmlu_samples = load_benchmark("mmlu", split="test")
     print(f"Loaded {len(mmlu_samples)} MMLU samples")
     print(f"Example: {mmlu_samples[0]}")
+    
+    print("\nTesting HellaSwag loader...")
+    hellaswag_samples = load_benchmark("hellaswag", split="validation")
+    print(f"Loaded {len(hellaswag_samples)} HellaSwag samples")
+    print(f"Example: {hellaswag_samples[0]}")
+    
+    print("\nTesting BIG-Bench loader...")
+    bigbench_samples = load_benchmark("bigbench", split="default", task="logical_deduction")
+    print(f"Loaded {len(bigbench_samples)} BIG-Bench samples")
+    print(f"Example: {bigbench_samples[0]}")
+    
+    print("\nTesting HumanEval loader...")
+    humaneval_samples = load_benchmark("humaneval", split="test")
+    print(f"Loaded {len(humaneval_samples)} HumanEval samples")
+    print(f"Example: {humaneval_samples[0]}")
