@@ -14,18 +14,29 @@ cd ~/metacog-reasoning
 # Pull the fixed version
 git pull
 
-# Run the H100-specific setup script
-bash setup_h100.sh
+# Run the conda-based setup script (recommended)
+bash setup_conda.sh
+
+# OR if you don't have conda, use venv (requires python3-venv)
+# bash setup_h100.sh
 ```
 
 This will:
+- Create conda environment named 'metacog'
 - Detect your CUDA version automatically
-- Install PyTorch with correct CUDA support
+- Install PyTorch with correct CUDA support via conda
 - Install all dependencies (without problematic packages)
 - Set up cache directories
 - Verify GPU access
 
 **Time:** ~5-10 minutes
+
+**Note:** If you don't have conda installed, you can install Miniconda:
+```bash
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+source ~/.bashrc
+```
 
 ### Step 2: Download Benchmarks
 
@@ -33,8 +44,8 @@ This will:
 # Make sure you're in the project directory
 cd ~/metacog-reasoning
 
-# Activate environment
-source venv/bin/activate
+# Activate conda environment
+conda activate metacog
 
 # Download all 6 benchmarks
 bash scripts/download_benchmarks.sh
