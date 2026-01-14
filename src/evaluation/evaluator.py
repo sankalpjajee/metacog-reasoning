@@ -160,6 +160,10 @@ Solution:"""
         Returns:
             Dictionary with evaluation results
         """
+        # HellaSwag test split has no labels, use validation instead
+        if benchmark_name.lower() == 'hellaswag' and split == 'test':
+            split = 'validation'
+        
         print(f"\n{'='*60}")
         print(f"Evaluating on {benchmark_name.upper()} ({split} split)")
         print(f"{'='*60}\n")
