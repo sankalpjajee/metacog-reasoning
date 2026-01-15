@@ -274,74 +274,74 @@ Solution:"""
             
             # Load benchmark
             samples = load_benchmark(benchmark_name, split=split)
-        
-        if max_samples:
-            samples = samples[:max_samples]
-            print(f"Limiting to {max_samples} samples for testing")
-        
-        print(f"Loaded {len(samples)} samples")
-        
-        # Run evaluation
-        predictions = []
-        is_humaneval = benchmark_name.lower() == 'humaneval'
-        
-        for sample in tqdm(samples, desc="Evaluating"):
-            # Generate answer
-            if is_humaneval:
-                # For HumanEval, use code generation prompt
-                predicted_answer = self._generate_code(sample)
-            else:
-                predicted_answer = self.generate_answer(sample.question)
             
-            # Store prediction
-            predictions.append({
-                'id': sample.id,
-                'question': sample.question,
-                'target_answer': sample.answer,
-                'predicted_answer': predicted_answer,
-                'category': sample.category,
-                'difficulty': sample.difficulty,
-                'is_correct': None,  # Will be computed by metrics
-            })
-        
-        # Compute metrics
-        metrics = compute_accuracy(predictions)
-        
-        # Update is_correct in predictions
-        from .metrics import is_correct
-        for i, pred in enumerate(predictions):
+            if max_samples:
+                samples = samples[:max_samples]
+                print(f"Limiting to {max_samples} samples for testing")
+            
+            print(f"Loaded {len(samples)} samples")
+            
+            # Run evaluation
+            predictions = []
+            is_humaneval = benchmark_name.lower() == 'humaneval'
+            
+            for sample in tqdm(samples, desc="Evaluating"):
+                # Generate answer
+                if is_humaneval:
+                    # For HumanEval, use code generation prompt
+                    predicted_answer = self._generate_code(sample)
+                else:
+                    predicted_answer = self.generate_answer(sample.question)
+                
+                # Store prediction
+                predictions.append({
+                    'id': sample.id,
+                    'question': sample.question,
+                    'target_answer': sample.answer,
+                    'predicted_answer': predicted_answer,
+                    'category': sample.category,
+                    'difficulty': sample.difficulty,
+                    'is_correct': None,  # Will be computed by metrics
+                })
+            
+            # Compute metrics
+            metrics = compute_accuracy(predictions)
+            
+            # Update is_correct in predictions
+            from .metrics import is_correct
+            for i, pred in enumerate(predictions):
+                if is_humaneval:
+                    # For HumanEval, execute the code to check correctness
+                    pred['is_correct'] = self._execute_code_test(samples[i], pred['predicted_answer'])
+                else:
+                    pred['is_correct'] = is_correct(pred['predicted_answer'], pred['target_answer'])
+            
+            # Recompute metrics after code execution for HumanEval
             if is_humaneval:
-                # For HumanEval, execute the code to check correctness
-                pred['is_correct'] = self._execute_code_test(samples[i], pred['predicted_answer'])
-            else:
-                pred['is_correct'] = is_correct(pred['predicted_answer'], pred['target_answer'])
-        
-        # Recompute metrics after code execution for HumanEval
-        if is_humaneval:
-            num_correct = sum(1 for p in predictions if p['is_correct'])
-            metrics = EvaluationMetrics(
-                accuracy=num_correct / len(predictions) if predictions else 0,
-                num_correct=num_correct,
-                num_incorrect=len(predictions) - num_correct,
-                per_category_accuracy={'code_generation': num_correct / len(predictions) if predictions else 0},
-                per_difficulty_accuracy=None
-            )
-        
-        # Create results dictionary
-        results = {
-            'benchmark': benchmark_name,
-            'split': split,
-            'model': self.model_path,
-            'timestamp': datetime.now().isoformat(),
-            'num_samples': len(samples),
-            'accuracy': metrics.accuracy,
-            'num_correct': metrics.num_correct,
-            'num_incorrect': metrics.num_incorrect,
-            'per_category_accuracy': metrics.per_category_accuracy,
-            'per_difficulty_accuracy': metrics.per_difficulty_accuracy,
-            'predictions': predictions,
-        }
-        
+                num_correct = sum(1 for p in predictions if p['is_correct'])
+                metrics = EvaluationMetrics(
+                    accuracy=num_correct / len(predictions) if predictions else 0,
+                    num_correct=num_correct,
+                    num_incorrect=len(predictions) - num_correct,
+                    per_category_accuracy={'code_generation': num_correct / len(predictions) if predictions else 0},
+                    per_difficulty_accuracy=None
+                )
+            
+            # Create results dictionary
+            results = {
+                'benchmark': benchmark_name,
+                'split': split,
+                'model': self.model_path,
+                'timestamp': datetime.now().isoformat(),
+                'num_samples': len(samples),
+                'accuracy': metrics.accuracy,
+                'num_correct': metrics.num_correct,
+                'num_incorrect': metrics.num_incorrect,
+                'per_category_accuracy': metrics.per_category_accuracy,
+                'per_difficulty_accuracy': metrics.per_difficulty_accuracy,
+                'predictions': predictions,
+            }
+            
             # Print results
             print(f"\nAccuracy: {metrics.accuracy:.1%} ({metrics.num_correct}/{len(samples)})")
             print(f"Correct: {metrics.num_correct}")
@@ -367,47 +367,47 @@ Solution:"""
                     print(f"  Level {difficulty}: {acc:.1%}")
                     if self.use_mlflow:
                         mlflow.log_metric(f"accuracy_level_{difficulty}", acc)
-        
-        # Save results
-        if output_dir:
-            os.makedirs(output_dir, exist_ok=True)
             
-            # Save detailed results
-            results_file = os.path.join(output_dir, f"{benchmark_name}_results.json")
-            with open(results_file, 'w') as f:
-                json.dump(results, f, indent=2)
-            print(f"\nResults saved to {results_file}")
-            
-            # Save summary
-            summary_file = os.path.join(output_dir, "summary.json")
-            summary = {
-                'model': self.model_path,
-                'timestamp': results['timestamp'],
-                'benchmarks': {
-                    benchmark_name: {
-                        'accuracy': metrics.accuracy,
-                        'num_samples': len(samples),
-                        'num_correct': metrics.num_correct,
+            # Save results
+            if output_dir:
+                os.makedirs(output_dir, exist_ok=True)
+                
+                # Save detailed results
+                results_file = os.path.join(output_dir, f"{benchmark_name}_results.json")
+                with open(results_file, 'w') as f:
+                    json.dump(results, f, indent=2)
+                print(f"\nResults saved to {results_file}")
+                
+                # Save summary
+                summary_file = os.path.join(output_dir, "summary.json")
+                summary = {
+                    'model': self.model_path,
+                    'timestamp': results['timestamp'],
+                    'benchmarks': {
+                        benchmark_name: {
+                            'accuracy': metrics.accuracy,
+                            'num_samples': len(samples),
+                            'num_correct': metrics.num_correct,
+                        }
                     }
                 }
-            }
+                
+                # Merge with existing summary if it exists
+                if os.path.exists(summary_file):
+                    with open(summary_file, 'r') as f:
+                        existing_summary = json.load(f)
+                        existing_summary['benchmarks'].update(summary['benchmarks'])
+                        summary = existing_summary
+                
+                with open(summary_file, 'w') as f:
+                    json.dump(summary, f, indent=2)
+                print(f"Summary saved to {summary_file}")
+                
+                # Log artifacts to MLflow
+                if self.use_mlflow:
+                    mlflow.log_artifact(results_file)
+                    mlflow.log_artifact(summary_file)
             
-            # Merge with existing summary if it exists
-            if os.path.exists(summary_file):
-                with open(summary_file, 'r') as f:
-                    existing_summary = json.load(f)
-                    existing_summary['benchmarks'].update(summary['benchmarks'])
-                    summary = existing_summary
-            
-            with open(summary_file, 'w') as f:
-                json.dump(summary, f, indent=2)
-            print(f"Summary saved to {summary_file}")
-            
-            # Log artifacts to MLflow
-            if self.use_mlflow:
-                mlflow.log_artifact(results_file)
-                mlflow.log_artifact(summary_file)
-        
             return results
         
         finally:
