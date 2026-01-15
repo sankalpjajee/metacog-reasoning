@@ -400,15 +400,20 @@ class MRBenLoader(BenchmarkLoader):
         options = item.get('Options', '')
         steps = item.get('Model_Solution_Steps', [])
         
-        formatted = f"{question}\n"
+        formatted = "You are evaluating a student's solution to identify reasoning errors.\n\n"
+        formatted += f"Original Question: {question}\n"
         if options:
-            formatted += f"\nOptions: {options}\n"
+            formatted += f"\nAnswer Options: {options}\n"
         
         if steps:
-            formatted += "\nProvided solution steps:\n"
+            formatted += "\n--- Student's Solution Steps ---\n"
             for i, step in enumerate(steps, 1):
                 formatted += f"Step {i}: {step}\n"
-            formatted += "\nTask: Identify the first error step in the reasoning above. Answer with the step number (e.g., 'Step 2') or 'N/A' if all steps are correct."
+            formatted += "--- End of Solution ---\n"
+            formatted += "\nYour task: Find the FIRST step where the student made an error in their reasoning.\n"
+            formatted += "Answer with ONLY the step number (1, 2, 3, etc.) or 'N/A' if all steps are correct.\n"
+            formatted += "Do NOT answer the original question - just identify which step has the first error.\n"
+            formatted += "\nFirst error step number:"
         
         return formatted
 

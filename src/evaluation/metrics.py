@@ -61,6 +61,40 @@ def extract_number(text: str) -> float:
     return None
 
 
+def extract_step_number(text: str) -> int:
+    """
+    Extract step number from text like 'Step 2', '2', 'step 3', etc.
+    Used for MR-Ben meta-reasoning benchmark.
+    """
+    if text is None:
+        return None
+    if not isinstance(text, str):
+        text = str(text)
+    
+    text = text.strip().lower()
+    
+    # Handle N/A
+    if 'n/a' in text or 'none' in text or 'no error' in text:
+        return -1  # Special value for N/A
+    
+    # Try to find "step X" pattern
+    match = re.search(r'step\s*(\d+)', text)
+    if match:
+        return int(match.group(1))
+    
+    # Try to find just a number at the start
+    match = re.match(r'^\s*(\d+)', text)
+    if match:
+        return int(match.group(1))
+    
+    # Try to find any number in the text
+    match = re.search(r'(\d+)', text)
+    if match:
+        return int(match.group(1))
+    
+    return None
+
+
 def is_correct(predicted: str, target: str) -> bool:
     """
     Check if predicted answer matches target answer.
@@ -69,6 +103,7 @@ def is_correct(predicted: str, target: str) -> bool:
     - Exact string matching
     - Numerical equivalence
     - Case-insensitive matching
+    - Step number extraction (for MR-Ben)
     """
     # Normalize both answers
     predicted = normalize_answer(predicted)
@@ -77,6 +112,13 @@ def is_correct(predicted: str, target: str) -> bool:
     # Exact match (case-insensitive)
     if predicted.lower() == target.lower():
         return True
+    
+    # Try step number extraction (for MR-Ben style answers)
+    pred_step = extract_step_number(predicted)
+    target_step = extract_step_number(target)
+    
+    if pred_step is not None and target_step is not None:
+        return pred_step == target_step
     
     # Try numerical comparison
     pred_num = extract_number(predicted)
