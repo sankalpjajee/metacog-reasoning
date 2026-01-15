@@ -90,24 +90,8 @@ def main():
         print("⚠ MLflow not available, disabling experiment tracking\n")
         args.use_mlflow = False
     
-    # Load model and tokenizer
-    print("Loading model and tokenizer...")
-    tokenizer = AutoTokenizer.from_pretrained(args.model)
-    model = AutoModelForCausalLM.from_pretrained(
-        args.model,
-        torch_dtype=torch.float16 if args.device == "cuda" else torch.float32,
-        device_map="auto" if args.device == "cuda" else None,
-    )
-    
-    if args.device == "cpu":
-        model = model.to(args.device)
-    
-    print(f"✓ Model loaded on {args.device}\n")
-    
-    # Create evaluator
+    # Create evaluator (it will load the model internally)
     evaluator = ModelEvaluator(
-        model=model,
-        tokenizer=tokenizer,
         model_path=args.model,
         device=args.device,
         use_mlflow=args.use_mlflow,
@@ -121,7 +105,7 @@ def main():
         print(f"{'='*60}\n")
         
         try:
-            results = evaluator.evaluate(
+            results = evaluator.evaluate_benchmark(
                 benchmark_name=benchmark,
                 split="test",
                 output_dir=args.output_dir,
