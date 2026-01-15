@@ -356,27 +356,33 @@ class MRBenLoader(BenchmarkLoader):
             print(f"Loading MR-Ben from cache: {cache_path}")
             return self.load_cache(cache_path)
         
-        # Download from HuggingFace
-        print(f"Downloading MR-Ben {split} split...")
-        dataset = load_dataset("Randolphzeng/Mr-Ben", split=split)
+        # Download from HuggingFace (only has 'train' split)
+        print(f"Downloading MR-Ben dataset...")
+        dataset = load_dataset("Randolphzeng/Mr-Ben", split="train")
         
         samples = []
         for idx, item in enumerate(dataset):
+            # Only use incorrect solutions for evaluation
+            if item.get('Model_Solution_Correctness', '').lower() != 'incorrect':
+                continue
+            
             # Format the meta-reasoning question
             question = self._format_question(item)
             
-            # The answer is the error location/analysis
-            answer = item.get('answer', item.get('label', ''))
+            # The answer is the first error step
+            answer = item.get('Model_Solution_First_Error_Step', 'N/A')
             
             samples.append(BenchmarkSample(
                 id=f"mrben_{idx}",
                 question=question,
                 answer=str(answer),
-                category=item.get('subject', item.get('category', 'meta_reasoning')),
-                difficulty=item.get('difficulty', None),
+                category=item.get('Subject', 'meta_reasoning'),
+                difficulty=None,
                 metadata={
-                    'subject': item.get('subject', ''),
-                    'reasoning_steps': item.get('steps', []),
+                    'question_uuid': item.get('Question_UUID', ''),
+                    'subject': item.get('Subject', ''),
+                    'model_solution_steps': item.get('Model_Solution_Steps', []),
+                    'error_reason': item.get('Model_Solution_Error_Reason', []),
                 }
             ))
         
@@ -390,17 +396,21 @@ class MRBenLoader(BenchmarkLoader):
     @staticmethod
     def _format_question(item: dict) -> str:
         """Format MR-Ben meta-reasoning question."""
-        question = item.get('question', item.get('problem', ''))
-        steps = item.get('steps', item.get('reasoning_steps', []))
+        question = item.get('Question', '')
+        options = item.get('Options', '')
+        steps = item.get('Model_Solution_Steps', [])
+        
+        formatted = f"{question}\n"
+        if options:
+            formatted += f"\nOptions: {options}\n"
         
         if steps:
-            formatted = f"{question}\n\nReasoning steps to analyze:\n"
+            formatted += "\nProvided solution steps:\n"
             for i, step in enumerate(steps, 1):
                 formatted += f"Step {i}: {step}\n"
-            formatted += "\nIdentify any errors in the reasoning above."
-            return formatted
+            formatted += "\nTask: Identify the first error step in the reasoning above. Answer with the step number (e.g., 'Step 2') or 'N/A' if all steps are correct."
         
-        return question
+        return formatted
 
 
 def load_benchmark(
