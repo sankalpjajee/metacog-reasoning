@@ -9,6 +9,12 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from src.evaluation.evaluator import ModelEvaluator
 
+try:
+    import mlflow
+    MLFLOW_AVAILABLE = True
+except ImportError:
+    MLFLOW_AVAILABLE = False
+
 
 def main():
     import argparse
@@ -66,6 +72,23 @@ def main():
     
     # Parse benchmarks
     benchmarks = [b.strip() for b in args.benchmarks.split(',')]
+    
+    # Setup MLflow if requested
+    if args.use_mlflow and MLFLOW_AVAILABLE:
+        mlflow_dir = os.path.expanduser("~/metacog-reasoning/mlruns")
+        os.makedirs(mlflow_dir, exist_ok=True)
+        mlflow.set_tracking_uri(f"file://{mlflow_dir}")
+        
+        # Create or get experiment
+        experiment_name = "metacog-reasoning-baseline"
+        experiment = mlflow.get_experiment_by_name(experiment_name)
+        if experiment is None:
+            mlflow.create_experiment(experiment_name)
+        mlflow.set_experiment(experiment_name)
+        print(f"✓ MLflow tracking enabled: {experiment_name}\n")
+    elif args.use_mlflow and not MLFLOW_AVAILABLE:
+        print("⚠ MLflow not available, disabling experiment tracking\n")
+        args.use_mlflow = False
     
     # Load model and tokenizer
     print("Loading model and tokenizer...")
