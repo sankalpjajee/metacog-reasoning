@@ -58,6 +58,8 @@ logs/*
 !logs/.gitkeep
 *.log
 wandb/
+mlruns/
+mlartifacts/
 results/
 outputs/
 

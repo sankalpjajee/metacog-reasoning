@@ -19,6 +19,7 @@ This project addresses the significant reasoning performance gap between high-re
 - 🌍 **Multilingual Support:** English + 10 Indic languages (Hindi, Bengali, Tamil, Telugu, Marathi, Gujarati, Kannada, Malayalam, Punjabi, Urdu)
 - 🎯 **Multi-Component Reward:** Rich learning signal (answer, strategy, process, plan)
 - 📊 **Comprehensive Analysis:** Strategy transfer patterns, error taxonomy, cross-lingual insights
+- 📈 **MLflow Tracking:** Automatic experiment tracking, comparison, and visualization
 - 🚀 **State-of-the-Art Models:** Fine-tuned Llama-3.1-8B (teacher) and Qwen2.5-7B (student)
 
 ## Project Structure
@@ -107,6 +108,20 @@ python scripts/evaluate.py \
     --benchmarks gsm8k,math,indicmmlu \
     --output_dir ./results
 ```
+
+### Experiment Tracking with MLflow
+
+All evaluations are automatically tracked with MLflow:
+
+```bash
+# View experiments in UI
+bash scripts/mlflow_ui.sh
+
+# Compare experiments
+python scripts/compare_experiments.py
+```
+
+See [docs/MLFLOW.md](docs/MLFLOW.md) for detailed MLflow usage.
 
 ## Reasoning Strategy Taxonomy
 

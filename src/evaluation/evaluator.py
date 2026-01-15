@@ -3,15 +3,17 @@
 import json
 import os
 import re
-from typing import List, Dict, Optional
 from datetime import datetime
+from typing import Dict, List, Optional
+
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from tqdm import tqdm
+import mlflow
+import mlflow.pytorch
 
 from .benchmarks import load_benchmark, BenchmarkSample
 from .metrics import compute_accuracy, EvaluationMetrics, format_metrics
-
 
 class ModelEvaluator:
     """Evaluates language models on reasoning benchmarks."""
@@ -22,6 +24,8 @@ class ModelEvaluator:
         device: str = "cuda",
         max_new_tokens: int = 512,
         batch_size: int = 1,
+        use_mlflow: bool = True,
+        experiment_name: str = "metacog-reasoning",
     ):
         """
         Initialize evaluator.
@@ -31,11 +35,19 @@ class ModelEvaluator:
             device: Device to run on (cuda/cpu)
             max_new_tokens: Maximum tokens to generate
             batch_size: Batch size for evaluation
+            use_mlflow: Whether to use MLflow tracking
+            experiment_name: MLflow experiment name
         """
         self.model_path = model_path
         self.device = device
         self.max_new_tokens = max_new_tokens
         self.batch_size = batch_size
+        self.use_mlflow = use_mlflow
+        
+        # Setup MLflow
+        if self.use_mlflow:
+            mlflow.set_experiment(experiment_name)
+            mlflow.set_tracking_uri("file:./mlruns")
         
         # Load model and tokenizer
         print(f"Loading model from {model_path}...")
@@ -237,16 +249,31 @@ Solution:"""
         Returns:
             Dictionary with evaluation results
         """
-        # HellaSwag test split has no labels, use validation instead
-        if benchmark_name.lower() == 'hellaswag' and split == 'test':
-            split = 'validation'
+        # Start MLflow run
+        if self.use_mlflow:
+            run_name = f"{benchmark_name}_{split}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+            mlflow.start_run(run_name=run_name)
+            
+            # Log parameters
+            mlflow.log_param("model", self.model_path)
+            mlflow.log_param("benchmark", benchmark_name)
+            mlflow.log_param("split", split)
+            mlflow.log_param("max_new_tokens", self.max_new_tokens)
+            mlflow.log_param("device", self.device)
+            if max_samples:
+                mlflow.log_param("max_samples", max_samples)
         
-        print(f"\n{'='*60}")
-        print(f"Evaluating on {benchmark_name.upper()} ({split} split)")
-        print(f"{'='*60}\n")
-        
-        # Load benchmark
-        samples = load_benchmark(benchmark_name, split=split)
+        try:
+            # HellaSwag test split has no labels, use validation instead
+            if benchmark_name.lower() == 'hellaswag' and split == 'test':
+                split = 'validation'
+            
+            print(f"\n{'='*60}")
+            print(f"Evaluating on {benchmark_name.upper()} ({split} split)")
+            print(f"{'='*60}\n")
+            
+            # Load benchmark
+            samples = load_benchmark(benchmark_name, split=split)
         
         if max_samples:
             samples = samples[:max_samples]
@@ -315,20 +342,31 @@ Solution:"""
             'predictions': predictions,
         }
         
-        # Print results
-        print(f"\nAccuracy: {metrics.accuracy:.1%} ({metrics.num_correct}/{len(samples)})")
-        print(f"Correct: {metrics.num_correct}")
-        print(f"Incorrect: {metrics.num_incorrect}")
-        
-        if metrics.per_category_accuracy:
-            print("\nPer-Category Accuracy:")
-            for category, acc in metrics.per_category_accuracy.items():
-                print(f"  {category}: {acc:.1%}")
-        
-        if metrics.per_difficulty_accuracy:
-            print("\nPer-Difficulty Accuracy:")
-            for difficulty, acc in sorted(metrics.per_difficulty_accuracy.items()):
-                print(f"  Level {difficulty}: {acc:.1%}")
+            # Print results
+            print(f"\nAccuracy: {metrics.accuracy:.1%} ({metrics.num_correct}/{len(samples)})")
+            print(f"Correct: {metrics.num_correct}")
+            print(f"Incorrect: {metrics.num_incorrect}")
+            
+            # Log metrics to MLflow
+            if self.use_mlflow:
+                mlflow.log_metric("accuracy", metrics.accuracy)
+                mlflow.log_metric("num_correct", metrics.num_correct)
+                mlflow.log_metric("num_incorrect", metrics.num_incorrect)
+                mlflow.log_metric("num_samples", len(samples))
+            
+            if metrics.per_category_accuracy:
+                print("\nPer-Category Accuracy:")
+                for category, acc in metrics.per_category_accuracy.items():
+                    print(f"  {category}: {acc:.1%}")
+                    if self.use_mlflow:
+                        mlflow.log_metric(f"accuracy_{category}", acc)
+            
+            if metrics.per_difficulty_accuracy:
+                print("\nPer-Difficulty Accuracy:")
+                for difficulty, acc in sorted(metrics.per_difficulty_accuracy.items()):
+                    print(f"  Level {difficulty}: {acc:.1%}")
+                    if self.use_mlflow:
+                        mlflow.log_metric(f"accuracy_level_{difficulty}", acc)
         
         # Save results
         if output_dir:
@@ -364,5 +402,15 @@ Solution:"""
             with open(summary_file, 'w') as f:
                 json.dump(summary, f, indent=2)
             print(f"Summary saved to {summary_file}")
+            
+            # Log artifacts to MLflow
+            if self.use_mlflow:
+                mlflow.log_artifact(results_file)
+                mlflow.log_artifact(summary_file)
         
-        return results
+            return results
+        
+        finally:
+            # End MLflow run
+            if self.use_mlflow:
+                mlflow.end_run()
