@@ -187,6 +187,7 @@ class HellaSwagLoader(BenchmarkLoader):
         formatted = f"{context}\n\nWhat happens next?\n\n"
         for i, ending in enumerate(endings):
             formatted += f"{chr(65+i)}. {ending}\n"
+        formatted += "\nAnswer with the letter only (A, B, C, or D):"
         return formatted.strip()
 
 
@@ -341,6 +342,7 @@ class MMLULoader(BenchmarkLoader):
         formatted = f"{question}\n\n"
         for i, choice in enumerate(choices):
             formatted += f"{chr(65+i)}. {choice}\n"
+        formatted += "\nAnswer with the letter only (A, B, C, or D):"
         return formatted.strip()
 
 

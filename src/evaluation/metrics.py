@@ -28,10 +28,16 @@ def normalize_answer(answer: str) -> str:
     answer = answer.strip()
     
     # Remove common prefixes
-    prefixes = ["the answer is", "answer:", "final answer:"]
+    prefixes = ["the answer is", "answer:", "final answer:", "the correct answer is"]
     for prefix in prefixes:
         if answer.lower().startswith(prefix):
             answer = answer[len(prefix):].strip()
+    
+    # For single letter answers (A, B, C, D), extract just the letter
+    if len(answer) > 0 and answer[0].upper() in 'ABCD':
+        # Check if it's like "A." or "A)" or just "A"
+        if len(answer) == 1 or (len(answer) > 1 and answer[1] in '.):'):
+            return answer[0].upper()
     
     # Remove punctuation at the end
     answer = answer.rstrip('.,;:!?')
