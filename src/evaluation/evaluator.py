@@ -321,6 +321,7 @@ Solution:"""
                 num_correct = sum(1 for p in predictions if p['is_correct'])
                 metrics = EvaluationMetrics(
                     accuracy=num_correct / len(predictions) if predictions else 0,
+                    num_samples=len(predictions),
                     num_correct=num_correct,
                     num_incorrect=len(predictions) - num_correct,
                     per_category_accuracy={'code_generation': num_correct / len(predictions) if predictions else 0},
