@@ -164,7 +164,7 @@ class ModelEvaluator:
         return text
     
     def _generate_code(self, sample) -> str:
-        """Generate code for HumanEval problems."""
+        """Generate code for HumanEval problems with improved extraction."""
         # Use the original prompt from the sample
         prompt = sample.metadata.get('prompt', sample.question)
         
@@ -177,9 +177,8 @@ class ModelEvaluator:
             outputs = self.model.generate(
                 **inputs,
                 max_new_tokens=512,
-                temperature=0.2,
-                top_p=0.95,
-                do_sample=True,
+                temperature=0.0,  # Use greedy decoding for consistency
+                do_sample=False,
                 pad_token_id=self.tokenizer.eos_token_id,
             )
         
@@ -189,11 +188,42 @@ class ModelEvaluator:
         # Extract just the function body (after the prompt)
         code = generated_text[len(prompt):].strip()
         
-        # Stop at end of function (double newline or next def)
-        if '\n\ndef ' in code:
-            code = code.split('\n\ndef ')[0]
-        if '\n\nclass ' in code:
-            code = code.split('\n\nclass ')[0]
+        # IMPROVED: Stop at multiple markers to avoid including test/example code
+        stop_markers = [
+            '\n\ndef ',      # Next function definition
+            '\n\nclass ',    # Next class definition
+            '\nif __name__', # Test block
+            '\n# Test',      # Test comments
+            '\n# Example',   # Example usage
+            '\n# Usage',     # Usage examples
+            '\nprint(',      # Debug prints
+            '\nassert ',     # Test assertions
+            '\n```',         # Markdown code block end
+        ]
+        
+        for marker in stop_markers:
+            if marker in code:
+                code = code.split(marker)[0]
+        
+        # Remove markdown code blocks if present
+        if '```' in code:
+            code = code.split('```')[0]
+        
+        # Clean up: remove trailing comments and empty lines
+        lines = code.split('\n')
+        cleaned_lines = []
+        
+        for line in lines:
+            stripped = line.strip()
+            # Stop at example/test/usage comments
+            if stripped.startswith('# Example') or \
+               stripped.startswith('# Test') or \
+               stripped.startswith('# Usage') or \
+               stripped.startswith('# Demo'):
+                break
+            cleaned_lines.append(line)
+        
+        code = '\n'.join(cleaned_lines).rstrip()
         
         return code
     
