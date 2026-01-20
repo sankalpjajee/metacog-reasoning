@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Evaluate baseline Llama-3.1-8B model on benchmarks."""
+"""Evaluate baseline Llama-3.1-8B-Instruct model on benchmarks."""
 
 import sys
 import os
@@ -19,7 +19,7 @@ except ImportError:
 def main():
     import argparse
     
-    parser = argparse.ArgumentParser(description="Evaluate baseline Llama-3.1-8B model")
+    parser = argparse.ArgumentParser(description="Evaluate baseline Llama-3.1-8B-Instruct model")
     parser.add_argument(
         "--model",
         type=str,

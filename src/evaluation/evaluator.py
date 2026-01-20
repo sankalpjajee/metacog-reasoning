@@ -83,7 +83,17 @@ class ModelEvaluator:
         generated_text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
         
         # Extract answer (remove prompt)
-        full_response = generated_text[len(prompt):].strip()
+        # For chat template, extract only the assistant's response
+        if "<|start_header_id|>assistant<|end_header_id|>" in generated_text:
+            # Split at assistant marker and take everything after
+            parts = generated_text.split("<|start_header_id|>assistant<|end_header_id|>")
+            if len(parts) > 1:
+                full_response = parts[-1].strip()
+            else:
+                full_response = generated_text[len(prompt):].strip()
+        else:
+            # Fallback: remove prompt
+            full_response = generated_text[len(prompt):].strip()
         
         # Extract final answer, passing question for MC value mapping
         answer = self._extract_final_answer(full_response, question)
@@ -243,22 +253,33 @@ class ModelEvaluator:
             return False
     
     def _format_prompt(self, question: str) -> str:
-        """Format question as a prompt."""
+        """Format question as a prompt using Llama-3.1 Instruct chat template."""
         # Detect if this is a multiple choice question
         is_multiple_choice = bool(re.search(r'\n[A-D]\.', question))
         
         if is_multiple_choice:
-            return f"""Answer the following multiple choice question. Think step by step, then provide your final answer as a single letter (A, B, C, or D).
+            user_message = f"""Answer the following multiple choice question. Think step by step, then provide your final answer as a single letter (A, B, C, or D).
 
-Question: {question}
-
-Solution:"""
+Question: {question}"""
         else:
-            return f"""Solve the following problem step by step. Provide your final answer at the end.
+            user_message = f"""Solve the following problem step by step. Provide your final answer at the end.
 
-Problem: {question}
-
-Solution:"""
+Problem: {question}"""
+        
+        # Use Llama-3.1 Instruct chat template
+        messages = [
+            {"role": "system", "content": "You are a helpful AI assistant skilled at reasoning and problem-solving."},
+            {"role": "user", "content": user_message}
+        ]
+        
+        # Apply chat template
+        prompt = self.tokenizer.apply_chat_template(
+            messages,
+            tokenize=False,
+            add_generation_prompt=True
+        )
+        
+        return prompt
     
     def evaluate_benchmark(
         self,
