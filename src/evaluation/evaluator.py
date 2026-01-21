@@ -79,20 +79,28 @@ class ModelEvaluator:
                 pad_token_id=self.tokenizer.eos_token_id,
             )
         
-        # Decode
-        generated_text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+        # Decode - KEEP special tokens to properly extract assistant response
+        generated_text_with_tokens = self.tokenizer.decode(outputs[0], skip_special_tokens=False)
         
         # Extract answer (remove prompt)
         # For chat template, extract only the assistant's response
-        if "<|start_header_id|>assistant<|end_header_id|>" in generated_text:
+        if "<|start_header_id|>assistant<|end_header_id|>" in generated_text_with_tokens:
             # Split at assistant marker and take everything after
-            parts = generated_text.split("<|start_header_id|>assistant<|end_header_id|>")
+            parts = generated_text_with_tokens.split("<|start_header_id|>assistant<|end_header_id|>")
             if len(parts) > 1:
+                # Get the assistant's response and remove end tokens
                 full_response = parts[-1].strip()
+                # Remove any trailing special tokens
+                for token in ['<|eot_id|>', '<|end_of_text|>']:
+                    full_response = full_response.replace(token, '')
+                full_response = full_response.strip()
             else:
+                # Fallback: decode without special tokens and remove prompt
+                generated_text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
                 full_response = generated_text[len(prompt):].strip()
         else:
-            # Fallback: remove prompt
+            # Fallback: decode without special tokens and remove prompt
+            generated_text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
             full_response = generated_text[len(prompt):].strip()
         
         # Extract final answer, passing question for MC value mapping
