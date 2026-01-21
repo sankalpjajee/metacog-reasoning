@@ -76,3 +76,12 @@ htmlcov/
 *.bak
 *.tmp
 .cache/
+
+# Benchmark data (downloaded locally, not in repo)
+data/benchmarks/
+
+# MLflow database
+mlflow.db
+
+# Conda installer
+Miniconda*.sh
