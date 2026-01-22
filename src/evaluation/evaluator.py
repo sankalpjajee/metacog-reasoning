@@ -214,7 +214,8 @@ class ModelEvaluator:
         generated_text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
         
         # Extract just the function body (after the prompt)
-        code = generated_text[len(prompt):].strip()
+        # The generated_text includes the prompt + generated body
+        generated_body = generated_text[len(prompt):].strip()
         
         # IMPROVED: Stop at multiple markers to avoid including test/example code
         stop_markers = [
@@ -230,15 +231,15 @@ class ModelEvaluator:
         ]
         
         for marker in stop_markers:
-            if marker in code:
-                code = code.split(marker)[0]
+            if marker in generated_body:
+                generated_body = generated_body.split(marker)[0]
         
         # Remove markdown code blocks if present
-        if '```' in code:
-            code = code.split('```')[0]
+        if '```' in generated_body:
+            generated_body = generated_body.split('```')[0]
         
         # Clean up: remove trailing comments and empty lines
-        lines = code.split('\n')
+        lines = generated_body.split('\n')
         cleaned_lines = []
         
         for line in lines:
@@ -251,9 +252,12 @@ class ModelEvaluator:
                 break
             cleaned_lines.append(line)
         
-        code = '\n'.join(cleaned_lines).rstrip()
+        generated_body = '\n'.join(cleaned_lines).rstrip()
         
-        return code
+        # Combine prompt (function signature) with generated body
+        full_code = prompt + generated_body
+        
+        return full_code
     
     def _execute_code_test(self, sample, generated_code: str) -> bool:
         """Execute HumanEval test cases to check correctness."""
