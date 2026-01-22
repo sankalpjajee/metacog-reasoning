@@ -106,7 +106,8 @@ class ModelEvaluator:
         # Extract final answer, passing question for MC value mapping
         answer = self._extract_final_answer(full_response, question)
         
-        return answer
+        # Return both full response and extracted answer
+        return full_response, answer
     
     def _extract_final_answer(self, text: str, question: str = None) -> str:
         """Extract the final answer from model's reasoning."""
@@ -349,8 +350,9 @@ Problem: {question}"""
                 if is_humaneval:
                     # For HumanEval, use code generation prompt
                     predicted_answer = self._generate_code(sample)
+                    model_output = predicted_answer  # For code, the output is the answer
                 else:
-                    predicted_answer = self.generate_answer(sample.question)
+                    model_output, predicted_answer = self.generate_answer(sample.question)
                 
                 # Store prediction
                 predictions.append({
@@ -358,6 +360,7 @@ Problem: {question}"""
                     'question': sample.question,
                     'target_answer': sample.answer,
                     'predicted_answer': predicted_answer,
+                    'model_output': model_output,  # Save full model response
                     'category': sample.category,
                     'difficulty': sample.difficulty,
                     'is_correct': None,  # Will be computed by metrics
