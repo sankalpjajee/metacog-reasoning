@@ -114,7 +114,16 @@ class ModelEvaluator:
         # Check if this is a multiple choice question
         is_mc = question and bool(re.search(r'\n[A-D]\.', question))
         
-        # First, try to extract multiple choice answer (A, B, C, D)
+        # PRIORITY 1: Look for explicit "Answer: X" format (from our prompt)
+        answer_match = re.search(r'Answer:\s*([A-D]|[\d,\.\-]+)', text, re.IGNORECASE)
+        if answer_match:
+            answer = answer_match.group(1).strip()
+            if is_mc:
+                return answer.upper()
+            else:
+                return answer.replace(',', '')
+        
+        # PRIORITY 2: Try to extract multiple choice answer (A, B, C, D)
         mc_patterns = [
             r'(?:answer|option|choice)\s*(?:is|:)?\s*\(?([A-D])\)?',
             r'\b([A-D])\)\s*(?:is|appears|seems)',
@@ -267,13 +276,19 @@ class ModelEvaluator:
         is_multiple_choice = bool(re.search(r'\n[A-D]\.', question))
         
         if is_multiple_choice:
-            user_message = f"""Answer the following multiple choice question. Think step by step, then provide your final answer as a single letter (A, B, C, or D).
+            user_message = f"""Answer the following multiple choice question. Think step by step if needed, then provide your final answer.
 
-Question: {question}"""
+Question: {question}
+
+Provide your answer in this exact format:
+Answer: [single letter A, B, C, or D]"""
         else:
-            user_message = f"""Solve the following problem step by step. Provide your final answer at the end.
+            user_message = f"""Solve the following problem step by step if needed, then provide your final numerical answer.
 
-Problem: {question}"""
+Problem: {question}
+
+Provide your answer in this exact format:
+Answer: [numerical value only, no units or explanation]"""
         
         # Use Llama-3.1 Instruct chat template
         messages = [
