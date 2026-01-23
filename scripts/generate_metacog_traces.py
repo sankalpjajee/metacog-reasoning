@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Generate metacognitive traces for self-play training.
-This script generates multiple reasoning traces per problem with explicit metacognitive markers.
+This script generates multiple reasoning traces per problem with varying levels of metacognition.
 """
 
 import os
@@ -13,21 +13,16 @@ from tqdm import tqdm
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from datasets import load_dataset
 
-# Metacognitive prompt template
-METACOGNITIVE_PROMPT = """You are a careful problem solver. For each problem, think step-by-step and explicitly show your metacognitive reasoning:
+# Flexible metacognitive prompt template
+METACOGNITIVE_PROMPT = """You are a helpful problem solver. Solve this problem accurately.
 
-1. State your confidence level after each reasoning step
-2. Check for potential errors in your reasoning  
-3. Verify your final answer
-
-Use these markers:
-- [Confidence: High/Medium/Low] after steps you're certain/uncertain about
-- [Check: ...] when verifying your reasoning
-- [Verify: ...] when double-checking your final answer
+For complex problems, think carefully and verify your work.
+For simple problems, direct answers are fine.
+If you're uncertain, express your uncertainty.
 
 Problem: {problem}
 
-Think carefully and show your metacognitive reasoning:"""
+Your response:"""
 
 
 def load_model_and_tokenizer(model_name="meta-llama/Llama-3.1-8B-Instruct"):
@@ -47,6 +42,30 @@ def load_model_and_tokenizer(model_name="meta-llama/Llama-3.1-8B-Instruct"):
 def format_gsm8k_problem(example):
     """Format a GSM8K problem."""
     return example['question'], example['answer']
+
+
+def classify_problem_difficulty(problem):
+    """
+    Classify problem difficulty based on heuristics.
+    Simple: Single-step arithmetic
+    Medium: Multi-step but straightforward
+    Hard: Multi-step with potential error traps
+    """
+    # Simple heuristics (can be improved)
+    words = problem.lower().split()
+    
+    # Count mathematical operations
+    operations = sum(1 for word in words if word in ['+', '-', '*', '/', 'plus', 'minus', 'times', 'divided'])
+    
+    # Count steps (rough estimate based on sentence count)
+    sentences = problem.count('.') + problem.count('?')
+    
+    if sentences <= 1 and operations <= 1:
+        return "simple"
+    elif sentences >= 3 or operations >= 3:
+        return "hard"
+    else:
+        return "medium"
 
 
 def generate_trace(model, tokenizer, problem, temperature=0.8, max_new_tokens=1024):
@@ -89,32 +108,40 @@ def generate_traces_for_problems(
     tokenizer, 
     problems, 
     num_traces_per_problem=4,
-    temperature=0.8
 ):
-    """Generate multiple traces for each problem."""
+    """Generate multiple traces for each problem with varying temperatures."""
     
     all_traces = []
     
+    # Use different temperatures to get natural diversity
+    # Lower temp → more likely correct, less metacognition
+    # Higher temp → more diverse, some errors, more metacognition
+    temperatures = [0.7, 0.8, 0.9, 1.0]
+    
     for idx, (problem, answer) in enumerate(tqdm(problems, desc="Generating traces")):
+        # Classify problem difficulty
+        difficulty = classify_problem_difficulty(problem)
+        
         problem_traces = {
             'problem_id': idx,
             'problem': problem,
             'ground_truth_answer': answer,
+            'difficulty': difficulty,
             'traces': []
         }
         
-        # Generate multiple traces with different temperatures for diversity
-        temperatures = [temperature] * num_traces_per_problem
-        
-        for trace_idx, temp in enumerate(temperatures):
+        for trace_idx in range(num_traces_per_problem):
+            temp = temperatures[trace_idx % len(temperatures)]
+            
             print(f"\n{'='*80}")
             print(f"Problem {idx+1}/{len(problems)}, Trace {trace_idx+1}/{num_traces_per_problem}")
+            print(f"Difficulty: {difficulty}, Temperature: {temp}")
             print(f"{'='*80}")
             print(f"Problem: {problem[:100]}...")
             
             trace = generate_trace(model, tokenizer, problem, temperature=temp)
             
-            print(f"\nGenerated trace (temp={temp}):")
+            print(f"\nGenerated trace:")
             print(trace[:500] + "..." if len(trace) > 500 else trace)
             
             problem_traces['traces'].append({
@@ -141,12 +168,6 @@ def main():
         type=int,
         default=4,
         help="Number of traces per problem"
-    )
-    parser.add_argument(
-        "--temperature",
-        type=float,
-        default=0.8,
-        help="Sampling temperature"
     )
     parser.add_argument(
         "--output_dir",
@@ -181,7 +202,7 @@ def main():
         problems.append((problem, answer))
     
     print(f"\nGenerating {args.num_traces} traces for {args.num_problems} problems...")
-    print(f"Temperature: {args.temperature}")
+    print(f"Using temperatures: [0.7, 0.8, 0.9, 1.0] for diversity")
     print(f"Total traces to generate: {args.num_problems * args.num_traces}")
     
     # Generate traces
@@ -190,7 +211,6 @@ def main():
         tokenizer,
         problems,
         num_traces_per_problem=args.num_traces,
-        temperature=args.temperature
     )
     
     # Save traces
@@ -210,17 +230,26 @@ def main():
     avg_length = sum(len(t['trace']) for p in all_traces for t in p['traces']) / total_traces
     print(f"- Average trace length: {avg_length:.0f} characters")
     
+    # Count by difficulty
+    difficulty_counts = {}
+    for problem_data in all_traces:
+        diff = problem_data['difficulty']
+        difficulty_counts[diff] = difficulty_counts.get(diff, 0) + 1
+    
+    print(f"\nProblem difficulty distribution:")
+    for diff, count in sorted(difficulty_counts.items()):
+        print(f"  {diff}: {count} problems")
+    
     # Check for metacognitive markers
-    markers = ['[Confidence:', '[Check:', '[Verify:', 'confident', 'uncertain']
+    markers = ['[Confidence:', '[Check:', '[Verify:', 'confident', 'uncertain', 'let me', 'wait']
     traces_with_markers = 0
     for problem_data in all_traces:
         for trace_data in problem_data['traces']:
             trace = trace_data['trace'].lower()
             if any(marker.lower() in trace for marker in markers):
                 traces_with_markers += 1
-                break
     
-    print(f"- Traces with metacognitive markers: {traces_with_markers}/{total_traces} ({traces_with_markers/total_traces*100:.1f}%)")
+    print(f"\nTraces with metacognitive markers: {traces_with_markers}/{total_traces} ({traces_with_markers/total_traces*100:.1f}%)")
 
 
 if __name__ == "__main__":
