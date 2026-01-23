@@ -143,7 +143,11 @@ class MetacognitiveEvaluator:
 
 Problem: {question}
 
-Provide the answer in your final response as "Final Answer: [numerical value]"""
+IMPORTANT: You MUST end your response with exactly this format:
+Final Answer: [just the number, nothing else]
+
+Example: If the answer is 25 dollars, write:
+Final Answer: 25"""
         
         elif benchmark_name and benchmark_name.lower() in ['mmlu', 'hellaswag', 'mrben']:
             user_message = f"""Answer this question step by step. As you work through this:
@@ -164,7 +168,11 @@ Provide the answer in your final response as "Final Answer: [numerical value]"""
 
 {question}
 
-Provide the answer in your final response as "Final Answer: [A, B, C, or D]"""
+IMPORTANT: You MUST end your response with exactly this format:
+Final Answer: [just the letter A, B, C, or D]
+
+Example: If you choose option B, write:
+Final Answer: B"""
         
         else:
             # Generic format
@@ -186,7 +194,10 @@ Provide the answer in your final response as "Final Answer: [A, B, C, or D]"""
 
 Problem: {question}
 
-Provide the answer in your final response as "Final Answer: [your answer]"""
+IMPORTANT: You MUST end your response with exactly this format:
+Final Answer: [your answer]
+
+Make sure to write "Final Answer:" followed by just your answer."""
         
         # Use Llama-3.1 Instruct chat template
         messages = [
