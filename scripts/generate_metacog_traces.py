@@ -13,12 +13,13 @@ from tqdm import tqdm
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from datasets import load_dataset
 
-# Flexible metacognitive prompt template
-METACOGNITIVE_PROMPT = """You are a helpful problem solver. Solve this problem accurately.
+# Metacognitive prompt template - encourages monitoring and control
+METACOGNITIVE_PROMPT = """You are a careful problem solver. Solve this problem accurately.
 
-For complex problems, think carefully and verify your work.
-For simple problems, direct answers are fine.
-If you're uncertain, express your uncertainty.
+As you solve:
+- Monitor your confidence: Note when you're certain or uncertain about steps
+- Check your work: Verify calculations and catch potential errors
+- Control your approach: Adjust if something doesn't seem right
 
 Problem: {problem}
 
