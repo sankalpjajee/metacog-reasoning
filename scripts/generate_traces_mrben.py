@@ -59,24 +59,15 @@ def load_model_and_tokenizer(model_name="meta-llama/Llama-3.1-8B-Instruct"):
 def load_dataset_with_fallback():
     """Try to load MR-Ben, fall back to harder GSM8K problems."""
     
-    # Try MR-Ben first
+    # Try MR-Ben first (correct HuggingFace dataset name)
     try:
         print("Attempting to load MR-Ben dataset...")
-        dataset = load_dataset("MR-Ben/MR-Ben", split="train")
+        dataset = load_dataset("Randolphzeng/Mr-Ben", split="train")
         print(f"✓ Loaded MR-Ben: {len(dataset)} examples")
         return dataset, "mrben"
     except Exception as e:
         print(f"Could not load MR-Ben: {e}")
-    
-    # Try alternative MR-Ben names
-    for name in ["mrben", "mr-ben", "MRBen", "MR-Ben"]:
-        try:
-            print(f"Trying {name}...")
-            dataset = load_dataset(name, split="train")
-            print(f"✓ Loaded {name}: {len(dataset)} examples")
-            return dataset, "mrben"
-        except:
-            continue
+        print(f"Error details: {str(e)}")
     
     # Fall back to harder GSM8K problems
     print("Falling back to GSM8K (filtering for harder problems)...")
@@ -104,9 +95,19 @@ def format_problem(example, dataset_type):
     """Format a problem based on dataset type."""
     
     if dataset_type == "mrben":
-        # MR-Ben format (adjust if needed based on actual format)
-        question = example.get('question', example.get('problem', example.get('input', '')))
-        answer = example.get('answer', example.get('solution', example.get('output', '')))
+        # MR-Ben format: Meta-reasoning about model solutions
+        # Use the original question and ground truth (not the model's incorrect solution)
+        question = example.get('Question', example.get('question', ''))
+        # For training, we want the correct answer, not the error identification
+        # So we'll use the ground truth if available
+        answer = example.get('Ground_Truth_Answer', example.get('answer', ''))
+        
+        # If no direct question/answer, construct from available fields
+        if not question:
+            question = example.get('Problem', example.get('problem', ''))
+        if not answer:
+            # MR-Ben might have the answer in different formats
+            answer = str(example.get('Model_Solution_First_Error_Step', ''))
     else:  # gsm8k_hard
         question = example['question']
         answer = example['answer']
