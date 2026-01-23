@@ -114,65 +114,79 @@ class MetacognitiveEvaluator:
         return full_response, answer
     
     def _format_metacognitive_prompt(self, question: str, benchmark_name: str = None) -> str:
-        """Format question with metacognitive prompting."""
+        """Format question with metacognitive prompting.
         
-        # Metacognitive system message
-        system_message = """You are a careful problem solver. As you solve problems:
-- Monitor your confidence: Note when you're certain or uncertain about steps
-- Check your reasoning: Catch potential errors before they lead to wrong answers
-- Verify your work: Double-check calculations and logic
-
-This metacognitive approach helps you catch errors and improve accuracy."""
+        Based on Wang & Zhao (NAACL 2024) "Metacognitive Prompting Improves Understanding in LLMs"
+        Enhanced to align with Nelson & Narens (1990) framework with stronger control mechanisms.
+        """
+        
+        # Simple system message
+        system_message = """You are a helpful assistant that solves problems carefully and thoughtfully."""
         
         # Benchmark-specific user message formatting
         if benchmark_name and benchmark_name.lower() == 'gsm8k':
-            user_message = f"""Solve this math problem step-by-step. Show your reasoning with metacognitive monitoring.
+            user_message = f"""Solve this math problem step by step. As you work through this:
+
+1. First, clarify your understanding of what the problem is asking.
+
+2. Make a preliminary solution to the problem, showing your work.
+
+3. As you solve, monitor your confidence in each step. If you notice uncertainty or potential errors, pause and verify your work.
+
+4. If your verification reveals issues, adjust your approach and try again.
+
+5. Once you have a solution, decide whether you need additional verification or if you're confident enough to finalize.
+
+6. Provide your final answer with a clear explanation of your reasoning.
+
+7. Rate your overall confidence (0-100%) in this answer and explain why you have this confidence level.
 
 Problem: {question}
 
-Instructions:
-1. Break down the problem into steps
-2. Note your confidence level when uncertain
-3. Verify calculations as you go
-4. Check your final answer
-
-Format your response as:
-[Your step-by-step reasoning with metacognitive notes]
-
-Final Answer: [numerical value only]"""
+Provide the answer in your final response as "Final Answer: [numerical value]""""
         
         elif benchmark_name and benchmark_name.lower() in ['mmlu', 'hellaswag', 'mrben']:
-            user_message = f"""Answer this question carefully. Think through each option with metacognitive monitoring.
+            user_message = f"""Answer this question step by step. As you work through this:
+
+1. First, clarify your understanding of what the question is asking.
+
+2. Make a preliminary analysis of each option.
+
+3. As you analyze, monitor your confidence in your reasoning. If you notice uncertainty or potential errors, pause and reconsider.
+
+4. If your analysis reveals issues with your initial thinking, adjust your approach and reassess.
+
+5. Once you have selected an option, decide whether you need additional verification or if you're confident enough to finalize.
+
+6. Provide your final answer with a clear explanation of your reasoning.
+
+7. Rate your overall confidence (0-100%) in this answer and explain why you have this confidence level.
 
 {question}
 
-Instructions:
-1. Analyze each option systematically
-2. Note your confidence in your reasoning
-3. Check for potential errors in your logic
-4. Verify your final choice
-
-Format your response as:
-[Your reasoning with metacognitive notes]
-
-Final Answer: [A, B, C, or D]"""
+Provide the answer in your final response as "Final Answer: [A, B, C, or D]"""
         
         else:
             # Generic format
-            user_message = f"""Solve this problem carefully with metacognitive monitoring.
+            user_message = f"""Solve this problem step by step. As you work through this:
+
+1. First, clarify your understanding of what is being asked.
+
+2. Make a preliminary solution, showing your reasoning.
+
+3. As you work, monitor your confidence. If you notice uncertainty or potential errors, pause and verify.
+
+4. If verification reveals issues, adjust your approach and try again.
+
+5. Once you have a solution, decide if you need more verification or if you're ready to finalize.
+
+6. Provide your final answer with clear reasoning.
+
+7. Rate your confidence (0-100%) and explain why.
 
 Problem: {question}
 
-Instructions:
-1. Think through the problem step-by-step
-2. Monitor your confidence as you reason
-3. Check for errors in your work
-4. Verify your final answer
-
-Format your response as:
-[Your reasoning with metacognitive notes]
-
-Final Answer: [your answer]"""
+Provide the answer in your final response as "Final Answer: [your answer]"""
         
         # Use Llama-3.1 Instruct chat template
         messages = [
