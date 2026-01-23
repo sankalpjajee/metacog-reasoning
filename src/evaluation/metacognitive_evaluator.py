@@ -143,7 +143,7 @@ class MetacognitiveEvaluator:
 
 Problem: {question}
 
-Provide the answer in your final response as "Final Answer: [numerical value]""""
+Provide the answer in your final response as "Final Answer: [numerical value]"""
         
         elif benchmark_name and benchmark_name.lower() in ['mmlu', 'hellaswag', 'mrben']:
             user_message = f"""Answer this question step by step. As you work through this:
