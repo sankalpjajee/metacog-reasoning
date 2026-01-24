@@ -125,19 +125,25 @@ class MetacognitiveEvaluator:
         
         # Benchmark-specific user message formatting
         if benchmark_name and benchmark_name.lower() == 'gsm8k':
-            user_message = f"""Solve this math problem step by step:
+            user_message = f"""First, assess if this problem is SIMPLE or COMPLEX:
+- SIMPLE: Basic arithmetic or 1-2 step calculation
+- COMPLEX: Multi-step reasoning, word problems, or requires careful analysis
 
-1. First, clarify your understanding of what the problem is asking.
+If SIMPLE: Solve directly and provide your final answer.
+
+If COMPLEX: Follow these steps:
+
+1. Clarify your understanding of what the problem is asking.
 
 2. Make a preliminary solution to the problem.
 
-3. Monitor your confidence in the solution, if you think its wrong or has potential errors, pause and verify your work.
+3. Monitor your confidence in the solution. If you think it's wrong or has potential errors, pause and verify your work.
 
 4. Once you have a solution, decide whether you need additional verification or if you're confident enough to finalize.
 
 5. Provide your final answer with a clear explanation of your reasoning.
 
-6. Rate your overall confidence (0-100%) in this answer and explain why you have this confidence level.
+6. Rate your overall confidence (0-100%) in this answer and explain why.
 
 Problem: {question}
 
@@ -148,19 +154,25 @@ Example: If the answer is 25 dollars, write:
 Final Answer: 25"""
         
         elif benchmark_name and benchmark_name.lower() in ['mmlu', 'hellaswag', 'mrben']:
-            user_message = f"""Answer this question step by step:
+            user_message = f"""First, assess if this question is SIMPLE or COMPLEX:
+- SIMPLE: The answer is immediately clear from basic knowledge or intuition
+- COMPLEX: Requires careful analysis, comparison of options, or multi-step reasoning
 
-1. First, clarify your understanding of what the question is asking.
+If SIMPLE: Choose the answer directly and provide your final answer.
+
+If COMPLEX: Follow these steps:
+
+1. Clarify your understanding of what the question is asking.
 
 2. Make a preliminary analysis of each option.
 
-3. Monitor your confidence in the solution, if you think its wrong or has potential errors, pause and verify your work.
+3. Monitor your confidence in the solution. If you think it's wrong or has potential errors, pause and verify your work.
 
 4. Once you have selected an option, decide whether you need additional verification or if you're confident enough to finalize.
 
 5. Provide your final answer with a clear explanation of your reasoning.
 
-6. Rate your overall confidence (0-100%) in this answer and explain why you have this confidence level.
+6. Rate your overall confidence (0-100%) in this answer and explain why.
 
 {question}
 
@@ -172,19 +184,25 @@ Final Answer: B"""
         
         else:
             # Generic format
-            user_message = f"""Solve this problem step by step:
+            user_message = f"""First, assess if this problem is SIMPLE or COMPLEX:
+- SIMPLE: Straightforward question with obvious answer
+- COMPLEX: Requires careful reasoning or multi-step analysis
 
-1. First, clarify your understanding of what is being asked.
+If SIMPLE: Solve directly and provide your final answer.
+
+If COMPLEX: Follow these steps:
+
+1. Clarify your understanding of what is being asked.
 
 2. Make a preliminary solution to the problem.
 
-3. Monitor your confidence in the solution, if you think its wrong or has potential errors, pause and verify your work.
+3. Monitor your confidence in the solution. If you think it's wrong or has potential errors, pause and verify your work.
 
 4. Once you have a solution, decide whether you need additional verification or if you're confident enough to finalize.
 
 5. Provide your final answer with a clear explanation of your reasoning.
 
-6. Rate your overall confidence (0-100%) in this answer and explain why you have this confidence level.
+6. Rate your overall confidence (0-100%) in this answer and explain why.
 
 Problem: {question}
 
