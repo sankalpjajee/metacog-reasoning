@@ -437,7 +437,9 @@ Answer: [numerical value only, no units or explanation]"""
                 for category, acc in metrics.per_category_accuracy.items():
                     print(f"  {category}: {acc:.1%}")
                     if self.use_mlflow:
-                        mlflow.log_metric(f"accuracy_{category}", acc)
+                        # Sanitize category name for MLflow (remove special characters)
+                        sanitized_category = category.replace("&", "and").replace(" ", "_").replace("/", "_").replace("(", "").replace(")", "")
+                        mlflow.log_metric(f"accuracy_{sanitized_category}", acc)
             
             if metrics.per_difficulty_accuracy:
                 print("\nPer-Difficulty Accuracy:")
