@@ -125,68 +125,91 @@ class MetacognitiveEvaluator:
         
         # Benchmark-specific user message formatting
         if benchmark_name and benchmark_name.lower() == 'gsm8k':
-            user_message = f"""Solve this math problem step by step. As you work through this:
+            user_message = f"""First, assess if this problem is SIMPLE or COMPLEX:
+- SIMPLE: Basic arithmetic or 1-2 step calculation
+- COMPLEX: Multi-step reasoning, word problems, or requires careful analysis
 
-1. First, clarify your understanding of what the problem is asking.
+If SIMPLE: Solve directly and provide your final answer.
 
-2. Make a preliminary solution to the problem, showing your work.
+If COMPLEX: Follow these steps:
 
-3. As you solve, monitor your confidence in each step. If you notice uncertainty or potential errors, pause and verify your work.
+1. Clarify your understanding of what the problem is asking.
 
-4. If your verification reveals issues, adjust your approach and try again.
+2. Make a preliminary solution to the problem.
 
-5. Once you have a solution, decide whether you need additional verification or if you're confident enough to finalize.
+3. Monitor your confidence in the solution. If you think it's wrong or has potential errors, pause and verify your work.
 
-6. Provide your final answer with a clear explanation of your reasoning.
+4. Once you have a solution, decide whether you need additional verification or if you're confident enough to finalize.
 
-7. Rate your overall confidence (0-100%) in this answer and explain why you have this confidence level.
+5. Provide your final answer with a clear explanation of your reasoning.
+
+6. Rate your overall confidence (0-100%) in this answer and explain why.
 
 Problem: {question}
 
-Provide the answer in your final response as "Final Answer: [numerical value]""""
+IMPORTANT: You MUST end your response with exactly this format:
+Final Answer: [just the number, nothing else]
+
+Example: If the answer is 25 dollars, write:
+Final Answer: 25"""
         
         elif benchmark_name and benchmark_name.lower() in ['mmlu', 'hellaswag', 'mrben']:
-            user_message = f"""Answer this question step by step. As you work through this:
+            user_message = f"""First, assess if this question is SIMPLE or COMPLEX:
+- SIMPLE: The answer is immediately clear from basic knowledge or intuition
+- COMPLEX: Requires careful analysis, comparison of options, or multi-step reasoning
 
-1. First, clarify your understanding of what the question is asking.
+If SIMPLE: Choose the answer directly and provide your final answer.
+
+If COMPLEX: Follow these steps:
+
+1. Clarify your understanding of what the question is asking.
 
 2. Make a preliminary analysis of each option.
 
-3. As you analyze, monitor your confidence in your reasoning. If you notice uncertainty or potential errors, pause and reconsider.
+3. Monitor your confidence in the solution. If you think it's wrong or has potential errors, pause and verify your work.
 
-4. If your analysis reveals issues with your initial thinking, adjust your approach and reassess.
+4. Once you have selected an option, decide whether you need additional verification or if you're confident enough to finalize.
 
-5. Once you have selected an option, decide whether you need additional verification or if you're confident enough to finalize.
+5. Provide your final answer with a clear explanation of your reasoning.
 
-6. Provide your final answer with a clear explanation of your reasoning.
-
-7. Rate your overall confidence (0-100%) in this answer and explain why you have this confidence level.
+6. Rate your overall confidence (0-100%) in this answer and explain why.
 
 {question}
 
-Provide the answer in your final response as "Final Answer: [A, B, C, or D]"""
+IMPORTANT: You MUST end your response with exactly this format:
+Final Answer: [just the letter A, B, C, or D]
+
+Example: If you choose option B, write:
+Final Answer: B"""
         
         else:
             # Generic format
-            user_message = f"""Solve this problem step by step. As you work through this:
+            user_message = f"""First, assess if this problem is SIMPLE or COMPLEX:
+- SIMPLE: Straightforward question with obvious answer
+- COMPLEX: Requires careful reasoning or multi-step analysis
 
-1. First, clarify your understanding of what is being asked.
+If SIMPLE: Solve directly and provide your final answer.
 
-2. Make a preliminary solution, showing your reasoning.
+If COMPLEX: Follow these steps:
 
-3. As you work, monitor your confidence. If you notice uncertainty or potential errors, pause and verify.
+1. Clarify your understanding of what is being asked.
 
-4. If verification reveals issues, adjust your approach and try again.
+2. Make a preliminary solution to the problem.
 
-5. Once you have a solution, decide if you need more verification or if you're ready to finalize.
+3. Monitor your confidence in the solution. If you think it's wrong or has potential errors, pause and verify your work.
 
-6. Provide your final answer with clear reasoning.
+4. Once you have a solution, decide whether you need additional verification or if you're confident enough to finalize.
 
-7. Rate your confidence (0-100%) and explain why.
+5. Provide your final answer with a clear explanation of your reasoning.
+
+6. Rate your overall confidence (0-100%) in this answer and explain why.
 
 Problem: {question}
 
-Provide the answer in your final response as "Final Answer: [your answer]"""
+IMPORTANT: You MUST end your response with exactly this format:
+Final Answer: [your answer]
+
+Make sure to write "Final Answer:" followed by just your answer."""
         
         # Use Llama-3.1 Instruct chat template
         messages = [

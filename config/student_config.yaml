@@ -1,0 +1,84 @@
+# Student Model Training Configuration (Phase 2)
+
+teacher_model:
+  checkpoint_path: "./checkpoints/teacher/final"
+  device_map: "auto"
+  torch_dtype: "bfloat16"
+
+student_model:
+  name: "Qwen/Qwen2.5-7B-Instruct"
+  device_map: "auto"
+  torch_dtype: "bfloat16"
+  load_in_8bit: false
+  use_flash_attention: true
+
+training:
+  output_dir: "./checkpoints/student"
+  num_iterations: 100000
+  batch_size: 4
+  gradient_accumulation_steps: 8
+  learning_rate: 5.0e-6
+  warmup_steps: 50
+  max_grad_norm: 1.0
+  logging_steps: 10
+  save_steps: 2000
+  eval_steps: 1000
+  
+  # Hybrid training ratio
+  distillation_ratio: 0.7  # 70% distillation, 30% self-play
+  
+  # GRPO specific
+  grpo_beta: 0.1
+  grpo_gamma: 0.99
+
+generation:
+  max_new_tokens: 1024
+  temperature: 0.7
+  top_p: 0.9
+  top_k: 50
+  do_sample: true
+  num_return_sequences: 1
+
+data:
+  languages:
+    - hi  # Hindi
+    - bn  # Bengali
+    - ta  # Tamil
+    - te  # Telugu
+    - mr  # Marathi
+    - gu  # Gujarati
+    - kn  # Kannada
+    - ml  # Malayalam
+    - pa  # Punjabi
+    - ur  # Urdu
+  
+  problem_categories:
+    - math
+    - logic
+    - commonsense
+  
+  difficulty_range: [1, 5]
+  validation_split: 0.1
+
+translation:
+  api: "google"  # or "indictrans"
+  cache_dir: "./data/translation_cache"
+
+rewards:
+  # Reward component weights
+  answer_weight: 0.4
+  strategy_weight: 0.2
+  process_weight: 0.3
+  plan_weight: 0.1
+  
+  # Process similarity metric
+  similarity_metric: "bertscore"  # or "sentence_transformer"
+  similarity_model: "microsoft/deberta-xlarge-mnli"
+
+logging:
+  use_wandb: true
+  wandb_project: "metacog-reasoning"
+  wandb_entity: null
+  log_level: "INFO"
+
+seed: 42
