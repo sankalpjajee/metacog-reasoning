@@ -125,21 +125,19 @@ class MetacognitiveEvaluator:
         
         # Benchmark-specific user message formatting
         if benchmark_name and benchmark_name.lower() == 'gsm8k':
-            user_message = f"""Solve this math problem step by step. As you work through this:
+            user_message = f"""Solve this math problem step by step:
 
 1. First, clarify your understanding of what the problem is asking.
 
-2. Make a preliminary solution to the problem, showing your work.
+2. Make a preliminary solution to the problem.
 
-3. As you solve, monitor your confidence in each step. If you notice uncertainty or potential errors, pause and verify your work.
+3. Monitor your confidence in the solution, if you think its wrong or has potential errors, pause and verify your work.
 
-4. If your verification reveals issues, adjust your approach and try again.
+4. Once you have a solution, decide whether you need additional verification or if you're confident enough to finalize.
 
-5. Once you have a solution, decide whether you need additional verification or if you're confident enough to finalize.
+5. Provide your final answer with a clear explanation of your reasoning.
 
-6. Provide your final answer with a clear explanation of your reasoning.
-
-7. Rate your overall confidence (0-100%) in this answer and explain why you have this confidence level.
+6. Rate your overall confidence (0-100%) in this answer and explain why you have this confidence level.
 
 Problem: {question}
 
@@ -150,21 +148,19 @@ Example: If the answer is 25 dollars, write:
 Final Answer: 25"""
         
         elif benchmark_name and benchmark_name.lower() in ['mmlu', 'hellaswag', 'mrben']:
-            user_message = f"""Answer this question step by step. As you work through this:
+            user_message = f"""Answer this question step by step:
 
 1. First, clarify your understanding of what the question is asking.
 
 2. Make a preliminary analysis of each option.
 
-3. As you analyze, monitor your confidence in your reasoning. If you notice uncertainty or potential errors, pause and reconsider.
+3. Monitor your confidence in the solution, if you think its wrong or has potential errors, pause and verify your work.
 
-4. If your analysis reveals issues with your initial thinking, adjust your approach and reassess.
+4. Once you have selected an option, decide whether you need additional verification or if you're confident enough to finalize.
 
-5. Once you have selected an option, decide whether you need additional verification or if you're confident enough to finalize.
+5. Provide your final answer with a clear explanation of your reasoning.
 
-6. Provide your final answer with a clear explanation of your reasoning.
-
-7. Rate your overall confidence (0-100%) in this answer and explain why you have this confidence level.
+6. Rate your overall confidence (0-100%) in this answer and explain why you have this confidence level.
 
 {question}
 
@@ -176,21 +172,19 @@ Final Answer: B"""
         
         else:
             # Generic format
-            user_message = f"""Solve this problem step by step. As you work through this:
+            user_message = f"""Solve this problem step by step:
 
 1. First, clarify your understanding of what is being asked.
 
-2. Make a preliminary solution, showing your reasoning.
+2. Make a preliminary solution to the problem.
 
-3. As you work, monitor your confidence. If you notice uncertainty or potential errors, pause and verify.
+3. Monitor your confidence in the solution, if you think its wrong or has potential errors, pause and verify your work.
 
-4. If verification reveals issues, adjust your approach and try again.
+4. Once you have a solution, decide whether you need additional verification or if you're confident enough to finalize.
 
-5. Once you have a solution, decide if you need more verification or if you're ready to finalize.
+5. Provide your final answer with a clear explanation of your reasoning.
 
-6. Provide your final answer with clear reasoning.
-
-7. Rate your confidence (0-100%) and explain why.
+6. Rate your overall confidence (0-100%) in this answer and explain why you have this confidence level.
 
 Problem: {question}
 
