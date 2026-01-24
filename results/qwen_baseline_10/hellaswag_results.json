@@ -1,0 +1,122 @@
+{
+  "benchmark": "hellaswag",
+  "split": "validation",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "timestamp": "2026-01-24T10:26:54.453781",
+  "num_samples": 10,
+  "accuracy": 0.0,
+  "num_correct": 0,
+  "num_incorrect": 10,
+  "per_category_accuracy": {
+    "Roof shingle removal": 0.0,
+    "Clean and jerk": 0.0,
+    "Canoeing": 0.0,
+    "High jump": 0.0,
+    "Playing harmonica": 0.0,
+    "Sumo": 0.0,
+    "Sharpening knives": 0.0
+  },
+  "per_difficulty_accuracy": null,
+  "predictions": [
+    {
+      "id": "hellaswag_0",
+      "question": "A man is sitting on a roof. he\n\nWhat happens next?\n\nA. is using wrap to wrap a pair of skis.\nB. is ripping level tiles off.\nC. is holding a rubik's cube.\nD. starts pulling up roofing on a roof.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "D",
+      "predicted_answer": "",
+      "model_output": "",
+      "category": "Roof shingle removal",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "hellaswag_1",
+      "question": "A lady walks to a barbell. She bends down and grabs the pole. the lady\n\nWhat happens next?\n\nA. swings and lands in her arms.\nB. pulls the barbell forward.\nC. pulls a rope attached to the barbell.\nD. stands and lifts the weight over her head.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "D",
+      "predicted_answer": "",
+      "model_output": "",
+      "category": "Clean and jerk",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "hellaswag_2",
+      "question": "Two women in a child are shown in a canoe while a man pulls the canoe while standing in the water, with other individuals visible in the background. the child and a different man\n\nWhat happens next?\n\nA. are then shown paddling down a river in a boat while a woman talks.\nB. are driving the canoe, they go down the river flowing side to side.\nC. sit in a canoe while the man paddles.\nD. walking go down the rapids, while the man in his helicopter almost falls and goes out of canoehood.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "C",
+      "predicted_answer": "",
+      "model_output": "",
+      "category": "Canoeing",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "hellaswag_3",
+      "question": "A boy is running down a track. the boy\n\nWhat happens next?\n\nA. runs into a car.\nB. gets in a mat.\nC. lifts his body above the height of a pole.\nD. stands on his hands and springs.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "C",
+      "predicted_answer": "",
+      "model_output": "",
+      "category": "High jump",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "hellaswag_4",
+      "question": "The boy lifts his body above the height of a pole. The boy lands on his back on to a red mat. the boy\n\nWhat happens next?\n\nA. turns his body around on the mat.\nB. gets up from the mat.\nC. continues to lift his body over the pole.\nD. wiggles out of the mat.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "B",
+      "predicted_answer": "",
+      "model_output": "",
+      "category": "High jump",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "hellaswag_5",
+      "question": "The boy lands on his back on to a red mat. The boy gets up from the mat. the boy\n\nWhat happens next?\n\nA. starts doing spins.\nB. celebrates by clapping and flexing both arms.\nC. is dancing on the mat.\nD. does jump jacks on his stick.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "B",
+      "predicted_answer": "",
+      "model_output": "",
+      "category": "High jump",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "hellaswag_6",
+      "question": "A man is standing in front of a camera. He starts playing a harmonica for the camera. he\n\nWhat happens next?\n\nA. begins to play the harmonica with his body while looking at the camera.\nB. seems to be singing while playing the harmonica.\nC. rocks back and forth to the music as he goes.\nD. painted a fence in front of the camera.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "C",
+      "predicted_answer": "",
+      "model_output": "",
+      "category": "Playing harmonica",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "hellaswag_7",
+      "question": "A cartoon animation video is shown with people wandering around and rockets being shot. two men\n\nWhat happens next?\n\nA. fight robots of evil and ends with a to be continued.\nB. are then shown in closeups shooting a shot put.\nC. push a child in a speedboat in the water.\nD. look in the cameraman's eye and smile.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "A",
+      "predicted_answer": "",
+      "model_output": "",
+      "category": "Sumo",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "hellaswag_8",
+      "question": "A man is holding a pocket knife while sitting on some rocks in the wilderness. then he\n\nWhat happens next?\n\nA. opens a can of oil put oil on the knife, and puts oil on a knife and press it through a can filled with oil then cuts several pieces from the sandwiches.\nB. takes a small stone from the flowing river and smashes it on another stone.\nC. uses the knife to shave his leg.\nD. sand the rocks and tops them by using strong pressure.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "B",
+      "predicted_answer": "",
+      "model_output": "",
+      "category": "Sharpening knives",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "hellaswag_9",
+      "question": "Then he takes a small stone from the flowing river and smashes it on another stone. He starts to crush the small stone to smaller pieces. he\n\nWhat happens next?\n\nA. cuts the center stone in half and blow it on to make it bigger.\nB. grind it hard to make the pieces smaller.\nC. eventually brings it back into view and adds it to the smaller ones to make a small triangular shaped piece.\nD. starts to party with them and throw the pieces by hand while they celebrate.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "B",
+      "predicted_answer": "",
+      "model_output": "",
+      "category": "Sharpening knives",
+      "difficulty": null,
+      "is_correct": false
+    }
+  ]
+}

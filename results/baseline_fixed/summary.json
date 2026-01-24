@@ -1,0 +1,31 @@
+{
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "timestamp": "2026-01-21T16:17:36.950180",
+  "benchmarks": {
+    "gsm8k": {
+      "accuracy": 0.551,
+      "num_samples": 1000,
+      "num_correct": 551
+    },
+    "mmlu": {
+      "accuracy": 0.603,
+      "num_samples": 1000,
+      "num_correct": 603
+    },
+    "hellaswag": {
+      "accuracy": 0.629,
+      "num_samples": 1000,
+      "num_correct": 629
+    },
+    "humaneval": {
+      "accuracy": 0.3231707317073171,
+      "num_samples": 164,
+      "num_correct": 53
+    },
+    "mrben": {
+      "accuracy": 0.159,
+      "num_samples": 1000,
+      "num_correct": 159
+    }
+  }
+}

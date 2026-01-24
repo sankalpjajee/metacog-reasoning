@@ -1,0 +1,71 @@
+{
+  "benchmark": "mmlu",
+  "split": "test",
+  "model": "meta-llama/Llama-3.1-70B-Instruct",
+  "evaluation_type": "metacognitive",
+  "accuracy": 0.0,
+  "correct": 0,
+  "total": 10,
+  "results": [
+    {
+      "sample_id": 0,
+      "question": "Find the degree for the given field extension Q(sqrt(2), sqrt(3), sqrt(18)) over Q.\n\nA. 0\nB. 4\nC. 2\nD. 6\n\nAnswer with the letter only (A, B, C, or D):",
+      "error": "CUDA out of memory. Tried to allocate 1.96 GiB. GPU 0 has a total capacity of 93.00 GiB of which 1.50 GiB is free. Process 176477 has 2.82 GiB memory in use. Process 3818095 has 7.75 GiB memory in use. Process 52315 has 66.79 GiB memory in use. Including non-PyTorch memory, this process has 14.10 GiB memory in use. Of the allocated memory 13.24 GiB is allocated by PyTorch, and 16.57 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "correct": false
+    },
+    {
+      "sample_id": 1,
+      "question": "Let p = (1, 2, 5, 4)(2, 3) in S_5 . Find the index of <p> in S_5.\n\nA. 8\nB. 2\nC. 24\nD. 120\n\nAnswer with the letter only (A, B, C, or D):",
+      "error": "CUDA out of memory. Tried to allocate 1.96 GiB. GPU 0 has a total capacity of 93.00 GiB of which 1.50 GiB is free. Process 176477 has 2.82 GiB memory in use. Process 3818095 has 7.75 GiB memory in use. Process 52315 has 66.79 GiB memory in use. Including non-PyTorch memory, this process has 14.10 GiB memory in use. Of the allocated memory 13.24 GiB is allocated by PyTorch, and 10.61 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "correct": false
+    },
+    {
+      "sample_id": 2,
+      "question": "Find all zeros in the indicated finite field of the given polynomial with coefficients in that field. x^5 + 3x^3 + x^2 + 2x in Z_5\n\nA. 0\nB. 1\nC. 0,1\nD. 0,4\n\nAnswer with the letter only (A, B, C, or D):",
+      "error": "CUDA out of memory. Tried to allocate 1.96 GiB. GPU 0 has a total capacity of 93.00 GiB of which 1.50 GiB is free. Process 176477 has 2.82 GiB memory in use. Process 3818095 has 7.75 GiB memory in use. Process 52315 has 66.79 GiB memory in use. Including non-PyTorch memory, this process has 14.10 GiB memory in use. Of the allocated memory 13.25 GiB is allocated by PyTorch, and 10.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "correct": false
+    },
+    {
+      "sample_id": 3,
+      "question": "Statement 1 | A factor group of a non-Abelian group is non-Abelian. Statement 2 | If K is a normal subgroup of H and H is a normal subgroup of G, then K is a normal subgroup of G.\n\nA. True, True\nB. False, False\nC. True, False\nD. False, True\n\nAnswer with the letter only (A, B, C, or D):",
+      "error": "CUDA out of memory. Tried to allocate 1.96 GiB. GPU 0 has a total capacity of 93.00 GiB of which 1.46 GiB is free. Process 176477 has 2.82 GiB memory in use. Process 3818095 has 7.75 GiB memory in use. Process 52315 has 66.79 GiB memory in use. Including non-PyTorch memory, this process has 14.15 GiB memory in use. Of the allocated memory 13.25 GiB is allocated by PyTorch, and 55.43 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "correct": false
+    },
+    {
+      "sample_id": 4,
+      "question": "Find the product of the given polynomials in the given polynomial ring. f(x) = 4x - 5, g(x) = 2x^2 - 4x + 2 in Z_8[x].\n\nA. 2x^2 + 5\nB. 6x^2 + 4x + 6\nC. 0\nD. x^2 + 1\n\nAnswer with the letter only (A, B, C, or D):",
+      "error": "CUDA out of memory. Tried to allocate 1.96 GiB. GPU 0 has a total capacity of 93.00 GiB of which 1.45 GiB is free. Process 176477 has 2.82 GiB memory in use. Process 3818095 has 7.75 GiB memory in use. Process 52315 has 66.79 GiB memory in use. Including non-PyTorch memory, this process has 14.15 GiB memory in use. Of the allocated memory 13.25 GiB is allocated by PyTorch, and 52.78 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "correct": false
+    },
+    {
+      "sample_id": 5,
+      "question": "Statement 1 | If a group has an element of order 15 it must have at least 8 elements of order 15. Statement 2 | If a group has more than 8 elements of order 15, it must have at least 16 elements of order 15.\n\nA. True, True\nB. False, False\nC. True, False\nD. False, True\n\nAnswer with the letter only (A, B, C, or D):",
+      "error": "CUDA out of memory. Tried to allocate 1.96 GiB. GPU 0 has a total capacity of 93.00 GiB of which 1.46 GiB is free. Process 176477 has 2.82 GiB memory in use. Process 3818095 has 7.75 GiB memory in use. Process 52315 has 66.79 GiB memory in use. Including non-PyTorch memory, this process has 14.15 GiB memory in use. Of the allocated memory 13.25 GiB is allocated by PyTorch, and 52.15 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "correct": false
+    },
+    {
+      "sample_id": 6,
+      "question": "Statement 1 | Every homomorphic image of a group G is isomorphic to a factor group of G. Statement 2 | The homomorphic images of a group G are the same (up to isomorphism) as the factor groups of G.\n\nA. True, True\nB. False, False\nC. True, False\nD. False, True\n\nAnswer with the letter only (A, B, C, or D):",
+      "error": "CUDA out of memory. Tried to allocate 1.96 GiB. GPU 0 has a total capacity of 93.00 GiB of which 1.45 GiB is free. Process 176477 has 2.82 GiB memory in use. Process 3818095 has 7.75 GiB memory in use. Process 52315 has 66.79 GiB memory in use. Including non-PyTorch memory, this process has 14.15 GiB memory in use. Of the allocated memory 13.25 GiB is allocated by PyTorch, and 57.12 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "correct": false
+    },
+    {
+      "sample_id": 7,
+      "question": "Statement 1 | A ring homomorphism is one to one if and only if the kernel is {0}. Statement 2 | Q is an ideal in R.\n\nA. True, True\nB. False, False\nC. True, False\nD. False, True\n\nAnswer with the letter only (A, B, C, or D):",
+      "error": "CUDA out of memory. Tried to allocate 1.96 GiB. GPU 0 has a total capacity of 93.00 GiB of which 1.50 GiB is free. Process 176477 has 2.82 GiB memory in use. Process 3818095 has 7.75 GiB memory in use. Process 52315 has 66.79 GiB memory in use. Including non-PyTorch memory, this process has 14.10 GiB memory in use. Of the allocated memory 13.24 GiB is allocated by PyTorch, and 12.30 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "correct": false
+    },
+    {
+      "sample_id": 8,
+      "question": "Find the degree for the given field extension Q(sqrt(2) + sqrt(3)) over Q.\n\nA. 0\nB. 4\nC. 2\nD. 6\n\nAnswer with the letter only (A, B, C, or D):",
+      "error": "CUDA out of memory. Tried to allocate 1.96 GiB. GPU 0 has a total capacity of 93.00 GiB of which 1.50 GiB is free. Process 176477 has 2.82 GiB memory in use. Process 3818095 has 7.75 GiB memory in use. Process 52315 has 66.79 GiB memory in use. Including non-PyTorch memory, this process has 14.10 GiB memory in use. Of the allocated memory 13.24 GiB is allocated by PyTorch, and 15.49 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "correct": false
+    },
+    {
+      "sample_id": 9,
+      "question": "Find all zeros in the indicated finite field of the given polynomial with coefficients in that field. x^3 + 2x + 2 in Z_7\n\nA. 1\nB. 2\nC. 2,3\nD. 6\n\nAnswer with the letter only (A, B, C, or D):",
+      "error": "CUDA out of memory. Tried to allocate 1.96 GiB. GPU 0 has a total capacity of 93.00 GiB of which 1.50 GiB is free. Process 176477 has 2.82 GiB memory in use. Process 3818095 has 7.75 GiB memory in use. Process 52315 has 66.79 GiB memory in use. Including non-PyTorch memory, this process has 14.10 GiB memory in use. Of the allocated memory 13.24 GiB is allocated by PyTorch, and 11.22 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "correct": false
+    }
+  ]
+}

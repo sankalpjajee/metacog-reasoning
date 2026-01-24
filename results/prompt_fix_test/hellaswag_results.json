@@ -1,0 +1,330 @@
+{
+  "benchmark": "hellaswag",
+  "split": "validation",
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "timestamp": "2026-01-22T07:34:10.274438",
+  "num_samples": 30,
+  "accuracy": 0.6666666666666666,
+  "num_correct": 20,
+  "num_incorrect": 10,
+  "per_category_accuracy": {
+    "Roof shingle removal": 0.0,
+    "Clean and jerk": 0.0,
+    "Canoeing": 1.0,
+    "High jump": 1.0,
+    "Playing harmonica": 1.0,
+    "Sumo": 1.0,
+    "Sharpening knives": 0.5714285714285714,
+    "Playing bagpipes": 0.0,
+    "Playing water polo": 1.0,
+    "Having an ice cream": 0.3333333333333333,
+    "Cheerleading": 0.6666666666666666,
+    "Cutting the grass": 1.0,
+    "Washing face": 0.5,
+    "Paintball": 1.0,
+    "Gargling mouthwash": 1.0
+  },
+  "per_difficulty_accuracy": null,
+  "predictions": [
+    {
+      "id": "hellaswag_0",
+      "question": "A man is sitting on a roof. he\n\nWhat happens next?\n\nA. is using wrap to wrap a pair of skis.\nB. is ripping level tiles off.\nC. is holding a rubik's cube.\nD. starts pulling up roofing on a roof.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "D",
+      "predicted_answer": "B",
+      "model_output": "To deduce the most likely scenario, let's consider the context and the options provided.\n\n- Option A: \"is using wrap to wrap a pair of skis.\" This option seems unlikely as the man is on the roof, and wrapping skis is typically done on the ground.\n\n- Option B: \"is ripping level tiles off.\" This option is possible, as a person on a roof might be repairing or replacing tiles.\n\n- Option C: \"is holding a Rubik's Cube.\" This option is unlikely as it doesn't relate to the typical activities one would do on a roof.\n\n- Option D: \"starts pulling up roofing on a roof.\" This option is contradictory, as the man is already on the roof, so it wouldn't make sense for him to be pulling up roofing.\n\nConsidering the options, the most plausible scenario is that the man is on the roof for a reason related to the roof itself, such as maintenance or repair. Therefore, the most likely action is ripping level tiles off.\n\nAnswer: B",
+      "category": "Roof shingle removal",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "hellaswag_1",
+      "question": "A lady walks to a barbell. She bends down and grabs the pole. the lady\n\nWhat happens next?\n\nA. swings and lands in her arms.\nB. pulls the barbell forward.\nC. pulls a rope attached to the barbell.\nD. stands and lifts the weight over her head.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "D",
+      "predicted_answer": "B",
+      "model_output": "Answer: B",
+      "category": "Clean and jerk",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "hellaswag_2",
+      "question": "Two women in a child are shown in a canoe while a man pulls the canoe while standing in the water, with other individuals visible in the background. the child and a different man\n\nWhat happens next?\n\nA. are then shown paddling down a river in a boat while a woman talks.\nB. are driving the canoe, they go down the river flowing side to side.\nC. sit in a canoe while the man paddles.\nD. walking go down the rapids, while the man in his helicopter almost falls and goes out of canoehood.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "C",
+      "predicted_answer": "C",
+      "model_output": "Based on the information given, it seems like the scenario is setting up a scene where the man is pulling the canoe, and the women and child are in it. The next logical step would be for the man to get into the canoe and start paddling, allowing them to move forward. \n\nAnswer: C",
+      "category": "Canoeing",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_3",
+      "question": "A boy is running down a track. the boy\n\nWhat happens next?\n\nA. runs into a car.\nB. gets in a mat.\nC. lifts his body above the height of a pole.\nD. stands on his hands and springs.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "C",
+      "predicted_answer": "C",
+      "model_output": "To solve this, let's consider the information given and the options provided.\n\nThe question states \"A boy is running down a track.\" This implies that the boy is in motion, likely on the track for a purpose such as running a race or training. \n\nOption A, \"runs into a car,\" is unlikely because there's no indication that a car is present on the track. \n\nOption B, \"gets in a mat,\" doesn't make sense in this context as there's no mention of a mat being present on the track.\n\nOption C, \"lifts his body above the height of a pole,\" is a plausible action for a boy running on a track, especially if there are hurdles or other obstacles present. This action is consistent with a common track and field event, such as high jump.\n\nOption D, \"stands on his hands and springs,\" is not a typical action associated with running on a track.\n\nConsidering the context and the options, the most likely action for a boy running down a track is to clear an obstacle, which is most closely associated with option C.\n\nAnswer: C",
+      "category": "High jump",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_4",
+      "question": "The boy lifts his body above the height of a pole. The boy lands on his back on to a red mat. the boy\n\nWhat happens next?\n\nA. turns his body around on the mat.\nB. gets up from the mat.\nC. continues to lift his body over the pole.\nD. wiggles out of the mat.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "B",
+      "predicted_answer": "B",
+      "model_output": "Answer: B",
+      "category": "High jump",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_5",
+      "question": "The boy lands on his back on to a red mat. The boy gets up from the mat. the boy\n\nWhat happens next?\n\nA. starts doing spins.\nB. celebrates by clapping and flexing both arms.\nC. is dancing on the mat.\nD. does jump jacks on his stick.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "B",
+      "predicted_answer": "B",
+      "model_output": "There is no information about the boy doing spins, dancing, or doing jump jacks on a stick. The information given is that the boy lands on his back on a red mat and then gets up from the mat. The most logical action after getting up from the mat would be to celebrate, which is often done by clapping and flexing both arms.\n\nAnswer: B",
+      "category": "High jump",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_6",
+      "question": "A man is standing in front of a camera. He starts playing a harmonica for the camera. he\n\nWhat happens next?\n\nA. begins to play the harmonica with his body while looking at the camera.\nB. seems to be singing while playing the harmonica.\nC. rocks back and forth to the music as he goes.\nD. painted a fence in front of the camera.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "C",
+      "predicted_answer": "C",
+      "model_output": "Answer: C",
+      "category": "Playing harmonica",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_7",
+      "question": "A cartoon animation video is shown with people wandering around and rockets being shot. two men\n\nWhat happens next?\n\nA. fight robots of evil and ends with a to be continued.\nB. are then shown in closeups shooting a shot put.\nC. push a child in a speedboat in the water.\nD. look in the cameraman's eye and smile.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "A",
+      "predicted_answer": "A",
+      "model_output": "Based on the description of a cartoon animation video with people wandering around and rockets being shot, it seems like the scenario is likely to be an action-packed or adventurous scene. \n\nGiven the options, option A \"fight robots of evil and ends with a to be continued\" seems like the most plausible continuation of such a scene, as it fits the typical narrative structure of an action-packed cartoon animation.\n\nAnswer: A",
+      "category": "Sumo",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_8",
+      "question": "A man is holding a pocket knife while sitting on some rocks in the wilderness. then he\n\nWhat happens next?\n\nA. opens a can of oil put oil on the knife, and puts oil on a knife and press it through a can filled with oil then cuts several pieces from the sandwiches.\nB. takes a small stone from the flowing river and smashes it on another stone.\nC. uses the knife to shave his leg.\nD. sand the rocks and tops them by using strong pressure.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "B",
+      "predicted_answer": "C",
+      "model_output": "To determine the most likely action, let's consider the context and the tools available to the man.\n\nThe man is in the wilderness and is holding a pocket knife. This suggests that he is likely trying to accomplish a task that requires the use of the knife. \n\nOption A involves using the knife to cut sandwiches, but it's unclear why he would need to press the knife through a can filled with oil. This action seems unnecessary and impractical.\n\nOption B involves smashing a stone on another stone, which could be a way to sharpen the knife, but it's not the most direct or efficient way to do so.\n\nOption C, using the knife to shave his leg, is a plausible action, as the man is sitting on rocks and has a knife available.\n\nOption D, sanding the rocks and topping them, doesn't seem to involve the use of the knife at all.\n\nConsidering the context and the tools available, the most likely action is using the knife to shave his leg.\n\nAnswer: C",
+      "category": "Sharpening knives",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "hellaswag_9",
+      "question": "Then he takes a small stone from the flowing river and smashes it on another stone. He starts to crush the small stone to smaller pieces. he\n\nWhat happens next?\n\nA. cuts the center stone in half and blow it on to make it bigger.\nB. grind it hard to make the pieces smaller.\nC. eventually brings it back into view and adds it to the smaller ones to make a small triangular shaped piece.\nD. starts to party with them and throw the pieces by hand while they celebrate.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "B",
+      "predicted_answer": "B",
+      "model_output": "Based on the context, it seems like the person is trying to break the stone into smaller pieces. The most logical next step would be to continue grinding or crushing the stone to make the pieces even smaller. \n\nAnswer: B",
+      "category": "Sharpening knives",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_10",
+      "question": "Then he takes a piece of bark and rubs the powered stone pieces onto it. The stone particles stick to the wet piece of wood. he\n\nWhat happens next?\n\nA. uses a small brush to polish one of the stone pieces.\nB. then uses a strip of sealing tape to seal the board and then smooths the bottom of the board.\nC. walks towards the camera.\nD. then takes the knife and sharpens it against the wood piece.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "D",
+      "predicted_answer": "A",
+      "model_output": "To solve this, let's analyze the given information step by step:\n\n1. The person is rubbing powered stone pieces onto a wet piece of wood. This suggests that they are trying to attach or adhere the stone particles to the wood.\n2. The action of rubbing the stone particles onto the wood implies that the person is trying to create a surface or a tool of some sort.\n3. Given the context, the most likely outcome of this process is that the person is trying to create a sharpening tool or a sharpening surface for a knife.\n\nConsidering the options:\n\nA. uses a small brush to polish one of the stone pieces. - This option is plausible, as polishing the stone pieces could be a step in creating a sharpening tool.\nB. then uses a strip of sealing tape to seal the board and then smooths the bottom of the board. - This option doesn't seem directly related to the process of creating a sharpening tool.\nC. walks towards the camera. - This option is unrelated to the process of creating a sharpening tool.\nD. then takes the knife and sharpens it against the wood piece. - This option is possible, but it seems more likely that the person would use the sharpening tool they are creating, rather than sharpening the knife against the wood piece.\n\nBased on the analysis, the most likely next step is polishing the stone pieces to create a sharpening tool.\n\nAnswer: A",
+      "category": "Sharpening knives",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "hellaswag_11",
+      "question": "The stone particles stick to the wet piece of wood. He then takes the knife and sharpens it against the wood piece. he\n\nWhat happens next?\n\nA. then cuts off the excess hair of the wood.\nB. scrapes the wood with a broom in the cutting tool used in sharpening the instrument.\nC. writes on the board again.\nD. then notices a little black and green poisonous frog sitting next to him.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "D",
+      "predicted_answer": "D",
+      "model_output": "To solve this, let's break down the information given:\n\n1. The stone particles stick to the wet piece of wood. This implies that the person is sharpening a knife using a whetstone, which is a common method for sharpening knives.\n2. He then takes the knife and sharpens it against the wood piece. This is likely a continuation of the sharpening process, but it seems unusual because sharpening a knife is typically done against a whetstone, not wood.\n\nGiven the context, it seems like there might be a misunderstanding or a missing piece of information. However, considering the options provided:\n\nA. then cuts off the excess hair of the wood. - This option doesn't make sense in the context of sharpening a knife.\nB. scrapes the wood with a broom in the cutting tool used in sharpening the instrument. - This option is also unclear and doesn't fit the context.\nC. writes on the board again. - This option seems unrelated to the sharpening process.\nD. then notices a little black and green poisonous frog sitting next to him. - This option is unrelated to the sharpening process and seems like a non-sequitur.\n\nHowever, considering the given options and the context, it seems like the person is trying to sharpen the knife against the wood, which is not the typical method. The most likely correct answer based on the provided options is:\n\nAnswer: D",
+      "category": "Sharpening knives",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_12",
+      "question": "He then takes the knife and sharpens it against the wood piece. He then notices a little black and green poisonous frog sitting next to him. the frog\n\nWhat happens next?\n\nA. eventually gets to get up and marches out of the room waving its body about.\nB. then starts to get up from the chair and begins walking towards the camera.\nC. then escapes and jumps away.\nD. is acting crazy and attacking him while he is cooking.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "C",
+      "predicted_answer": "C",
+      "model_output": "Answer: C",
+      "category": "Sharpening knives",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_13",
+      "question": "He then notices a little black and green poisonous frog sitting next to him. The frog then escapes and jumps away. he\n\nWhat happens next?\n\nA. sits and hugs another man and also adjusts his camera.\nB. then sits there staring at his text machine as if he has actually been given a gift from god.\nC. explains how the frog secretes a poisonous fluid that can be extremely harmful.\nD. takes the frog on his hand and tickles the back of it.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "C",
+      "predicted_answer": "C",
+      "model_output": "Answer: C",
+      "category": "Sharpening knives",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_14",
+      "question": "A person is playing bagpipes out in a park. A man and two boys watching from a far. the camera\n\nWhat happens next?\n\nA. shoots areas all around the park while the bagpipes play.\nB. is covered to the boy that is playing there.\nC. then goes black and we see a black opening scene.\nD. watching the boy and boy as they play a game of drums.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "A",
+      "predicted_answer": "B",
+      "model_output": "Answer: B",
+      "category": "Playing bagpipes",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "hellaswag_15",
+      "question": "Two people are seen passing a ball back and fourth in a pool and leads into one speaking to the camera. the man\n\nWhat happens next?\n\nA. dips the ball and walks back with the boy and pours detergent into a cup again.\nB. then throws the ball into the pool and begins running around with a sail in his hand while a group of men watch.\nC. then takes a drink having a conversation with another man and another man leads into him throwing balls in the water and laughing to the camera.\nD. demonstrates how to properly throw the ball with his hands while still speaking to the camera.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "D",
+      "predicted_answer": "D",
+      "model_output": "Answer: D",
+      "category": "Playing water polo",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_16",
+      "question": "A woman is sitting at a table in a fast food restaurant while eating. She continually speaks to nobody as she eats. she\n\nWhat happens next?\n\nA. is then seen sitting alone as she eats a cold brown ice cream.\nB. pauses in the process of eating to enjoy her food.\nC. stands up and grabs her purse, continuing to talk and laugh as she leaves.\nD. picks up another chocolate bar and chews it as she talks.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "C",
+      "predicted_answer": "D",
+      "model_output": "Answer: D",
+      "category": "Having an ice cream",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "hellaswag_17",
+      "question": "A group of cheerleaders run onto a stage before a cheering audience. they\n\nWhat happens next?\n\nA. get into formation, then begin dancing and flipping as male cheerleaders join them.\nB. perform a cheer routine before the girls, along with makeup artists, spread out and pose.\nC. take turns jumping on each other like they are performing karate.\nD. are then shown performing the type of cheerleading dance, using batons and pole vaults.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "A",
+      "predicted_answer": "A",
+      "model_output": "Answer: A",
+      "category": "Cheerleading",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_18",
+      "question": "A group of cheerleaders run onto a stage before a cheering audience. They get into formation, then begin dancing and flipping as male cheerleaders join them. they all\n\nWhat happens next?\n\nA. dance and flip on stage while hanging their hats on the sides.\nB. continue dancing and flipping, doing hand springs.\nC. dance together with flip up their sleeves.\nD. perform their routines as the studio rashes to a halt with cheerleaders in the audience.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "B",
+      "predicted_answer": "B",
+      "model_output": "Based on the context, it seems like the cheerleaders are performing a routine on stage. The description mentions dancing and flipping, which is typical of cheerleading performances. The options provided don't seem to fit perfectly with the usual cheerleading activities, but option B is the closest to what cheerleaders might do during a performance. They might continue dancing and flipping, and hand springs could be a part of their routine.\n\nAnswer: B",
+      "category": "Cheerleading",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_19",
+      "question": "They get into formation, then begin dancing and flipping as male cheerleaders join them. They all continue dancing and flipping, doing hand springs. when they\n\nWhat happens next?\n\nA. are done, they shake hands and walk away, but cheers are heard all around as they're finished.\nB. are finished, they jump up and down happily and walk off the stage, exhausted.\nC. are done, a male cheerleader is crowned and an instant replay is shown.\nD. come down from their workout, they all stop to bow and applaud, then they continue dancing.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "B",
+      "predicted_answer": "D",
+      "model_output": "Based on the context, it seems like the scenario is describing a cheerleading routine. The description of dancing, flipping, and hand springs suggests a performance. The most likely outcome after a performance is applause, which is mentioned in option D. \n\nAnswer: D",
+      "category": "Cheerleading",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "hellaswag_20",
+      "question": "A woman is reading a newspaper nearby while he speaks to her and shows her something in his hand. The man sharpens his knives using an electric tool. he\n\nWhat happens next?\n\nA. sharpens and cuts something on a knife board using an electric tool.\nB. then continues cutting his onion.\nC. travels with his knife under the table and uses it also in his shoe.\nD. then shows her a spare knife that he has also used on a knife sharpener and drills into a side of the table.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "B",
+      "predicted_answer": "A",
+      "model_output": "Answer: A",
+      "category": "Sharpening knives",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "hellaswag_21",
+      "question": "A man is outside of a building. He is using commercial lawn mowing equipment. he\n\nWhat happens next?\n\nA. walks back and forth as he mows the grass.\nB. is animated as he does the task.\nC. relaxes, making sure his lawn is pristine.\nD. runs from one side of the building to the other.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "A",
+      "predicted_answer": "A",
+      "model_output": "To determine the most likely action, let's consider the context and the options provided.\n\nThe man is outside of a building and using commercial lawn mowing equipment. This implies that he is likely mowing the lawn, which is a task that typically requires moving around to cover the entire area.\n\nOption A, \"walks back and forth as he mows the grass,\" is a common and practical way to mow a lawn, as it allows the man to evenly cover the area.\n\nOption B, \"is animated as he does the task,\" is not directly related to the action of mowing the lawn, and it's unclear what being \"animated\" would mean in this context.\n\nOption C, \"relaxes, making sure his lawn is pristine,\" is not a likely action while using commercial lawn mowing equipment, as the task of mowing the lawn is typically physically demanding and requires attention to detail.\n\nOption D, \"runs from one side of the building to the other,\" is unlikely, as running would not be an efficient or safe way to mow a lawn, especially with commercial equipment.\n\nConsidering these points, the most logical action is walking back and forth to mow the lawn.\n\nAnswer: A",
+      "category": "Cutting the grass",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_22",
+      "question": "Children bring desert out for their family member. the family\n\nWhat happens next?\n\nA. floats in a river.\nB. member stands looking into a hut and then handing people photographs.\nC. member cuts a piece of sunscreen.\nD. enjoys eating the desert together.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "D",
+      "predicted_answer": "D",
+      "model_output": "To solve this, let's break it down step by step:\n\n1. The subject is \"children\" bringing something out for their family member.\n2. The something they bring out is described as \"desert,\" which is likely a dessert, a sweet treat.\n3. The context implies a family gathering or meal setting where desserts are typically served.\n4. Considering the options provided:\n   - A. \"floats in a river\" doesn't make sense in this context.\n   - B. \"member stands looking into a hut and then handing people photographs\" seems unrelated to the context of bringing a dessert.\n   - C. \"cuts a piece of sunscreen\" is also unrelated to the context.\n   - D. \"enjoys eating the dessert together\" fits the context of a family gathering and the act of bringing a dessert.\n\nBased on this analysis, the most logical outcome is that the family enjoys eating the dessert together.\n\nAnswer: D",
+      "category": "Having an ice cream",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_23",
+      "question": "The family enjoys eating the desert together. The people in the restaurant laugh at the man and he wonders what they are doing. the man\n\nWhat happens next?\n\nA. goes to the bathroom and isn't able to get very far.\nB. puts the glass aside and a fourth person walks in and walks away.\nC. plays the bagpipe and smiles and laughs as he enjoys the hospitality.\nD. gets up and walks away to the other room.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "D",
+      "predicted_answer": "C",
+      "model_output": "To deduce the correct answer, let's analyze the given information step by step:\n\n1. The family enjoys eating dessert together.\n2. The people in the restaurant laugh at the man.\n3. The man wonders what they are doing.\n\nGiven that the family is enjoying dessert together, it's likely that the man is also eating dessert. The people in the restaurant laughing at the man suggests that he might be doing something unusual or entertaining.\n\nConsidering the options:\n\nA. goes to the bathroom and isn't able to get very far. - This option doesn't seem directly related to the people laughing at him.\n\nB. puts the glass aside and a fourth person walks in and walks away. - This option doesn't explain why the people in the restaurant are laughing at the man.\n\nC. plays the bagpipe and smiles and laughs as he enjoys the hospitality. - This option is a plausible explanation for the people laughing at the man, as playing the bagpipe in a restaurant would likely be unusual and entertaining.\n\nD. gets up and walks away to the other room. - This option doesn't explain why the people in the restaurant are laughing at the man.\n\nBased on the analysis, the most likely scenario is that the man is doing something entertaining, such as playing the bagpipe, which would explain why the people in the restaurant are laughing at him.\n\nAnswer: C",
+      "category": "Having an ice cream",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "hellaswag_24",
+      "question": "A black female is shown in a room with a black scarf around her head. black spots on her faced\n\nWhat happens next?\n\nA. are then zoomed in on and she begins to apply something on it.\nB. are shown and she misses a little bit of her swing.\nC. are shown and one finger is seen poking through.\nD. are shown as she continues to dance around on the hardwood and every move makes a lash on her face.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "A",
+      "predicted_answer": "D",
+      "model_output": "Based on the description, it seems like the black spots on her face are likely freckles. Given the context of a black female with a black scarf around her head, and considering the options provided, the most likely scenario is that she is dancing, and the black spots (freckles) are being highlighted as she moves. \n\nAnswer: D",
+      "category": "Washing face",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "hellaswag_25",
+      "question": "A black female is shown in a room with a black scarf around her head. Black spots on her faced are then zoomed in on and she begins to apply something on it. next\n\nWhat happens next?\n\nA. , she begins to brush her lips and make painted lips look just like a lipstick to the camera and ends with her closing gift and instruction showing her off at the end.\nB. she is shown in various different locations and gets extremely close to a wall.\nC. , she is shown making multiple moans and sprays some kind of liquid down her face before hanging up.\nD. , she takes some spray and it makes her skin extremely oily and she continues to talk until the video is over.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "D",
+      "predicted_answer": "D",
+      "model_output": "Answer: D",
+      "category": "Washing face",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_26",
+      "question": "A helicopter flies in some people who then start playing paintball. they\n\nWhat happens next?\n\nA. run around obstacles and have a great time.\nB. lose their shirt during the fight and run back the others.\nC. shoot at each other while the helicopter drone who am looking on.\nD. chase a bird in the sky while others walk around.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "A",
+      "predicted_answer": "A",
+      "model_output": "Answer: A",
+      "category": "Paintball",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_27",
+      "question": "A young boy and girl are standing over a sink with their mother talking. the mother\n\nWhat happens next?\n\nA. is now putting lipstick on the boy's mouth and he tries to stop her but only gets a little bit stuck.\nB. washes the boy while the child grabs shampoo.\nC. shows some shaving cream on the boy who is scrubbing her brushes.\nD. instructs them on how to brush their teeth while laughing.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "D",
+      "predicted_answer": "D",
+      "model_output": "Answer: D",
+      "category": "Gargling mouthwash",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_28",
+      "question": "A young boy and girl are standing over a sink with their mother talking. The mother instructs them on how to brush their teeth while laughing. the boy\n\nWhat happens next?\n\nA. puts a shirt on and rubs his mouth.\nB. helps his younger sister brush his teeth.\nC. walks with an empty mouthwash cup on a sink floor.\nD. and girl then begin working out.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "B",
+      "predicted_answer": "B",
+      "model_output": "Answer: B",
+      "category": "Gargling mouthwash",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_29",
+      "question": "The mother instructs them on how to brush their teeth while laughing. The boy helps his younger sister brush his teeth. she\n\nWhat happens next?\n\nA. shows how to hit the mom and then kiss his dad as well.\nB. brushes past the camera, looking better soon after.\nC. glows from the center of the camera as a reaction.\nD. gets them some water to gargle in their mouths.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "D",
+      "predicted_answer": "D",
+      "model_output": "Answer: D",
+      "category": "Gargling mouthwash",
+      "difficulty": null,
+      "is_correct": true
+    }
+  ]
+}

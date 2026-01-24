@@ -1,0 +1,16 @@
+{
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "timestamp": "2026-01-22T07:16:08.553361",
+  "benchmarks": {
+    "mmlu": {
+      "accuracy": 0.4,
+      "num_samples": 30,
+      "num_correct": 12
+    },
+    "mrben": {
+      "accuracy": 0.4,
+      "num_samples": 30,
+      "num_correct": 12
+    }
+  }
+}

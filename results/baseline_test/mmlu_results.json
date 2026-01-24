@@ -1,0 +1,106 @@
+{
+  "benchmark": "mmlu",
+  "split": "test",
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "timestamp": "2026-01-15T16:01:13.035303",
+  "num_samples": 10,
+  "accuracy": 0.5,
+  "num_correct": 5,
+  "num_incorrect": 5,
+  "per_category_accuracy": {
+    "abstract_algebra": 0.5
+  },
+  "per_difficulty_accuracy": null,
+  "predictions": [
+    {
+      "id": "mmlu_0",
+      "question": "Find the degree for the given field extension Q(sqrt(2), sqrt(3), sqrt(18)) over Q.\n\nA. 0\nB. 4\nC. 2\nD. 6",
+      "target_answer": "B",
+      "predicted_answer": "B",
+      "category": "abstract_algebra",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "mmlu_1",
+      "question": "Let p = (1, 2, 5, 4)(2, 3) in S_5 . Find the index of <p> in S_5.\n\nA. 8\nB. 2\nC. 24\nD. 120",
+      "target_answer": "C",
+      "predicted_answer": "3",
+      "category": "abstract_algebra",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "mmlu_2",
+      "question": "Find all zeros in the indicated finite field of the given polynomial with coefficients in that field. x^5 + 3x^3 + x^2 + 2x in Z_5\n\nA. 0\nB. 1\nC. 0,1\nD. 0,4",
+      "target_answer": "D",
+      "predicted_answer": "A",
+      "category": "abstract_algebra",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "mmlu_3",
+      "question": "Statement 1 | A factor group of a non-Abelian group is non-Abelian. Statement 2 | If K is a normal subgroup of H and H is a normal subgroup of G, then K is a normal subgroup of G.\n\nA. True, True\nB. False, False\nC. True, False\nD. False, True",
+      "target_answer": "B",
+      "predicted_answer": "A",
+      "category": "abstract_algebra",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "mmlu_4",
+      "question": "Find the product of the given polynomials in the given polynomial ring. f(x) = 4x - 5, g(x) = 2x^2 - 4x + 2 in Z_8[x].\n\nA. 2x^2 + 5\nB. 6x^2 + 4x + 6\nC. 0\nD. x^2 + 1",
+      "target_answer": "B",
+      "predicted_answer": "C",
+      "category": "abstract_algebra",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "mmlu_5",
+      "question": "Statement 1 | If a group has an element of order 15 it must have at least 8 elements of order 15. Statement 2 | If a group has more than 8 elements of order 15, it must have at least 16 elements of order 15.\n\nA. True, True\nB. False, False\nC. True, False\nD. False, True",
+      "target_answer": "A",
+      "predicted_answer": "A",
+      "category": "abstract_algebra",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "mmlu_6",
+      "question": "Statement 1 | Every homomorphic image of a group G is isomorphic to a factor group of G. Statement 2 | The homomorphic images of a group G are the same (up to isomorphism) as the factor groups of G.\n\nA. True, True\nB. False, False\nC. True, False\nD. False, True",
+      "target_answer": "A",
+      "predicted_answer": "A",
+      "category": "abstract_algebra",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "mmlu_7",
+      "question": "Statement 1 | A ring homomorphism is one to one if and only if the kernel is {0}. Statement 2 | Q is an ideal in R.\n\nA. True, True\nB. False, False\nC. True, False\nD. False, True",
+      "target_answer": "D",
+      "predicted_answer": "A",
+      "category": "abstract_algebra",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "mmlu_8",
+      "question": "Find the degree for the given field extension Q(sqrt(2) + sqrt(3)) over Q.\n\nA. 0\nB. 4\nC. 2\nD. 6",
+      "target_answer": "B",
+      "predicted_answer": "B",
+      "category": "abstract_algebra",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "mmlu_9",
+      "question": "Find all zeros in the indicated finite field of the given polynomial with coefficients in that field. x^3 + 2x + 2 in Z_7\n\nA. 1\nB. 2\nC. 2,3\nD. 6",
+      "target_answer": "C",
+      "predicted_answer": "C",
+      "category": "abstract_algebra",
+      "difficulty": null,
+      "is_correct": true
+    }
+  ]
+}

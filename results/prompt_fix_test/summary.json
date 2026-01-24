@@ -1,0 +1,26 @@
+{
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "timestamp": "2026-01-22T07:28:57.737993",
+  "benchmarks": {
+    "gsm8k": {
+      "accuracy": 0.7333333333333333,
+      "num_samples": 30,
+      "num_correct": 22
+    },
+    "mmlu": {
+      "accuracy": 0.4,
+      "num_samples": 30,
+      "num_correct": 12
+    },
+    "hellaswag": {
+      "accuracy": 0.6666666666666666,
+      "num_samples": 30,
+      "num_correct": 20
+    },
+    "mrben": {
+      "accuracy": 0.4,
+      "num_samples": 30,
+      "num_correct": 12
+    }
+  }
+}

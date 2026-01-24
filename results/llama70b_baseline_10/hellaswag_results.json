@@ -1,0 +1,122 @@
+{
+  "benchmark": "hellaswag",
+  "split": "validation",
+  "model": "meta-llama/Llama-3.1-70B-Instruct",
+  "timestamp": "2026-01-24T12:43:59.013201",
+  "num_samples": 10,
+  "accuracy": 0.8,
+  "num_correct": 8,
+  "num_incorrect": 2,
+  "per_category_accuracy": {
+    "Roof shingle removal": 1.0,
+    "Clean and jerk": 1.0,
+    "Canoeing": 1.0,
+    "High jump": 0.3333333333333333,
+    "Playing harmonica": 1.0,
+    "Sumo": 1.0,
+    "Sharpening knives": 1.0
+  },
+  "per_difficulty_accuracy": null,
+  "predictions": [
+    {
+      "id": "hellaswag_0",
+      "question": "A man is sitting on a roof. he\n\nWhat happens next?\n\nA. is using wrap to wrap a pair of skis.\nB. is ripping level tiles off.\nC. is holding a rubik's cube.\nD. starts pulling up roofing on a roof.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "D",
+      "predicted_answer": "D",
+      "model_output": "To solve this, let's analyze the given information and options:\n\n1. The man is sitting on a roof.\n2. We need to determine what he is doing based on the options provided.\n\nLet's examine each option:\n\nA. is using wrap to wrap a pair of skis. - This doesn't seem directly related to being on a roof.\nB. is ripping level tiles off. - This could be related to being on a roof, as it involves tiles, which are often found on roofs.\nC. is holding a rubik's cube. - This doesn't seem directly related to being on a roof.\nD. starts pulling up roofing on a roof. - This is directly related to being on a roof and involves an action that could be done on a roof.\n\nConsidering the given information and the options, the most likely action the man is doing while sitting on a roof is related to the roof itself.\n\nAnswer: D",
+      "category": "Roof shingle removal",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_1",
+      "question": "A lady walks to a barbell. She bends down and grabs the pole. the lady\n\nWhat happens next?\n\nA. swings and lands in her arms.\nB. pulls the barbell forward.\nC. pulls a rope attached to the barbell.\nD. stands and lifts the weight over her head.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "D",
+      "predicted_answer": "D",
+      "model_output": "Answer: D",
+      "category": "Clean and jerk",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_2",
+      "question": "Two women in a child are shown in a canoe while a man pulls the canoe while standing in the water, with other individuals visible in the background. the child and a different man\n\nWhat happens next?\n\nA. are then shown paddling down a river in a boat while a woman talks.\nB. are driving the canoe, they go down the river flowing side to side.\nC. sit in a canoe while the man paddles.\nD. walking go down the rapids, while the man in his helicopter almost falls and goes out of canoehood.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "C",
+      "predicted_answer": "C",
+      "model_output": "Answer: C",
+      "category": "Canoeing",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_3",
+      "question": "A boy is running down a track. the boy\n\nWhat happens next?\n\nA. runs into a car.\nB. gets in a mat.\nC. lifts his body above the height of a pole.\nD. stands on his hands and springs.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "C",
+      "predicted_answer": "D",
+      "model_output": "To determine the most likely outcome, let's analyze the given information and options:\n\n1. The boy is running down a track. This suggests a typical athletic or sports setting, possibly involving track and field events.\n\nNow, let's evaluate the options:\n\nA. runs into a car. - This is unlikely since the boy is running down a track, and cars are not typically present on a track.\n\nB. gets in a mat. - This option doesn't seem directly related to the action of running down a track.\n\nC. lifts his body above the height of a pole. - This option could be related to a track event, specifically pole vaulting. However, the initial statement only mentions running.\n\nD. stands on his hands and springs. - This option seems to describe a gymnastics or tumbling action, which could be part of a track event, such as a long jump or a hurdle event.\n\nConsidering the context of running down a track, option D seems the most plausible, as it involves a physical action that could be part of a track event.\n\nAnswer: D",
+      "category": "High jump",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "hellaswag_4",
+      "question": "The boy lifts his body above the height of a pole. The boy lands on his back on to a red mat. the boy\n\nWhat happens next?\n\nA. turns his body around on the mat.\nB. gets up from the mat.\nC. continues to lift his body over the pole.\nD. wiggles out of the mat.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "B",
+      "predicted_answer": "B",
+      "model_output": "Answer: B",
+      "category": "High jump",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_5",
+      "question": "The boy lands on his back on to a red mat. The boy gets up from the mat. the boy\n\nWhat happens next?\n\nA. starts doing spins.\nB. celebrates by clapping and flexing both arms.\nC. is dancing on the mat.\nD. does jump jacks on his stick.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "B",
+      "predicted_answer": "A",
+      "model_output": "To determine what happens next, let's analyze the given information step by step:\n\n1. The boy lands on his back onto a red mat. This suggests that the boy was likely performing some sort of gymnastics or tumbling move, as he landed on his back.\n2. The boy gets up from the mat. This indicates that he is now standing and ready to continue with his activity.\n\nGiven the context of the red mat, which is often used in gymnastics, and the fact that the boy landed on his back, it's likely that he is participating in a gymnastics routine or practice.\n\nConsidering the options:\n\nA. starts doing spins. This is a plausible next step, as spins are a common gymnastics move.\nB. celebrates by clapping and flexing both arms. This could be a possibility if the boy had just completed a routine, but it's not directly related to the gymnastics activity itself.\nC. is dancing on the mat. This seems less likely, as the context suggests a gymnastics setting rather than a dance performance.\nD. does jump jacks on his stick. This option seems unlikely, as jump jacks are typically done without a stick, and the context doesn't suggest the presence of a stick.\n\nBased on the analysis, the most likely next step is that the boy continues with his gymnastics routine.\n\nAnswer: A.",
+      "category": "High jump",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "hellaswag_6",
+      "question": "A man is standing in front of a camera. He starts playing a harmonica for the camera. he\n\nWhat happens next?\n\nA. begins to play the harmonica with his body while looking at the camera.\nB. seems to be singing while playing the harmonica.\nC. rocks back and forth to the music as he goes.\nD. painted a fence in front of the camera.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "C",
+      "predicted_answer": "C",
+      "model_output": "Answer: C.",
+      "category": "Playing harmonica",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_7",
+      "question": "A cartoon animation video is shown with people wandering around and rockets being shot. two men\n\nWhat happens next?\n\nA. fight robots of evil and ends with a to be continued.\nB. are then shown in closeups shooting a shot put.\nC. push a child in a speedboat in the water.\nD. look in the cameraman's eye and smile.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "A",
+      "predicted_answer": "A",
+      "model_output": "Answer: A",
+      "category": "Sumo",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_8",
+      "question": "A man is holding a pocket knife while sitting on some rocks in the wilderness. then he\n\nWhat happens next?\n\nA. opens a can of oil put oil on the knife, and puts oil on a knife and press it through a can filled with oil then cuts several pieces from the sandwiches.\nB. takes a small stone from the flowing river and smashes it on another stone.\nC. uses the knife to shave his leg.\nD. sand the rocks and tops them by using strong pressure.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "B",
+      "predicted_answer": "B",
+      "model_output": "Answer: B",
+      "category": "Sharpening knives",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "hellaswag_9",
+      "question": "Then he takes a small stone from the flowing river and smashes it on another stone. He starts to crush the small stone to smaller pieces. he\n\nWhat happens next?\n\nA. cuts the center stone in half and blow it on to make it bigger.\nB. grind it hard to make the pieces smaller.\nC. eventually brings it back into view and adds it to the smaller ones to make a small triangular shaped piece.\nD. starts to party with them and throw the pieces by hand while they celebrate.\n\nAnswer with the letter only (A, B, C, or D):",
+      "target_answer": "B",
+      "predicted_answer": "B",
+      "model_output": "Answer: B",
+      "category": "Sharpening knives",
+      "difficulty": null,
+      "is_correct": true
+    }
+  ]
+}

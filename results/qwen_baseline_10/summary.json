@@ -1,0 +1,26 @@
+{
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "timestamp": "2026-01-24T10:24:16.882546",
+  "benchmarks": {
+    "gsm8k": {
+      "accuracy": 0.3,
+      "num_samples": 10,
+      "num_correct": 3
+    },
+    "mmlu": {
+      "accuracy": 0.2,
+      "num_samples": 10,
+      "num_correct": 2
+    },
+    "hellaswag": {
+      "accuracy": 0.0,
+      "num_samples": 10,
+      "num_correct": 0
+    },
+    "mrben": {
+      "accuracy": 0.0,
+      "num_samples": 10,
+      "num_correct": 0
+    }
+  }
+}

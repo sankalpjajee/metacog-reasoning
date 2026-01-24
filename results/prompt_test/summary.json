@@ -1,0 +1,11 @@
+{
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "timestamp": "2026-01-22T07:10:26.527219",
+  "benchmarks": {
+    "gsm8k": {
+      "accuracy": 0.7333333333333333,
+      "num_samples": 30,
+      "num_correct": 22
+    }
+  }
+}

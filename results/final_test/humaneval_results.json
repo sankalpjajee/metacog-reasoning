@@ -1,0 +1,106 @@
+{
+  "benchmark": "humaneval",
+  "split": "test",
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "timestamp": "2026-01-15T16:22:46.352443",
+  "num_samples": 10,
+  "accuracy": 0.2,
+  "num_correct": 2,
+  "num_incorrect": 8,
+  "per_category_accuracy": {
+    "code_generation": 0.2
+  },
+  "per_difficulty_accuracy": null,
+  "predictions": [
+    {
+      "id": "HumanEval/0",
+      "question": "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n\n\n# Complete the function 'has_close_elements'",
+      "target_answer": "    for idx, elem in enumerate(numbers):\n        for idx2, elem2 in enumerate(numbers):\n            if idx != idx2:\n                distance = abs(elem - elem2)\n                if distance < threshold:\n                    return True\n\n    return False\n",
+      "predicted_answer": "numbers.sort()\n    for i in range(1, len(numbers)):\n        if numbers[i] - numbers[i - 1] < threshold:\n            return True\n    return False\n\n\nif __name__ == \"__main__\":\n    import doctest\n    doctest.testmod()  # run tests\n    print(\"All tests passed!\")  # if no errors, print this message\n    numbers = [1.0, 2.8, 3.0, 4.0, 5.0, 2.0]\n    print(has_close_elements(numbers, 0.3))  # True\n    print(has_close_elements(numbers, 0.4))  # False\n    print(has_close_elements(numbers, 0.5))  # False\n    print(has_close_elements(numbers, 0.6))  # False\n    print(has_close_elements(numbers, 0.7))  # False\n    print(has_close_elements(numbers, 0.8))  # False\n    print(has_close_elements(numbers, 0.9))  # False\n    print(has_close_elements(numbers, 1.0))  # False\n    print(has_close_elements(numbers, 1.1))  # False\n    print(has_close_elements(numbers, 1.2))  # False\n    print(has_close_elements(numbers, 1.3))  # False\n    print(has_close_elements(numbers, 1.4))  # False\n    print(has_close_elements(numbers, 1.5))  # False\n    print(has_close_elements(numbers, 1.6))  # False\n    print(has_close_elements(numbers, 1.7))  # False\n    print(has_close_elements(numbers, 1.8))  # False\n    print(has_close_elements(numbers, 1.9))  # False\n    print(has_close_elements(numbers, 2.0))  # False\n    print(has_close_elements(numbers, 2.1))  # False\n    print(has_close_elements(numbers, 2.2))  # False\n    print(has_close_elements(numbers, 2.3))  # False\n    print(has_close_elements(numbers, 2.4))  # False\n    print(has_close_elements(numbers, 2.5))  # False\n    print(has_close_elements(numbers, 2.6))  # False\n    print(has_close_elements(numbers, 2.7))  # False",
+      "category": "code_generation",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "HumanEval/1",
+      "question": "from typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    >>> separate_paren_groups('( ) (( )) (( )( ))')\n    ['()', '(())', '(()())']\n    \"\"\"\n\n\n# Complete the function 'separate_paren_groups'",
+      "target_answer": "    result = []\n    current_string = []\n    current_depth = 0\n\n    for c in paren_string:\n        if c == '(':\n            current_depth += 1\n            current_string.append(c)\n        elif c == ')':\n            current_depth -= 1\n            current_string.append(c)\n\n            if current_depth == 0:\n                result.append(''.join(current_string))\n                current_string.clear()\n\n    return result\n",
+      "predicted_answer": "# Initialize an empty list to store the groups\n    groups = []\n    # Initialize an empty string to build the current group\n    current_group = ''\n    # Initialize a counter to keep track of the balance of the current group\n    balance = 0\n    # Iterate over each character in the input string\n    for char in paren_string:\n        # If the character is an open parenthesis, add it to the current group and increment the balance\n        if char == '(':\n            current_group += char\n            balance += 1\n        # If the character is a close parenthesis, add it to the current group and decrement the balance\n        elif char == ')':\n            current_group += char\n            balance -= 1\n            # If the balance is zero, it means we've reached the end of a group, so add it to the list and reset the current group\n            if balance == 0:\n                groups.append(current_group)\n                current_group = ''\n        # If the character is not a parenthesis, just add it to the current group\n        else:\n            current_group += char\n    # Return the list of groups\n    return groups\n\n# Test the function\nprint(separate_paren_groups('( ) (( )) (( )( ))'))  # Output: ['()', '(())', '(()())']  # noqa: E501\nprint(separate_paren_groups('()()()'))  # Output: ['()', '()', '()']  # noqa: E501\nprint(separate_paren_groups('((()))'))  # Output: ['((()))']  # noqa: E501\nprint(separate_paren_groups('(()())'))  # Output: ['(()())']  # noqa: E501\nprint(separate_paren_groups('()()'))  # Output: ['()', '()']  # noqa: E501\nprint(separate_paren_groups(''))  # Output: []  # noqa: E501\nprint(separate_paren_groups('()'))  # Output: ['()']  # noqa: E501\nprint(separate_paren_groups('(()'))  # Output: ['((', ')]']  # noqa: E501\nprint(separate_paren_groups(')('))  # Output: ['(', ')']  # noqa: E501\nprint(separate_paren_groups(')'))  # Output: [')']  # noqa: E501\nprint(separate_paren_groups('('))  # Output: ['",
+      "category": "code_generation",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "HumanEval/2",
+      "question": "\n\ndef truncate_number(number: float) -> float:\n    \"\"\" Given a positive floating point number, it can be decomposed into\n    and integer part (largest integer smaller than given number) and decimals\n    (leftover part always smaller than 1).\n\n    Return the decimal part of the number.\n    >>> truncate_number(3.5)\n    0.5\n    \"\"\"\n\n\n# Complete the function 'truncate_number'",
+      "target_answer": "    return number % 1.0\n",
+      "predicted_answer": "return number - int(number)  # subtract the integer part from the number\n",
+      "category": "code_generation",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "HumanEval/3",
+      "question": "from typing import List\n\n\ndef below_zero(operations: List[int]) -> bool:\n    \"\"\" You're given a list of deposit and withdrawal operations on a bank account that starts with\n    zero balance. Your task is to detect if at any point the balance of account fallls below zero, and\n    at that point function should return True. Otherwise it should return False.\n    >>> below_zero([1, 2, 3])\n    False\n    >>> below_zero([1, 2, -4, 5])\n    True\n    \"\"\"\n\n\n# Complete the function 'below_zero'",
+      "target_answer": "    balance = 0\n\n    for op in operations:\n        balance += op\n        if balance < 0:\n            return True\n\n    return False\n",
+      "predicted_answer": "balance = 0\n    for operation in operations:\n        balance += operation\n        if balance < 0:\n            return True\n    return False\n",
+      "category": "code_generation",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "HumanEval/4",
+      "question": "from typing import List\n\n\ndef mean_absolute_deviation(numbers: List[float]) -> float:\n    \"\"\" For a given list of input numbers, calculate Mean Absolute Deviation\n    around the mean of this dataset.\n    Mean Absolute Deviation is the average absolute difference between each\n    element and a centerpoint (mean in this case):\n    MAD = average | x - x_mean |\n    >>> mean_absolute_deviation([1.0, 2.0, 3.0, 4.0])\n    1.0\n    \"\"\"\n\n\n# Complete the function 'mean_absolute_deviation'",
+      "target_answer": "    mean = sum(numbers) / len(numbers)\n    return sum(abs(x - mean) for x in numbers) / len(numbers)\n",
+      "predicted_answer": "mean = sum(numbers) / len(numbers)\n    return sum(abs(num - mean) for num in numbers) / len(numbers) if numbers else 0.0\n\n\n# Example usage:\nnumbers = [1.0, 2.0, 3.0, 4.0]\nprint(mean_absolute_deviation(numbers))  # Output: 1.0\nnumbers = []\nprint(mean_absolute_deviation(numbers))  # Output: 0.0\nnumbers = [1.0]\nprint(mean_absolute_deviation(numbers))  # Output: 0.0\nnumbers = [1.0, 1.0, 1.0, 1.0]\nprint(mean_absolute_deviation(numbers))  # Output: 0.0\nnumbers = [1.0, 2.0, 3.0, 4.0, 5.0]\nprint(mean_absolute_deviation(numbers))  # Output: 1.5\nnumbers = [1.0, 1.0, 1.0, 1.0, 1.0]\nprint(mean_absolute_deviation(numbers))  # Output: 0.0\nnumbers = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]\nprint(mean_absolute_deviation(numbers))  # Output: 0.0\nnumbers = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]\nprint(mean_absolute_deviation(numbers))  # Output: 0.0\nnumbers = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]\nprint(mean_absolute_deviation(numbers))  # Output: 0.0\nnumbers = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]\nprint(mean_absolute_deviation(numbers))  # Output: 0.0\nnumbers = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,",
+      "category": "code_generation",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "HumanEval/5",
+      "question": "from typing import List\n\n\ndef intersperse(numbers: List[int], delimeter: int) -> List[int]:\n    \"\"\" Insert a number 'delimeter' between every two consecutive elements of input list `numbers'\n    >>> intersperse([], 4)\n    []\n    >>> intersperse([1, 2, 3], 4)\n    [1, 4, 2, 4, 3]\n    \"\"\"\n\n\n# Complete the function 'intersperse'",
+      "target_answer": "    if not numbers:\n        return []\n\n    result = []\n\n    for n in numbers[:-1]:\n        result.append(n)\n        result.append(delimeter)\n\n    result.append(numbers[-1])\n\n    return result\n",
+      "predicted_answer": "result = []\n    for num in numbers:\n        result.append(num)\n        result.append(delimeter)\n    # remove the last element which is the delimeter\n    result.pop()\n    return result\n\nprint(intersperse([1, 2, 3], 4))  # [1, 4, 2, 4, 3]  # expected output\nprint(intersperse([], 4))  # []  # expected output\nprint(intersperse([1, 2, 3, 4, 5], 0))  # [1, 0, 2, 0, 3, 0, 4, 0, 5]  # expected output\nprint(intersperse([1, 2, 3, 4, 5], 10))  # [1, 10, 2, 10, 3, 10, 4, 10, 5]  # expected output\nprint(intersperse([1, 2, 3, 4, 5], -1))  # [1, -1, 2, -1, 3, -1, 4, -1, 5]  # expected output\nprint(intersperse([1, 2, 3, 4, 5], 0))  # [1, 0, 2, 0, 3, 0, 4, 0, 5]  # expected output\nprint(intersperse([1, 2, 3, 4, 5], 10))  # [1, 10, 2, 10, 3, 10, 4, 10, 5]  # expected output\nprint(intersperse([1, 2, 3, 4, 5], -1))  # [1, -1, 2, -1, 3, -1, 4, -1, 5]  # expected output\nprint(intersperse([1, 2, 3, 4, 5], 0))  # [1, 0, 2, 0, 3, 0, 4, 0, 5]  # expected output\nprint(intersperse([1, 2, 3, 4, 5], 10))  # [",
+      "category": "code_generation",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "HumanEval/6",
+      "question": "from typing import List\n\n\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    \"\"\" Input to this function is a string represented multiple groups for nested parentheses separated by spaces.\n    For each of the group, output the deepest level of nesting of parentheses.\n    E.g. (()()) has maximum two levels of nesting while ((())) has three.\n\n    >>> parse_nested_parens('(()()) ((())) () ((())()())')\n    [2, 3, 1, 3]\n    \"\"\"\n\n\n# Complete the function 'parse_nested_parens'",
+      "target_answer": "    def parse_paren_group(s):\n        depth = 0\n        max_depth = 0\n        for c in s:\n            if c == '(':\n                depth += 1\n                max_depth = max(depth, max_depth)\n            else:\n                depth -= 1\n\n        return max_depth\n\n    return [parse_paren_group(x) for x in paren_string.split(' ') if x]\n",
+      "predicted_answer": "def max_depth(s: str) -> int:\n        \"\"\" Helper function to calculate the maximum depth of a single group of parentheses. \"\"\"\n        depth = 0\n        max_depth = 0\n        for char in s:\n            if char == '(':\n                depth += 1\n                max_depth = max(max_depth, depth)\n            elif char == ')':\n                depth -= 1\n        return max_depth\n\n    return [max_depth(group) for group in paren_string.split()]  # split the input string into groups and calculate the maximum depth of each group.  # noqa: E501\n    return []  # noqa: F841\n    return None  # noqa: F841\n    return 0  # noqa: F841\n    return \"hello\"  # noqa: F841\n    return True  # noqa: F841\n    return False  # noqa: F841\n    return None  # noqa: F841\n    return 1  # noqa: F841\n    return 2  # noqa: F841\n    return 3  # noqa: F841\n    return 4  # noqa: F841\n    return 5  # noqa: F841\n    return 6  # noqa: F841\n    return 7  # noqa: F841\n    return 8  # noqa: F841\n    return 9  # noqa: F841\n    return 10  # noqa: F841\n    return 11  # noqa: F841\n    return 12  # noqa: F841\n    return 13  # noqa: F841\n    return 14  # noqa: F841\n    return 15  # noqa: F841\n    return 16  # noqa: F841\n    return 17  # noqa: F841\n    return 18  # noqa: F841\n    return 19  # noqa: F841\n    return 20  # noqa: F841\n    return 21  # noqa: F841\n    return 22  # noqa: F841\n    return 23  # noqa: F841\n    return 24  # noqa: F841\n    return 25  # noqa: F841\n    return 26  # noqa: F841\n    return 27  # noqa: F841\n    return 28  # noqa: F841\n    return 29  # noqa",
+      "category": "code_generation",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "HumanEval/7",
+      "question": "from typing import List\n\n\ndef filter_by_substring(strings: List[str], substring: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that contain given substring\n    >>> filter_by_substring([], 'a')\n    []\n    >>> filter_by_substring(['abc', 'bacd', 'cde', 'array'], 'a')\n    ['abc', 'bacd', 'array']\n    \"\"\"\n\n\n# Complete the function 'filter_by_substring'",
+      "target_answer": "    return [x for x in strings if substring in x]\n",
+      "predicted_answer": "return [s for s in strings if substring in s]  # filter strings by substring\n# end of filter_by_substring function\n# end of module\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of line\n# end of file\n# end of",
+      "category": "code_generation",
+      "difficulty": null,
+      "is_correct": false
+    },
+    {
+      "id": "HumanEval/8",
+      "question": "from typing import List, Tuple\n\n\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:\n    \"\"\" For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.\n    Empty sum should be equal to 0 and empty product should be equal to 1.\n    >>> sum_product([])\n    (0, 1)\n    >>> sum_product([1, 2, 3, 4])\n    (10, 24)\n    \"\"\"\n\n\n# Complete the function 'sum_product'",
+      "target_answer": "    sum_value = 0\n    prod_value = 1\n\n    for n in numbers:\n        sum_value += n\n        prod_value *= n\n    return sum_value, prod_value\n",
+      "predicted_answer": "# Initialize sum and product with 0 and 1 respectively\n    total_sum = 0\n    total_product = 1\n    # Iterate over the list of numbers\n    for num in numbers:\n        # Add the current number to the sum\n        total_sum += num\n        # Multiply the current number with the product\n        total_product *= num\n    # Return the sum and product as a tuple\n    return total_sum, total_product\n",
+      "category": "code_generation",
+      "difficulty": null,
+      "is_correct": true
+    },
+    {
+      "id": "HumanEval/9",
+      "question": "from typing import List, Tuple\n\n\ndef rolling_max(numbers: List[int]) -> List[int]:\n    \"\"\" From a given list of integers, generate a list of rolling maximum element found until given moment\n    in the sequence.\n    >>> rolling_max([1, 2, 3, 2, 3, 4, 2])\n    [1, 2, 3, 3, 3, 4, 4]\n    \"\"\"\n\n\n# Complete the function 'rolling_max'",
+      "target_answer": "    running_max = None\n    result = []\n\n    for n in numbers:\n        if running_max is None:\n            running_max = n\n        else:\n            running_max = max(running_max, n)\n\n        result.append(running_max)\n\n    return result\n",
+      "predicted_answer": "max_so_far = float('-inf')\n    result = []\n    for num in numbers:\n        if num >= max_so_far:\n            max_so_far = num\n        result.append(max_so_far)\n    return result\n",
+      "category": "code_generation",
+      "difficulty": null,
+      "is_correct": false
+    }
+  ]
+}
