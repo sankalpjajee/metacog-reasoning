@@ -54,12 +54,17 @@ class TargetedMetacognitiveEvaluator:
         print(f"Loading baseline results from: {baseline_file}")
         baseline_data = self.load_baseline_results(baseline_file)
         
-        # Find errors
+        # Find errors - handle both formats
         if 'results' in baseline_data:
+            # Metacognitive evaluator format
             all_samples = baseline_data['results']
             error_samples = [s for s in all_samples if not s.get('correct', False)]
+        elif 'predictions' in baseline_data:
+            # Baseline evaluator format
+            all_samples = baseline_data['predictions']
+            error_samples = [s for s in all_samples if not s.get('is_correct', True)]
         else:
-            raise ValueError("Baseline file doesn't have 'results' field")
+            raise ValueError("Baseline file doesn't have 'results' or 'predictions' field")
         
         print(f"Baseline accuracy: {baseline_data.get('accuracy', 'N/A')}%")
         print(f"Total samples: {len(all_samples)}")
@@ -73,7 +78,7 @@ class TargetedMetacognitiveEvaluator:
         
         for sample in tqdm(error_samples, desc=f"Evaluating {benchmark_name} errors"):
             question = sample['question']
-            ground_truth = sample['ground_truth']
+            ground_truth = sample.get('ground_truth', sample.get('target_answer', 'N/A'))
             
             # Generate answer with metacognition
             try:
@@ -95,6 +100,7 @@ class TargetedMetacognitiveEvaluator:
                     'question': question,
                     'ground_truth': ground_truth,
                     'baseline_prediction': sample.get('predicted', sample.get('predicted_answer', 'N/A')),
+                    'baseline_output': sample.get('model_output', sample.get('full_response', 'N/A')),
                     'metacog_prediction': predicted_answer,
                     'fixed': correct,
                     'full_response': full_response
@@ -103,10 +109,10 @@ class TargetedMetacognitiveEvaluator:
             except Exception as e:
                 print(f"\nError on sample {sample.get('sample_id', '?')}: {e}")
                 results.append({
-                    'sample_id': sample.get('sample_id', -1),
+                    'sample_id': sample.get('sample_id', sample.get('id', -1)),
                     'question': question,
                     'ground_truth': ground_truth,
-                    'baseline_prediction': sample.get('predicted', 'N/A'),
+                    'baseline_prediction': sample.get('predicted', sample.get('predicted_answer', 'N/A')),
                     'metacog_prediction': 'ERROR',
                     'fixed': False,
                     'error': str(e)
@@ -117,7 +123,8 @@ class TargetedMetacognitiveEvaluator:
         fix_rate = (fixed_count / len(error_samples) * 100) if error_samples else 0
         
         # Calculate what the new overall accuracy would be
-        baseline_correct = baseline_data.get('correct', 0)
+        baseline_correct = baseline_data.get('correct', baseline_data.get('num_correct', 0))
+        baseline_accuracy = baseline_data.get('accuracy', 0)
         total_samples = len(all_samples)
         new_correct = baseline_correct + fixed_count
         new_accuracy = (new_correct / total_samples * 100) if total_samples else 0
@@ -126,7 +133,7 @@ class TargetedMetacognitiveEvaluator:
             'benchmark': benchmark_name,
             'model': self.model_name,
             'evaluation_type': 'targeted_metacognitive',
-            'baseline_accuracy': baseline_data.get('accuracy', 0),
+            'baseline_accuracy': baseline_accuracy,
             'baseline_errors': len(error_samples),
             'errors_fixed': fixed_count,
             'still_wrong': still_wrong_count,
