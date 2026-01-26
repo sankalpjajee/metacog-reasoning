@@ -17,7 +17,110 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 
 import json
 from tqdm import tqdm
-from src.evaluation.threshold_evaluator import ThresholdMetacognitiveEvaluator
+from src.evaluation.metacognitive_evaluator import MetacognitiveEvaluator
+
+
+class AlwaysMetacognitiveEvaluator(MetacognitiveEvaluator):
+    """
+    Evaluator that ALWAYS applies the full 6-step metacognitive process.
+    No confidence threshold, no SIMPLE/COMPLEX classification.
+    """
+    
+    def __init__(self, model_name, device='cuda', max_new_tokens=2048):
+        super().__init__(model_name, device, max_new_tokens)
+        self.evaluation_type = "always_metacognitive"
+    
+    def format_prompt(self, question, benchmark_name=None):
+        """
+        Format prompt with ALWAYS-ON metacognition (no threshold, no classification).
+        """
+        
+        system_message = """You are a helpful assistant that solves problems carefully and thoughtfully."""
+        
+        # Benchmark-specific user message formatting
+        if benchmark_name and benchmark_name.lower() == 'gsm8k':
+            user_message = f"""Solve this problem using the following metacognitive steps:
+
+1. Clarify your understanding of what the problem is asking.
+
+2. Make a preliminary solution to the problem.
+
+3. Monitor your confidence in the solution. If you think it's wrong or has potential errors, pause and verify your work.
+
+4. Once you have a solution, decide whether you need additional verification or if you're confident enough to finalize.
+
+5. Provide your final answer with a clear explanation of your reasoning.
+
+6. Rate your overall confidence (0-100%) in this answer and explain why.
+
+Problem: {question}
+
+IMPORTANT: You MUST end your response with exactly this format:
+Final Answer: [just the number, nothing else]
+
+Example: If the answer is 25 dollars, write:
+Final Answer: 25"""
+        
+        elif benchmark_name and benchmark_name.lower() in ['mmlu', 'hellaswag', 'mrben']:
+            user_message = f"""Answer this question using the following metacognitive steps:
+
+1. Clarify your understanding of what the question is asking.
+
+2. Make a preliminary analysis of each option.
+
+3. Monitor your confidence in the solution. If you think it's wrong or has potential errors, pause and verify your work.
+
+4. Once you have selected an option, decide whether you need additional verification or if you're confident enough to finalize.
+
+5. Provide your final answer with a clear explanation of your reasoning.
+
+6. Rate your overall confidence (0-100%) in this answer and explain why.
+
+{question}
+
+IMPORTANT: You MUST end your response with exactly this format:
+Final Answer: [just the letter A, B, C, or D]
+
+Example: If you choose option B, write:
+Final Answer: B"""
+        
+        else:
+            # Generic format
+            user_message = f"""Solve this problem using the following metacognitive steps:
+
+1. Clarify your understanding of what is being asked.
+
+2. Make a preliminary solution to the problem.
+
+3. Monitor your confidence in the solution. If you think it's wrong or has potential errors, pause and verify your work.
+
+4. Once you have a solution, decide whether you need additional verification or if you're confident enough to finalize.
+
+5. Provide your final answer with a clear explanation of your reasoning.
+
+6. Rate your overall confidence (0-100%) in this answer and explain why.
+
+Problem: {question}
+
+IMPORTANT: You MUST end your response with exactly this format:
+Final Answer: [your answer]
+
+Make sure to write "Final Answer:" followed by just your answer."""
+        
+        # Use Llama-3.1 Instruct chat template
+        messages = [
+            {"role": "system", "content": system_message},
+            {"role": "user", "content": user_message}
+        ]
+        
+        # Apply chat template
+        prompt = self.tokenizer.apply_chat_template(
+            messages,
+            tokenize=False,
+            add_generation_prompt=True
+        )
+        
+        return prompt
 
 
 class TargetedMetacognitiveEvaluator:
@@ -26,7 +129,8 @@ class TargetedMetacognitiveEvaluator:
     """
     
     def __init__(self, model_name, device='cuda', max_new_tokens=2048):
-        self.evaluator = ThresholdMetacognitiveEvaluator(
+        # Use a simple always-apply-metacognition evaluator
+        self.evaluator = AlwaysMetacognitiveEvaluator(
             model_name=model_name,
             device=device,
             max_new_tokens=max_new_tokens
