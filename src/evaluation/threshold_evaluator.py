@@ -49,13 +49,20 @@ class ThresholdMetacognitiveEvaluator(MetacognitiveEvaluator):
 1. Generate your initial answer and rate your confidence (0-100%)
 
 2. Based on your confidence level:
-   - If confidence ≥ 90%: Provide your answer directly
-   - If confidence 70-89%: Briefly verify your reasoning (1-2 steps)
-   - If confidence < 70%: Apply detailed analysis:
-     * Clarify what the problem is asking
-     * Break down the solution step-by-step
-     * Verify your calculations
-     * Monitor for errors
+   - If confidence ≥ 90%: Provide your answer directly and skip to step 3
+   - If confidence < 90%: Follow the detailed metacognitive steps below:
+
+   a. Clarify your understanding of what the problem is asking.
+   
+   b. Make a preliminary solution to the problem.
+   
+   c. Monitor your confidence in the solution. If you think it's wrong or has potential errors, pause and verify your work.
+   
+   d. Once you have a solution, decide whether you need additional verification or if you're confident enough to finalize.
+   
+   e. Provide your final answer with a clear explanation of your reasoning.
+   
+   f. Rate your overall confidence (0-100%) in this answer and explain why.
 
 3. Provide your final answer
 
@@ -73,13 +80,20 @@ Final Answer: 25"""
 1. Generate your initial answer and rate your confidence (0-100%)
 
 2. Based on your confidence level:
-   - If confidence ≥ 90%: Provide your answer directly
-   - If confidence 70-89%: Briefly verify your reasoning (1-2 steps)
-   - If confidence < 70%: Apply detailed analysis:
-     * Clarify what the question is asking
-     * Analyze each option carefully
-     * Compare options systematically
-     * Verify your reasoning
+   - If confidence ≥ 90%: Provide your answer directly and skip to step 3
+   - If confidence < 90%: Follow the detailed metacognitive steps below:
+
+   a. Clarify your understanding of what the question is asking.
+   
+   b. Make a preliminary analysis of each option.
+   
+   c. Monitor your confidence in the solution. If you think it's wrong or has potential errors, pause and verify your work.
+   
+   d. Once you have selected an option, decide whether you need additional verification or if you're confident enough to finalize.
+   
+   e. Provide your final answer with a clear explanation of your reasoning.
+   
+   f. Rate your overall confidence (0-100%) in this answer and explain why.
 
 3. Provide your final answer
 
@@ -98,9 +112,20 @@ Final Answer: B"""
 1. Generate your initial answer and rate your confidence (0-100%)
 
 2. Based on your confidence level:
-   - If confidence ≥ 90%: Provide your answer directly
-   - If confidence 70-89%: Briefly verify your reasoning
-   - If confidence < 70%: Apply detailed analysis with verification
+   - If confidence ≥ 90%: Provide your answer directly and skip to step 3
+   - If confidence < 90%: Follow the detailed metacognitive steps below:
+
+   a. Clarify your understanding of what is being asked.
+   
+   b. Make a preliminary solution to the problem.
+   
+   c. Monitor your confidence in the solution. If you think it's wrong or has potential errors, pause and verify your work.
+   
+   d. Once you have a solution, decide whether you need additional verification or if you're confident enough to finalize.
+   
+   e. Provide your final answer with a clear explanation of your reasoning.
+   
+   f. Rate your overall confidence (0-100%) in this answer and explain why.
 
 3. Provide your final answer
 
