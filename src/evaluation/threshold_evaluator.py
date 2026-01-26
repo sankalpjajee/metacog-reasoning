@@ -27,9 +27,12 @@ class ThresholdMetacognitiveEvaluator(MetacognitiveEvaluator):
         super().__init__(model_name, device, max_new_tokens)
         self.evaluation_type = "threshold_metacognitive"
     
-    def format_prompt(self, question, benchmark_name=None):
+    def _format_metacognitive_prompt(self, question, benchmark_name=None):
         """
         Format prompt with threshold-based metacognition.
+        
+        This overrides the parent class's _format_metacognitive_prompt to use
+        confidence thresholds instead of SIMPLE/COMPLEX classification.
         
         Args:
             question: The question to answer
