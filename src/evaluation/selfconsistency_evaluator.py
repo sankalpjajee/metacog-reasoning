@@ -244,7 +244,7 @@ Follow these steps:
             full_response = f"Baseline answers: {baseline_answers}\nAgreement: {agreement_rate:.2f}\nMetacognitive response: {metacog_response}"
         
         # Check correctness
-        is_correct = self.check_answer(final_answer, ground_truth, benchmark_name)
+        is_correct = self._check_answer(final_answer, ground_truth, benchmark_name)
         
         return {
             "question": question,
