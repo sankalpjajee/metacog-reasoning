@@ -76,10 +76,10 @@ Final Answer: B"""
 {question}
 
 IMPORTANT: You MUST end your response with exactly this format:
-Final Answer: [just the number 0, 1, 2, or 3]
+Final Answer: [just the letter A, B, C, or D]
 
-Example: If you choose option 1, write:
-Final Answer: 1"""
+Example: If you choose option B, write:
+Final Answer: B"""
         
         elif benchmark_name == "mrben":
             user_message = f"""Answer this multi-step reasoning question.
@@ -168,10 +168,10 @@ Follow these steps:
 6. Rate your overall confidence (0-100%) in this answer and explain why.
 
 IMPORTANT: You MUST end your response with exactly this format:
-Final Answer: [just the number 0, 1, 2, or 3]
+Final Answer: [just the letter A, B, C, or D]
 
-Example: If you choose option 1, write:
-Final Answer: 1"""
+Example: If you choose option B, write:
+Final Answer: B"""
         
         elif benchmark_name == "mrben":
             user_message = f"""Answer this multi-step reasoning question using careful metacognitive reasoning.
