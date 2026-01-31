@@ -128,87 +128,96 @@ Final Answer: [just the letter A, B, C, or D]"""
 Final Answer:"""
     
     def get_metacognitive_prompt(self, question: str, benchmark: str) -> str:
-        """Get the metacognitive prompt for a question."""
+        """Get the 6-step metacognitive prompt for a question.
+        
+        Based on Wang & Zhao (NAACL 2024) "Metacognitive Prompting Improves Understanding in LLMs"
+        Enhanced to align with Nelson & Narens (1990) framework.
+        """
         if benchmark == "gsm8k":
-            return f"""You are solving a math problem. Before answering, engage in metacognitive reasoning:
+            return f"""First, assess if this problem is SIMPLE or COMPLEX:
+- SIMPLE: Basic arithmetic or 1-2 step calculation
+- COMPLEX: Multi-step reasoning, word problems, or requires careful analysis
 
-1. UNDERSTAND: What is being asked? What information is given?
-2. PLAN: What steps are needed to solve this?
-3. MONITOR: As you work, check each step. Does it make sense?
-4. VERIFY: Before finalizing, verify your answer is reasonable.
+If SIMPLE: Solve directly and provide your final answer.
 
-Question: {question}
+If COMPLEX: Follow these steps:
 
-Work through this problem with careful metacognitive monitoring:
+1. Clarify your understanding of what the problem is asking.
 
-UNDERSTANDING:
-[Restate the problem in your own words]
+2. Make a preliminary solution to the problem.
 
-PLANNING:
-[Outline your solution approach]
+3. Monitor your confidence in the solution. If you think it's wrong or has potential errors, pause and verify your work.
 
-SOLVING WITH MONITORING:
-[Show your work, checking each step]
+4. Once you have a solution, decide whether you need additional verification or if you're confident enough to finalize.
 
-VERIFICATION:
-[Verify your answer makes sense]
+5. Provide your final answer with a clear explanation of your reasoning.
 
-Final Answer: [just the number]"""
+6. Rate your overall confidence (0-100%) in this answer and explain why.
+
+Problem: {question}
+
+IMPORTANT: You MUST end your response with exactly this format:
+Final Answer: [just the number, nothing else]
+
+Example: If the answer is 25 dollars, write:
+Final Answer: 25"""
         
-        elif benchmark == "mmlu":
-            return f"""You are answering a knowledge question. Before answering, engage in metacognitive reasoning:
+        elif benchmark in ["mmlu", "hellaswag"]:
+            return f"""First, assess if this question is SIMPLE or COMPLEX:
+- SIMPLE: The answer is immediately clear from basic knowledge or intuition
+- COMPLEX: Requires careful analysis, comparison of options, or multi-step reasoning
 
-1. UNDERSTAND: What exactly is being asked?
-2. RECALL: What relevant knowledge do I have?
-3. EVALUATE: Consider each option carefully.
-4. VERIFY: Am I confident in my choice? Why?
+If SIMPLE: Choose the answer directly and provide your final answer.
+
+If COMPLEX: Follow these steps:
+
+1. Clarify your understanding of what the question is asking.
+
+2. Make a preliminary analysis of each option.
+
+3. Monitor your confidence in the solution. If you think it's wrong or has potential errors, pause and verify your work.
+
+4. Once you have selected an option, decide whether you need additional verification or if you're confident enough to finalize.
+
+5. Provide your final answer with a clear explanation of your reasoning.
+
+6. Rate your overall confidence (0-100%) in this answer and explain why.
 
 {question}
 
-Work through this with careful metacognitive monitoring:
+IMPORTANT: You MUST end your response with exactly this format:
+Final Answer: [just the letter A, B, C, or D]
 
-UNDERSTANDING:
-[What is this question really asking?]
-
-KNOWLEDGE RECALL:
-[What do I know about this topic?]
-
-OPTION ANALYSIS:
-[Evaluate each option]
-
-VERIFICATION:
-[Why am I confident in my answer?]
-
-Final Answer: [just the letter A, B, C, or D]"""
-        
-        elif benchmark == "hellaswag":
-            return f"""You are completing a sentence about a common situation. Before answering, engage in metacognitive reasoning:
-
-1. UNDERSTAND: What is the context? What's happening?
-2. PREDICT: What would logically happen next?
-3. EVALUATE: Which option best fits the context?
-4. VERIFY: Does my choice make sense?
-
-{question}
-
-Work through this with careful metacognitive monitoring:
-
-UNDERSTANDING:
-[What is the situation described?]
-
-PREDICTION:
-[What would naturally happen next?]
-
-OPTION ANALYSIS:
-[Evaluate each option for fit]
-
-VERIFICATION:
-[Why does my choice make sense?]
-
-Final Answer: [just the letter A, B, C, or D]"""
+Example: If you choose option B, write:
+Final Answer: B"""
         
         else:
-            return self.get_baseline_prompt(question, benchmark)
+            return f"""First, assess if this problem is SIMPLE or COMPLEX:
+- SIMPLE: Straightforward question with obvious answer
+- COMPLEX: Requires careful reasoning or multi-step analysis
+
+If SIMPLE: Solve directly and provide your final answer.
+
+If COMPLEX: Follow these steps:
+
+1. Clarify your understanding of what is being asked.
+
+2. Make a preliminary solution to the problem.
+
+3. Monitor your confidence in the solution. If you think it's wrong or has potential errors, pause and verify your work.
+
+4. Once you have a solution, decide whether you need additional verification or if you're confident enough to finalize.
+
+5. Provide your final answer with a clear explanation of your reasoning.
+
+6. Rate your overall confidence (0-100%) in this answer and explain why.
+
+Problem: {question}
+
+IMPORTANT: You MUST end your response with exactly this format:
+Final Answer: [your answer]
+
+Make sure to write "Final Answer:" followed by just your answer."""
     
     def format_chat_prompt(self, prompt: str) -> str:
         """Format prompt using chat template."""
