@@ -82,12 +82,15 @@ Example: If you choose option B, write:
 Final Answer: B"""
         
         elif benchmark_name == "mrben":
-            user_message = f"""Answer this multi-step reasoning question.
+            user_message = f"""Identify the first error step in the student's solution.
 
 {question}
 
 IMPORTANT: You MUST end your response with exactly this format:
-Final Answer: [your answer]"""
+Final Answer: [just the step number like 1, 2, 3, etc. or N/A if all steps are correct]
+
+Example: If step 3 has the first error, write:
+Final Answer: 3"""
         
         else:
             user_message = f"""Answer this question.
@@ -174,20 +177,23 @@ Example: If you choose option B, write:
 Final Answer: B"""
         
         elif benchmark_name == "mrben":
-            user_message = f"""Answer this multi-step reasoning question using careful metacognitive reasoning.
+            user_message = f"""Identify the first error step in the student's solution using careful metacognitive reasoning.
 
 {question}
 
 Follow these steps:
-1. Clarify your understanding of what the question is asking.
-2. Make a preliminary solution to the problem.
-3. Monitor your confidence in the solution. If you think it's wrong or has potential errors, pause and verify your work.
-4. Once you have a solution, decide whether you need additional verification or if you're confident enough to finalize.
-5. Provide your final answer with a clear explanation of your reasoning.
+1. Clarify your understanding of what the task is asking - you need to find the FIRST step with an error.
+2. Carefully analyze each step in the student's solution.
+3. For each step, verify if the reasoning is correct or contains an error.
+4. Monitor your confidence. If you're unsure about a step, re-examine it carefully.
+5. Identify the first step number where an error occurs.
 6. Rate your overall confidence (0-100%) in this answer and explain why.
 
 IMPORTANT: You MUST end your response with exactly this format:
-Final Answer: [your answer]"""
+Final Answer: [just the step number like 1, 2, 3, etc. or N/A if all steps are correct]
+
+Example: If step 3 has the first error, write:
+Final Answer: 3"""
         
         else:
             user_message = f"""Answer this question using careful metacognitive reasoning.

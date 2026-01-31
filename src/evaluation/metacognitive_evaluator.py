@@ -248,8 +248,29 @@ Make sure to write "Final Answer:" followed by just your answer."""
                 answer = match.group(1).strip()
                 return self._normalize_answer(answer, benchmark_name)
         
-        # PRIORITY 3: For multiple choice, look for letter patterns
-        if benchmark_name and benchmark_name.lower() in ['mmlu', 'hellaswag', 'mrben']:
+        # PRIORITY 3: For MR-Ben, look for step numbers (1, 2, 3, etc.) or N/A
+        if benchmark_name and benchmark_name.lower() == 'mrben':
+            # Look for step number patterns
+            step_patterns = [
+                r'(?:step|error)\s*(?:number)?\s*(?:is)?\s*[:\s]*(\d+|N/A)',
+                r'^\s*(\d+|N/A)\s*$',
+            ]
+            for pattern in step_patterns:
+                match = re.search(pattern, text, re.IGNORECASE | re.MULTILINE)
+                if match:
+                    return match.group(1).upper() if match.group(1).upper() == 'N/A' else match.group(1)
+            
+            # Extract any standalone number at the end
+            match = re.search(r'\b(\d+)\b\s*$', text)
+            if match:
+                return match.group(1)
+            
+            # Look for N/A
+            if 'n/a' in text.lower() or 'all steps are correct' in text.lower():
+                return 'N/A'
+        
+        # PRIORITY 4: For multiple choice (MMLU, HellaSwag), look for letter patterns
+        if benchmark_name and benchmark_name.lower() in ['mmlu', 'hellaswag']:
             mc_patterns = [
                 r'(?:option|choice)\s*\(?([A-D])\)?',
                 r'\b([A-D])\)\s*(?:is|appears)',
@@ -267,7 +288,7 @@ Make sure to write "Final Answer:" followed by just your answer."""
             if match:
                 return match.group(1).upper()
         
-        # PRIORITY 4: For numerical answers (GSM8K)
+        # PRIORITY 5: For numerical answers (GSM8K)
         if benchmark_name and benchmark_name.lower() == 'gsm8k':
             num_patterns = [
                 r'=\s*([\d,\.]+)\s*(?:\.|$)',
@@ -298,8 +319,16 @@ Make sure to write "Final Answer:" followed by just your answer."""
         """Normalize answer for comparison."""
         answer = answer.strip().strip('"\'.,;')
         
+        # For MR-Ben, extract step number
+        if benchmark_name and benchmark_name.lower() == 'mrben':
+            # Extract step number or N/A
+            match = re.search(r'(\d+|N/A)', answer, re.IGNORECASE)
+            if match:
+                return match.group(1).upper() if match.group(1).upper() == 'N/A' else match.group(1)
+            return answer
+        
         # For multiple choice, extract just the letter
-        if benchmark_name and benchmark_name.lower() in ['mmlu', 'hellaswag', 'mrben']:
+        if benchmark_name and benchmark_name.lower() in ['mmlu', 'hellaswag']:
             match = re.match(r'^([A-D])', answer.upper())
             if match:
                 return match.group(1)
@@ -492,8 +521,19 @@ Make sure to write "Final Answer:" followed by just your answer."""
             except (ValueError, AttributeError):
                 pass
         
+        # For MR-Ben, compare step numbers
+        if benchmark_name and benchmark_name.lower() == 'mrben':
+            # Extract numbers for comparison
+            pred_match = re.search(r'(\d+|N/A)', predicted, re.IGNORECASE)
+            gt_match = re.search(r'(\d+|N/A)', ground_truth, re.IGNORECASE)
+            if pred_match and gt_match:
+                pred_val = pred_match.group(1).upper()
+                gt_val = gt_match.group(1).upper()
+                return pred_val == gt_val
+            return pred_norm == gt_norm
+        
         # For multiple choice, just compare letters
-        if benchmark_name and benchmark_name.lower() in ['mmlu', 'hellaswag', 'mrben']:
+        if benchmark_name and benchmark_name.lower() in ['mmlu', 'hellaswag']:
             return pred_norm.upper() == gt_norm.upper()
         
         return False
