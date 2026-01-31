@@ -69,7 +69,7 @@ class SelfConsistencyEvaluator(MetacognitiveEvaluator):
             response = response[len(prompt):].strip()
             
             # Extract answer from response
-            answer = self.extract_answer(response, benchmark_name)
+            answer = self._extract_final_answer(response, question, benchmark_name)
             answers.append(answer)
             
         return answers
@@ -239,7 +239,7 @@ Follow these steps:
             )
             metacog_response = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
             metacog_response = metacog_response[len(metacog_prompt):].strip()
-            final_answer = self.extract_answer(metacog_response, benchmark_name)
+            final_answer = self._extract_final_answer(metacog_response, question, benchmark_name)
             method_used = "metacognition"
             full_response = f"Baseline answers: {baseline_answers}\nAgreement: {agreement_rate:.2f}\nMetacognitive response: {metacog_response}"
         
