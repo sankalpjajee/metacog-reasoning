@@ -211,8 +211,8 @@ Follow these steps:
         Returns:
             Dictionary with evaluation results
         """
-        question = sample.get("question", sample.get("input", ""))
-        ground_truth = sample.get("answer", sample.get("target", ""))
+        question = sample.question if hasattr(sample, 'question') else sample.get("question", sample.get("input", ""))
+        ground_truth = sample.answer if hasattr(sample, 'answer') else sample.get("answer", sample.get("target", ""))
         
         # Step 1: Generate multiple baseline answers
         baseline_answers = self.generate_multiple_answers(question, benchmark_name)
