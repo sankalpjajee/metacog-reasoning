@@ -15,10 +15,10 @@ from collections import Counter
 from typing import Dict, List, Tuple
 from tqdm import tqdm
 
-from src.evaluation.base_evaluator import BaseEvaluator
+from src.evaluation.metacognitive_evaluator import MetacognitiveEvaluator
 
 
-class SelfConsistencyEvaluator(BaseEvaluator):
+class SelfConsistencyEvaluator(MetacognitiveEvaluator):
     """Evaluator that uses self-consistency to decide when to apply metacognition."""
     
     def __init__(self, model_name: str, n_samples: int = 3, agreement_threshold: float = 0.67, 
@@ -32,7 +32,7 @@ class SelfConsistencyEvaluator(BaseEvaluator):
             agreement_threshold: Threshold for agreement (0-1). If agreement >= threshold, use baseline.
             temperature: Temperature for sampling diverse answers
         """
-        super().__init__(model_name)
+        super().__init__(model_name, device="cuda", max_new_tokens=512)
         self.n_samples = n_samples
         self.agreement_threshold = agreement_threshold
         self.temperature = temperature
@@ -54,13 +54,19 @@ class SelfConsistencyEvaluator(BaseEvaluator):
         prompt = self._format_baseline_prompt(question, benchmark_name)
         
         for _ in range(self.n_samples):
-            response = self.model.generate(
-                prompt,
+            # Generate response
+            inputs = self.tokenizer(prompt, return_tensors="pt").to(self.device)
+            outputs = self.model.generate(
+                **inputs,
                 max_new_tokens=512,
                 temperature=self.temperature,
                 do_sample=True,
-                top_p=0.95
+                top_p=0.95,
+                pad_token_id=self.tokenizer.eos_token_id
             )
+            response = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+            # Remove the prompt from response
+            response = response[len(prompt):].strip()
             
             # Extract answer from response
             answer = self.extract_answer(response, benchmark_name)
@@ -223,12 +229,16 @@ Follow these steps:
         else:
             # Low agreement → apply metacognition
             metacog_prompt = self._format_metacognitive_prompt(question, benchmark_name)
-            metacog_response = self.model.generate(
-                metacog_prompt,
+            inputs = self.tokenizer(metacog_prompt, return_tensors="pt").to(self.device)
+            outputs = self.model.generate(
+                **inputs,
                 max_new_tokens=1024,
                 temperature=0.1,
-                do_sample=False
+                do_sample=False,
+                pad_token_id=self.tokenizer.eos_token_id
             )
+            metacog_response = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+            metacog_response = metacog_response[len(metacog_prompt):].strip()
             final_answer = self.extract_answer(metacog_response, benchmark_name)
             method_used = "metacognition"
             full_response = f"Baseline answers: {baseline_answers}\nAgreement: {agreement_rate:.2f}\nMetacognitive response: {metacog_response}"
@@ -267,7 +277,10 @@ Follow these steps:
         print(f"Temperature: {self.temperature}")
         
         # Load benchmark data
-        samples = self.load_benchmark_data(benchmark_name, num_samples)
+        from src.evaluation.benchmarks import load_benchmark
+        samples = load_benchmark(benchmark_name, split="test")
+        if num_samples:
+            samples = samples[:num_samples]
         print(f"Loaded {len(samples)} samples")
         
         # Evaluate each sample
