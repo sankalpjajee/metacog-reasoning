@@ -68,18 +68,23 @@ class HotPotQABaselineEvaluator:
             if is_correct:
                 correct += 1
             
+            # Compute F1 score
+            f1 = self.compute_f1(predicted_answer, sample.answer)
+            
             results.append({
                 'id': sample.id,
                 'question': sample.question,
                 'ground_truth': sample.answer,
                 'predicted_answer': predicted_answer,
                 'is_correct': is_correct,
+                'f1': f1,
                 'type': sample.metadata.get('type', 'unknown'),
                 'level': sample.metadata.get('level', 'unknown')
             })
         
         # Calculate metrics
         accuracy = correct / len(samples) if samples else 0
+        avg_f1 = sum(r['f1'] for r in results) / len(results) if results else 0
         
         # Breakdown by type
         bridge_correct = sum(1 for r in results if r['type'] == 'bridge' and r['is_correct'])
@@ -88,12 +93,13 @@ class HotPotQABaselineEvaluator:
         comparison_total = sum(1 for r in results if r['type'] == 'comparison')
         
         summary = {
-            'accuracy': accuracy,
+            'exact_match': accuracy,
+            'f1': avg_f1,
             'correct': correct,
             'total': len(samples),
-            'bridge_accuracy': bridge_correct / bridge_total if bridge_total > 0 else 0,
+            'bridge_em': bridge_correct / bridge_total if bridge_total > 0 else 0,
             'bridge_total': bridge_total,
-            'comparison_accuracy': comparison_correct / comparison_total if comparison_total > 0 else 0,
+            'comparison_em': comparison_correct / comparison_total if comparison_total > 0 else 0,
             'comparison_total': comparison_total,
         }
         
@@ -156,38 +162,74 @@ class HotPotQABaselineEvaluator:
         
         return answer
     
+    def normalize_answer(self, s: str) -> str:
+        """Normalize answer using official HotPotQA normalization.
+        
+        From: https://github.com/hotpotqa/hotpot/blob/master/hotpot_evaluate_v1.py
+        """
+        import re
+        import string
+        
+        def remove_articles(text):
+            return re.sub(r'\b(a|an|the)\b', ' ', text)
+        
+        def white_space_fix(text):
+            return ' '.join(text.split())
+        
+        def remove_punc(text):
+            exclude = set(string.punctuation)
+            return ''.join(ch for ch in text if ch not in exclude)
+        
+        def lower(text):
+            return text.lower()
+        
+        return white_space_fix(remove_articles(remove_punc(lower(s))))
+    
+    def compute_f1(self, predicted: str, ground_truth: str) -> float:
+        """Compute F1 score using official HotPotQA method.
+        
+        From: https://github.com/hotpotqa/hotpot/blob/master/hotpot_evaluate_v1.py
+        """
+        from collections import Counter
+        
+        normalized_prediction = self.normalize_answer(predicted)
+        normalized_ground_truth = self.normalize_answer(ground_truth)
+        
+        # Handle yes/no/noanswer cases
+        if normalized_prediction in ['yes', 'no', 'noanswer'] and normalized_prediction != normalized_ground_truth:
+            return 0.0
+        if normalized_ground_truth in ['yes', 'no', 'noanswer'] and normalized_prediction != normalized_ground_truth:
+            return 0.0
+        
+        prediction_tokens = normalized_prediction.split()
+        ground_truth_tokens = normalized_ground_truth.split()
+        
+        common = Counter(prediction_tokens) & Counter(ground_truth_tokens)
+        num_same = sum(common.values())
+        
+        if num_same == 0:
+            return 0.0
+        
+        precision = 1.0 * num_same / len(prediction_tokens)
+        recall = 1.0 * num_same / len(ground_truth_tokens)
+        f1 = (2 * precision * recall) / (precision + recall)
+        
+        return f1
+    
     def check_answer(self, predicted: str, ground_truth: str) -> bool:
-        """Check if predicted answer matches ground truth.
+        """Check if predicted answer matches ground truth (exact match).
         
         Args:
             predicted: Predicted answer
             ground_truth: Ground truth answer
         
         Returns:
-            True if correct
+            True if exact match after normalization
         """
-        # Normalize
-        pred_norm = predicted.lower().strip()
-        gt_norm = ground_truth.lower().strip()
+        normalized_prediction = self.normalize_answer(predicted)
+        normalized_ground_truth = self.normalize_answer(ground_truth)
         
-        # Exact match
-        if pred_norm == gt_norm:
-            return True
-        
-        # Containment (either direction)
-        if gt_norm in pred_norm or pred_norm in gt_norm:
-            return True
-        
-        # Token overlap (for multi-word answers)
-        pred_tokens = set(pred_norm.split())
-        gt_tokens = set(gt_norm.split())
-        
-        if len(gt_tokens) > 0:
-            overlap = len(pred_tokens & gt_tokens) / len(gt_tokens)
-            if overlap >= 0.5:  # At least 50% token overlap
-                return True
-        
-        return False
+        return normalized_prediction == normalized_ground_truth
     
     def print_summary(self, summary: Dict):
         """Print evaluation summary.
@@ -198,10 +240,11 @@ class HotPotQABaselineEvaluator:
         print("\n" + "="*60)
         print("HOTPOTQA BASELINE EVALUATION RESULTS")
         print("="*60)
-        print(f"Overall Accuracy: {summary['accuracy']*100:.2f}% ({summary['correct']}/{summary['total']})")
+        print(f"Exact Match (EM): {summary['exact_match']*100:.2f}% ({summary['correct']}/{summary['total']})")
+        print(f"F1 Score: {summary['f1']*100:.2f}%")
         print()
-        print(f"Bridge Questions: {summary['bridge_accuracy']*100:.2f}% ({summary['bridge_total']} samples)")
-        print(f"Comparison Questions: {summary['comparison_accuracy']*100:.2f}% ({summary['comparison_total']} samples)")
+        print(f"Bridge Questions EM: {summary['bridge_em']*100:.2f}% ({summary['bridge_total']} samples)")
+        print(f"Comparison Questions EM: {summary['comparison_em']*100:.2f}% ({summary['comparison_total']} samples)")
         print("="*60)
 
 
