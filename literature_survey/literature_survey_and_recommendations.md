@@ -73,22 +73,104 @@ This method is:
 
 This plan provides a clear path to developing a novel, effective, and publishable method for adaptive metacognitive reasoning in LLMs.
 
-## 4. References
+---
 
-[1] Lin, S., Hilton, J., & Evans, O. (2022). *Teaching Models to Express Their Uncertainty in Natural Language*. arXiv preprint arXiv:2205.14334.
+## 4. References (Papers Used)
 
-[2] Kapoor, S., Gruver, N., Roberts, M., Pal, A., Bhatt, U., Weller, A., ... & Wilson, A. G. (2024). *Large Language Models Must Be Taught to Know What They Don't Know*. Advances in Neural Information Processing Systems.
+| # | Paper | Authors | Venue | arXiv Link |
+|---|-------|---------|-------|------------|
+| [1] | Teaching Models to Express Their Uncertainty in Words | Lin, Hilton, Evans | TMLR 2022 | [arXiv:2205.14334](https://arxiv.org/abs/2205.14334) |
+| [2] | Large Language Models Must Be Taught to Know What They Don't Know | Kapoor et al. | NeurIPS 2024 | [arXiv:2406.08391](https://arxiv.org/abs/2406.08391) |
+| [3] | Reasoning Models Know When They're Right: Probing Hidden States for Self-Verification | Zhang et al. | arXiv 2025 | [arXiv:2504.05419](https://arxiv.org/abs/2504.05419) |
+| [4] | Confident Adaptive Language Modeling | Schuster et al. | NeurIPS 2022 | [arXiv:2207.07061](https://arxiv.org/abs/2207.07061) |
+| [5] | (Same as [4]) | | | |
+| [6] | Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer | Shazeer et al. | ICLR 2017 | [arXiv:1701.06538](https://arxiv.org/abs/1701.06538) |
+| [7] | Training Language Models to Self-Correct via Reinforcement Learning (SCoRe) | Kumar et al. | ICLR 2025 | [arXiv:2409.12917](https://arxiv.org/abs/2409.12917) |
+| [8] | Self-Training Meets Consistency: Improving LLMs' Reasoning with Consistency-Driven Rationale Evaluation (CREST) | Lee, Sakaguchi, Bak | NAACL 2025 | [arXiv:2411.06387](https://arxiv.org/abs/2411.06387) |
+| [9] | Self-Consistency Improves Chain of Thought Reasoning in Language Models | Wang et al. | ICLR 2023 | [arXiv:2203.11171](https://arxiv.org/abs/2203.11171) |
 
-[3] Zhang, A., Chen, Y., Pan, J., Zhao, C., Panda, A., Li, J., & He, H. (2025). *Reasoning Models Know When They’re Right: Probing Hidden States for Self-Verification*. arXiv preprint arXiv:2504.05419.
+---
 
-[4] Schuster, T., et al. (2022). *Confident Adaptive Language Modeling*. Advances in Neural Information Processing Systems.
+## 5. Related Work (Additional arXiv Links)
 
-[5] Google Research. (2022). *Accelerating text generation with Confident Adaptive Language Modeling (CALM)*. Google Research Blog.
+### 5.1. Prompting and Reasoning Methods
 
-[6] Shazeer, N., Mirhoseini, A., Maziarz, K., Davis, A., Le, Q., Hinton, G., & Dean, J. (2017). *Outrageously large neural networks: The sparsely-gated mixture-of-experts layer*. arXiv preprint arXiv:1701.06538.
+| Paper | Authors | Venue | arXiv Link |
+|-------|---------|-------|------------|
+| Chain-of-Thought Prompting Elicits Reasoning in Large Language Models | Wei et al. | NeurIPS 2022 | [arXiv:2201.11903](https://arxiv.org/abs/2201.11903) |
+| Tree of Thoughts: Deliberate Problem Solving with Large Language Models | Yao et al. | NeurIPS 2023 | [arXiv:2305.10601](https://arxiv.org/abs/2305.10601) |
+| Metacognitive Prompting Improves Understanding in Large Language Models | Wang & Zhao | NAACL 2024 | [arXiv:2308.05342](https://arxiv.org/abs/2308.05342) |
+| Self-Refine: Iterative Refinement with Self-Feedback | Madaan et al. | NeurIPS 2023 | [arXiv:2303.17651](https://arxiv.org/abs/2303.17651) |
+| Automatic Chain of Thought Prompting in Large Language Models | Zhang et al. | ICLR 2023 | [arXiv:2210.03493](https://arxiv.org/abs/2210.03493) |
 
-[7] Kumar, A., et al. (2024). *Training Language Models to Self-Correct via Reinforcement Learning*. arXiv preprint arXiv:2409.12917.
+### 5.2. Uncertainty and Calibration
 
-[8] Lee, J., Sakaguchi, K., & Bak, J. (2025). *Self-Training Meets Consistency: Improving LLMs' Reasoning with Consistency-Driven Rationale Evaluation*. Proceedings of the 2025 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies.
+| Paper | Authors | Venue | arXiv Link |
+|-------|---------|-------|------------|
+| Semantic Uncertainty: Linguistic Invariances for Uncertainty Estimation in Natural Language Generation | Kuhn et al. | ICLR 2023 | [arXiv:2302.09664](https://arxiv.org/abs/2302.09664) |
+| Language Models (Mostly) Know What They Know | Kadavath et al. | arXiv 2022 | [arXiv:2207.05221](https://arxiv.org/abs/2207.05221) |
+| Teaching Language Models to Faithfully Express their Uncertainty | Tian et al. | arXiv 2025 | [arXiv:2510.12587](https://arxiv.org/abs/2510.12587) |
+| Can LLMs Express Their Uncertainty? An Empirical Evaluation of Confidence Elicitation in LLMs | Xiong et al. | ICLR 2024 | [arXiv:2306.13063](https://arxiv.org/abs/2306.13063) |
 
-[9] Google DeepMind. (2024). *Can Large Reasoning Models Self-Train?* SRT Website.
+### 5.3. Self-Correction and Verification
+
+| Paper | Authors | Venue | arXiv Link |
+|-------|---------|-------|------------|
+| Large Language Models Cannot Self-Correct Reasoning Yet | Huang et al. | ICLR 2024 | [arXiv:2310.01798](https://arxiv.org/abs/2310.01798) |
+| Self-Verification Improves Few-Shot Clinical Information Extraction | Gero et al. | arXiv 2023 | [arXiv:2306.00024](https://arxiv.org/abs/2306.00024) |
+| Let's Verify Step by Step | Lightman et al. | ICLR 2024 | [arXiv:2305.20050](https://arxiv.org/abs/2305.20050) |
+| Reflexion: Language Agents with Verbal Reinforcement Learning | Shinn et al. | NeurIPS 2023 | [arXiv:2303.11366](https://arxiv.org/abs/2303.11366) |
+
+### 5.4. Adaptive Computation and Efficiency
+
+| Paper | Authors | Venue | arXiv Link |
+|-------|---------|-------|------------|
+| Mixture of A Million Experts (PEER) | He et al. | arXiv 2024 | [arXiv:2407.04153](https://arxiv.org/abs/2407.04153) |
+| Sparsely Activated Mixture-of-Experts are Robust Multi-Task Learners | Shen et al. | arXiv 2022 | [arXiv:2204.07689](https://arxiv.org/abs/2204.07689) |
+| Scaling Laws for Routed Language Models | Clark et al. | arXiv 2022 | [arXiv:2202.01169](https://arxiv.org/abs/2202.01169) |
+
+### 5.5. Benchmarks and Evaluation
+
+| Paper | Authors | Venue | arXiv Link |
+|-------|---------|-------|------------|
+| Training Verifiers to Solve Math Word Problems (GSM8K) | Cobbe et al. | arXiv 2021 | [arXiv:2110.14168](https://arxiv.org/abs/2110.14168) |
+| Measuring Massive Multitask Language Understanding (MMLU) | Hendrycks et al. | ICLR 2021 | [arXiv:2009.03300](https://arxiv.org/abs/2009.03300) |
+| HellaSwag: Can a Machine Really Finish Your Sentence? | Zellers et al. | ACL 2019 | [arXiv:1905.07830](https://arxiv.org/abs/1905.07830) |
+| TruthfulQA: Measuring How Models Mimic Human Falsehoods | Lin et al. | ACL 2022 | [arXiv:2109.07958](https://arxiv.org/abs/2109.07958) |
+
+---
+
+## 6. Quick Reference: All arXiv Links
+
+**Core Papers (Used in Our Approach):**
+- https://arxiv.org/abs/2205.14334 - Teaching Models to Express Uncertainty
+- https://arxiv.org/abs/2406.08391 - LLMs Must Be Taught to Know What They Don't Know
+- https://arxiv.org/abs/2504.05419 - Probing Hidden States for Self-Verification
+- https://arxiv.org/abs/2207.07061 - CALM: Confident Adaptive Language Modeling
+- https://arxiv.org/abs/1701.06538 - Sparsely-Gated Mixture-of-Experts
+- https://arxiv.org/abs/2409.12917 - SCoRe: Self-Correction via RL
+- https://arxiv.org/abs/2411.06387 - CREST: Self-Consistency Training
+- https://arxiv.org/abs/2203.11171 - Self-Consistency Improves Chain of Thought
+
+**Prompting Methods:**
+- https://arxiv.org/abs/2201.11903 - Chain-of-Thought Prompting
+- https://arxiv.org/abs/2305.10601 - Tree of Thoughts
+- https://arxiv.org/abs/2308.05342 - Metacognitive Prompting
+- https://arxiv.org/abs/2303.17651 - Self-Refine
+- https://arxiv.org/abs/2210.03493 - Automatic Chain of Thought
+
+**Uncertainty & Calibration:**
+- https://arxiv.org/abs/2302.09664 - Semantic Uncertainty
+- https://arxiv.org/abs/2207.05221 - Language Models Know What They Know
+- https://arxiv.org/abs/2306.13063 - Confidence Elicitation in LLMs
+
+**Self-Correction:**
+- https://arxiv.org/abs/2310.01798 - LLMs Cannot Self-Correct Yet
+- https://arxiv.org/abs/2305.20050 - Let's Verify Step by Step
+- https://arxiv.org/abs/2303.11366 - Reflexion
+
+**Benchmarks:**
+- https://arxiv.org/abs/2110.14168 - GSM8K
+- https://arxiv.org/abs/2009.03300 - MMLU
+- https://arxiv.org/abs/1905.07830 - HellaSwag
+- https://arxiv.org/abs/2109.07958 - TruthfulQA
