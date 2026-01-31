@@ -395,8 +395,15 @@ Final Answer: [your answer]"""
         print(f"Agreement threshold: {self.agreement_threshold}")
         print(f"Temperature: {self.temperature}")
         
-        # Load benchmark
-        samples = load_benchmark(benchmark_name, split="test", max_samples=num_samples)
+        # Load benchmark (load all, then slice if needed)
+        # HellaSwag test split has no labels, use validation instead
+        split = "validation" if benchmark_name.lower() == "hellaswag" else "test"
+        samples = load_benchmark(benchmark_name, split=split)
+        
+        if num_samples:
+            samples = samples[:num_samples]
+            print(f"Limiting to {num_samples} samples")
+        
         print(f"Loaded {len(samples)} samples")
         
         results = []
