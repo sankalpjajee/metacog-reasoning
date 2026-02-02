@@ -496,10 +496,23 @@ def main():
         )
         all_results['loss_weight_ablation'] = loss_results
     
-    # Save results
+    # Save results (convert numpy types to Python types for JSON serialization)
+    def convert_to_serializable(obj):
+        """Recursively convert numpy types to Python types"""
+        if isinstance(obj, dict):
+            return {k: convert_to_serializable(v) for k, v in obj.items()}
+        elif isinstance(obj, list):
+            return [convert_to_serializable(item) for item in obj]
+        elif hasattr(obj, 'item'):  # numpy scalar
+            return obj.item()
+        elif hasattr(obj, 'tolist'):  # numpy array
+            return obj.tolist()
+        else:
+            return obj
+    
     results_path = os.path.join(args.output_dir, "ablation_results.json")
     with open(results_path, 'w') as f:
-        json.dump(all_results, f, indent=2)
+        json.dump(convert_to_serializable(all_results), f, indent=2)
     print(f"\nResults saved to: {results_path}")
     
     # Print summary
