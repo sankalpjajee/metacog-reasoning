@@ -402,10 +402,16 @@ def main():
         json.dump(config, f, indent=2)
     print(f"Saved config to: {config_path}")
     
-    # Save history
+    # Save history (convert numpy types to Python types for JSON serialization)
+    history_serializable = {
+        'train_loss': [float(x) for x in history['train_loss']],
+        'val_loss': [float(x) for x in history['val_loss']],
+        'val_wrong_f1': [float(x) for x in history['val_wrong_f1']],
+        'val_utility_corr': [float(x) for x in history['val_utility_corr']],
+    }
     history_path = os.path.join(args.output_dir, "training_history.json")
     with open(history_path, 'w') as f:
-        json.dump(history, f, indent=2)
+        json.dump(history_serializable, f, indent=2)
     print(f"Saved training history to: {history_path}")
     
     print("\n" + "="*60)
