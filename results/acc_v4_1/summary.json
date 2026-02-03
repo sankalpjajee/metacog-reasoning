@@ -1,0 +1,41 @@
+[
+  {
+    "benchmark": "gsm8k",
+    "total": 1000,
+    "correct": 836,
+    "accuracy": 0.836,
+    "baseline_count": 1000,
+    "baseline_correct": 836,
+    "baseline_accuracy": 0.836,
+    "metacog_count": 0,
+    "metacog_correct": 0,
+    "metacog_accuracy": 0,
+    "utility_threshold": 0.0
+  },
+  {
+    "benchmark": "mmlu",
+    "total": 631,
+    "correct": 374,
+    "accuracy": 0.5927099841521395,
+    "baseline_count": 631,
+    "baseline_correct": 374,
+    "baseline_accuracy": 0.5927099841521395,
+    "metacog_count": 0,
+    "metacog_correct": 0,
+    "metacog_accuracy": 0,
+    "utility_threshold": 0.0
+  },
+  {
+    "benchmark": "hellaswag",
+    "total": 1000,
+    "correct": 418,
+    "accuracy": 0.418,
+    "baseline_count": 1000,
+    "baseline_correct": 418,
+    "baseline_accuracy": 0.418,
+    "metacog_count": 0,
+    "metacog_correct": 0,
+    "metacog_accuracy": 0,
+    "utility_threshold": 0.0
+  }
+]

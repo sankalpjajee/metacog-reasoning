@@ -1,0 +1,10 @@
+{
+  "exact_match": 0.0,
+  "f1": 0.0,
+  "correct": 0,
+  "total": 10,
+  "bridge_em": 0.0,
+  "bridge_total": 7,
+  "comparison_em": 0.0,
+  "comparison_total": 3
+}

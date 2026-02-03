@@ -1,0 +1,10 @@
+{
+  "input_dim": 11,
+  "hidden_dim": 128,
+  "dropout": 0.1,
+  "use_ensemble": true,
+  "num_probes": 3,
+  "lambda_wrong": 1.0,
+  "lambda_conflict": 0.3,
+  "lambda_utility": 1.5
+}
