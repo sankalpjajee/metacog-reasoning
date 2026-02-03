@@ -1,0 +1,1017 @@
+{
+  "summary": {
+    "benchmark": "hellaswag",
+    "total": 100,
+    "correct": 47,
+    "accuracy": 0.47,
+    "baseline_count": 10,
+    "baseline_correct": 6,
+    "baseline_accuracy": 0.6,
+    "metacog_count": 90,
+    "metacog_correct": 41,
+    "metacog_accuracy": 0.45555555555555555,
+    "utility_threshold": 0.0
+  },
+  "results": [
+    {
+      "question": "[header] How to plan your own funeral [title] Make a list of your likes and dislikes. [step] Take out a pen and some paper and begin brainstorming ideas regarding your funeral. Write down whatever com",
+      "ground_truth": "C",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "baseline",
+      "p_wrong": 0.36315271258354187,
+      "conflict": 0.05293602496385574,
+      "utility": -0.14870993793010712
+    },
+    {
+      "question": "She continues playing her harmonica. There's a young boy and his mother who smile at the lady as she plays. then they\n\nA. continue playing as they hug their new child before walking away.\nB. continue ",
+      "ground_truth": "D",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5750916004180908,
+      "conflict": 0.08473125100135803,
+      "utility": 0.4919695556163788
+    },
+    {
+      "question": "[header] How to treat fractures in cats [title] Watch your cat walk. [step] Fractures can affect your cat's ability to walk. For example, if she has fractured a leg bone, she may hold the injured leg ",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.48185041546821594,
+      "conflict": 0.06732891499996185,
+      "utility": 0.32970166206359863
+    },
+    {
+      "question": "[header] How to deal with a friend who refuses to change [title] Ask yourself what you need changed. [step] If you plan to approach your friend and tell them to change, you need to lay out examples of",
+      "ground_truth": "A",
+      "predicted_answer": "D",
+      "is_correct": false,
+      "method": "baseline",
+      "p_wrong": 0.3328566253185272,
+      "conflict": 0.042845360934734344,
+      "utility": -0.23710107803344727
+    },
+    {
+      "question": "[header] How to buy children pyjamas as a gift [title] Get the right size. [step] When choosing the size, you might consider that measurements are average. And if the child is smaller or bigger than h",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5885062217712402,
+      "conflict": 0.08324326574802399,
+      "utility": 0.5087971687316895
+    },
+    {
+      "question": "[header] How to be more family oriented [title] Express your commitment to your family or significant other. [step] Being family oriented does not mean that you need to neglect everything else in your",
+      "ground_truth": "D",
+      "predicted_answer": "D.Onewaytoincreasefamilyorientationistoclearlyconveyyourcommitmenttothem.YoumaysayIwantyoutoknowIreallyvalueyourpresenceinmylifeandIamhereforourfamily.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5708865523338318,
+      "conflict": 0.08280380070209503,
+      "utility": 0.49165889620780945
+    },
+    {
+      "question": "[header] How to get rid of underarm hair [title] Clean your underarms. [step] Washing with warm water and soap is best. Any oils, deodorants, and other residues that could clog your razor will be remo",
+      "ground_truth": "B",
+      "predicted_answer": "",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5296183228492737,
+      "conflict": 0.081040158867836,
+      "utility": 0.4540714621543884
+    },
+    {
+      "question": "[header] How to determine when easter is [title] Mark the vernal equinox. [step] The date easter falls on is based on the ecclesiastical approximation of the vernal (spring) equinox. This approximatio",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.7685420513153076,
+      "conflict": 0.18648716807365417,
+      "utility": 0.5803234577178955
+    },
+    {
+      "question": "A couple of people are on the top of a snowy hill. They get into intertubes they carried to the top. they\n\nA. ride the tubes up a dark hill together.\nB. rodeo through the mountains together.\nC. ride t",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.2811416685581207,
+      "conflict": 0.028903601691126823,
+      "utility": -0.30356431007385254
+    },
+    {
+      "question": "Man is standing in front of a counter showing how to sharpening a knife. In the background man is cooking in the back counter. man\n\nA. is brushing a beard trying to clean it.\nB. is sharpening a knife ",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.31000086665153503,
+      "conflict": 0.04157320410013199,
+      "utility": -0.22556118667125702
+    },
+    {
+      "question": "A man in a denim shirt and black baseball cap plays the harmonica at the beach in front of a sandy shore, ocean water and a grass and flower covered knoll. the man\n\nA. plays for some time while making",
+      "ground_truth": "C",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5531484484672546,
+      "conflict": 0.0789685994386673,
+      "utility": 0.4704664349555969
+    },
+    {
+      "question": "[header] How to train your new dog to respond to a new name [title] Associate the new name with the old name. [step] For the first week, you may need to call the dog both names. To do this, say the ol",
+      "ground_truth": "D",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "baseline",
+      "p_wrong": 0.3478485345840454,
+      "conflict": 0.0497594028711319,
+      "utility": -0.16165415942668915
+    },
+    {
+      "question": "[header] How to have fun being naked [title] Create a self-love routine. [step] Establish a routine that helps you feel good about yourself. This can be anything--doing your hair, nails, or wearing so",
+      "ground_truth": "D",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.4732193648815155,
+      "conflict": 0.06867265701293945,
+      "utility": 0.25105342268943787
+    },
+    {
+      "question": "[header] How to make body oil [title] Find small, dark glass bottles to store your oil. [step] Sunlight and air break down oils over time. Store your oils in bottles made from dark, semi-opaque glass,",
+      "ground_truth": "B",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.6326268911361694,
+      "conflict": 0.10200980305671692,
+      "utility": 0.5445406436920166
+    },
+    {
+      "question": "[header] How to plan a corporate event [title] Conceptualize your big idea, a.k.a. [step] Come up with your theme. [substeps] Whether you are doing a cocktail party, a workshop or the company picnic, ",
+      "ground_truth": "D",
+      "predicted_answer": "",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.6342929601669312,
+      "conflict": 0.10066671669483185,
+      "utility": 0.5292060375213623
+    },
+    {
+      "question": "[header] How to do a professional ponytail [title] Dampen your hair. [step] Slightly wet hair will be easier to shape to the desired style. Don't style your hair straight after the shower, since soaki",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.6039248704910278,
+      "conflict": 0.0873199850320816,
+      "utility": 0.5315923094749451
+    },
+    {
+      "question": "A kid takes a drink and swishes it around in their mouth. they\n\nA. dive under the water, battling each other with their mouths until one guy makes a goal.\nB. wave at spectators, front and back.\nC. spi",
+      "ground_truth": "C",
+      "predicted_answer": "C",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.2940489649772644,
+      "conflict": 0.03166811168193817,
+      "utility": -0.3002030551433563
+    },
+    {
+      "question": "A slightly rotund man is shown standing in a kitchen while holding a can of drink. the man\n\nA. takes a drink from the can while sitting at the table and holding it up to show the bottle.\nB. then begin",
+      "ground_truth": "C",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.47640159726142883,
+      "conflict": 0.07565339654684067,
+      "utility": 0.3518697917461395
+    },
+    {
+      "question": "The man then picks up the two knives near his cutting board and demonstrates how they each cut a piece of green onion the cutting board, then he fastens the sharpener onto the counter, runs his knife ",
+      "ground_truth": "D",
+      "predicted_answer": "D.Themanistouchingholdingandshowingthecameraacloserlookofthesharpener.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.6064059138298035,
+      "conflict": 0.0918641984462738,
+      "utility": 0.5229556560516357
+    },
+    {
+      "question": "[header] How to get over a crush because you have moved away [title] Decide whether or not you want to stay in touch. [step] For some people, staying in touch can be a nice way to keep a friend who yo",
+      "ground_truth": "C",
+      "predicted_answer": "",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.6182458400726318,
+      "conflict": 0.1009993776679039,
+      "utility": 0.5231594443321228
+    },
+    {
+      "question": "[header] How to make microwave banana bread [title] Mix the dry ingredients in a bowl. [step] Pour the flour into a mixing bowl, then add in the sugar and baking powder. Whisk them together until ever",
+      "ground_truth": "D",
+      "predicted_answer": "D.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.569347620010376,
+      "conflict": 0.07597663998603821,
+      "utility": 0.5097581148147583
+    },
+    {
+      "question": "The list of ingredients are shown on the screen. All three children wipe the baking tray and pour the batter into it. then they\n\nA. either use the saran wrap etcetera to move the cookie dough down the",
+      "ground_truth": "B",
+      "predicted_answer": "B.Thisisthemostlikelynextstepafterpouringthebatterintothetrayaligningwiththetypicalprocessofbaking.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.7040842771530151,
+      "conflict": 0.13959507644176483,
+      "utility": 0.561372697353363
+    },
+    {
+      "question": "[header] How to take easter photos of your baby [title] Try a bunny outfit. [step] A bunny outfit is a classic for an easter photo. Try dressing your baby in a bunny costume, which you can buy online ",
+      "ground_truth": "B",
+      "predicted_answer": "B",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5350942015647888,
+      "conflict": 0.07605285942554474,
+      "utility": 0.4784008860588074
+    },
+    {
+      "question": "We see a game of dodge ball being played. A referee walks on the floor and tells a player something. a referee\n\nA. walks to a person on the right and tells them they are out.\nB. flips the ball and a p",
+      "ground_truth": "A",
+      "predicted_answer": "",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.488023579120636,
+      "conflict": 0.0810074508190155,
+      "utility": 0.35314854979515076
+    },
+    {
+      "question": "French cancan candy wrap, you need tissue paper, you fold it down really nicely. then you\n\nA. brand a knife with the tissue paper to get it out of sight.\nB. place the cellophane, you put white paper a",
+      "ground_truth": "C",
+      "predicted_answer": "",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5417864322662354,
+      "conflict": 0.07750846445560455,
+      "utility": 0.4774783253669739
+    },
+    {
+      "question": "[header] How to make tattoo ink [title] Burn wood to create ashes. [step] In order for wood ashes to work well as a tattoo ink, you need to completely burn the wood you're using. The ashes should be t",
+      "ground_truth": "D",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "baseline",
+      "p_wrong": 0.3093087077140808,
+      "conflict": 0.03249772638082504,
+      "utility": -0.2805052399635315
+    },
+    {
+      "question": "[header] How to get a cell phone with no internet access [title] Browse older phones. [step] Older phones generally have a lower level of functionality than newer phones. The best place to start your ",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.61067795753479,
+      "conflict": 0.09468452632427216,
+      "utility": 0.5130566358566284
+    },
+    {
+      "question": "A person is making a bow out of ribbon. they\n\nA. put on a decorating paper, put the bow on top of it, roll the paper over it, fasten it around the bow twice.\nB. tie the ribbon onto a wrapped package.\n",
+      "ground_truth": "B",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5687412619590759,
+      "conflict": 0.08052799105644226,
+      "utility": 0.49114522337913513
+    },
+    {
+      "question": "[header] How to prepare oily skin for makeup [title] Wash your face with a gentle cleanser. [step] They key to getting a healthy glow with makeup is making sure the palette-your face--underneath is cl",
+      "ground_truth": "B",
+      "predicted_answer": "B.Thisoptionseemslikethemosteffectivewaytoprepareoilyskinformakeup.Usingagelcleanserandavoidingheavychemicalproductswillhelptogentlycleantheskinwithoutirritatingitfurther.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.647794783115387,
+      "conflict": 0.11569833755493164,
+      "utility": 0.5066487789154053
+    },
+    {
+      "question": "Woman is talking to the camera and people are in gym practicing fencing. People are sitting on chairs behind he girls rpacticing fencing. girl\n\nA. is hanging from the pullp rope and demonstrates the s",
+      "ground_truth": "C",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.6315613985061646,
+      "conflict": 0.09506738185882568,
+      "utility": 0.5519576072692871
+    },
+    {
+      "question": "[header] How to dye hair turquoise [title] Protect your skin and clothing. [step] Put on an old shirt you don't mind ruining and a pair of plastic gloves. Coat your ears, hairline, and back of neck wi",
+      "ground_truth": "D",
+      "predicted_answer": "C",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5592932105064392,
+      "conflict": 0.07354278862476349,
+      "utility": 0.4970672130584717
+    },
+    {
+      "question": "[header] How to grill turkey [title] If you are using a charcoal grill, fill a chimney starter to the rim with charcoal and burn the coals until they are lightly covered with ash. [step] Spread the co",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.4145147502422333,
+      "conflict": 0.052425533533096313,
+      "utility": 0.10000508278608322
+    },
+    {
+      "question": "[header] How to be carefree [title] Keep your work time and fun time separate. [step] Life doesn't have to be a slog. If you want to figure out how to be more carefree in your daily life, it's importa",
+      "ground_truth": "D",
+      "predicted_answer": "C.Ifitstimetodosomethingtaketheinitiativetodoitandkeepthatthingseparate.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5939279794692993,
+      "conflict": 0.09199163317680359,
+      "utility": 0.5029613375663757
+    },
+    {
+      "question": "A young woman talks and two girls appear for few seconds splashing water on their face then she continues talking. the girl\n\nA. is on front a sink and puts soap on her face, then she remembers the two",
+      "ground_truth": "A",
+      "predicted_answer": "D",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.595621645450592,
+      "conflict": 0.08753132075071335,
+      "utility": 0.5175942182540894
+    },
+    {
+      "question": "[header] How to burp babies [title] Hold the baby over your shoulder. [step] Be sure to support your child's head and neck while you do this. You might have more success lifting your baby higher, so t",
+      "ground_truth": "C",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5709279179573059,
+      "conflict": 0.0848836749792099,
+      "utility": 0.4845372140407562
+    },
+    {
+      "question": "[header] How to be attentive in end of day classes [title] Eat less during breaks. [step] Having a heavy stomach after lunch or dinner can cause you to feel drowsy as your body focuses in digesting fo",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5919627547264099,
+      "conflict": 0.08122333884239197,
+      "utility": 0.530451774597168
+    },
+    {
+      "question": "Two girls check their wrists while one speaks to the camera and several shots of a wristband are shown. more people\n\nA. speak to the camera and the girls stand in front of a mirror speaking to the cam",
+      "ground_truth": "C",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5934972167015076,
+      "conflict": 0.08605167269706726,
+      "utility": 0.5201367735862732
+    },
+    {
+      "question": "A large group of people are seen standing around a table with one speaking to the camera. The people then assist one another putting ingredients into pans and flipping them around. the people\n\nA. cont",
+      "ground_truth": "C",
+      "predicted_answer": "",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5257959961891174,
+      "conflict": 0.08118447661399841,
+      "utility": 0.4400525689125061
+    },
+    {
+      "question": "[header] How to help your child enjoy milk [title] Try small amounts at first. [step] Toddlers especially may not want a full 8-oz glass (237 ml) of milk, and that's ok. If your child refuses to drink",
+      "ground_truth": "D",
+      "predicted_answer": "D.Thisoptionalignswiththeinitialsuggestiontostartwithsmallamounts1to3ozandgraduallyincreasetheportionsizeifthechildshowsinterest.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5696971416473389,
+      "conflict": 0.0762864425778389,
+      "utility": 0.5099503397941589
+    },
+    {
+      "question": "People are working in a bike shop fixing a bike. they\n\nA. use the tools and paint the wheels.\nB. put the wheels back onto the bike.\nC. are going over the bike handlebars and looking at the paint.\nD. c",
+      "ground_truth": "B",
+      "predicted_answer": "",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.39863428473472595,
+      "conflict": 0.05421920120716095,
+      "utility": 0.04965310916304588
+    },
+    {
+      "question": "A man walks along a bare field while a woman walks around beside him. he\n\nA. walks back and fourth preparing to jump and eventually jumps over a pole.\nB. travels around several bases and gets into pos",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5966296195983887,
+      "conflict": 0.09155969321727753,
+      "utility": 0.5139504671096802
+    },
+    {
+      "question": "[header] How to change a mortise lock cylinder [title] Open door partially to reveal the mortise lock cover plate at the edge of the door. [step] Remove the two retaining screws and set aside. [title]",
+      "ground_truth": "C",
+      "predicted_answer": "C",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.6131755709648132,
+      "conflict": 0.09465532004833221,
+      "utility": 0.5334347486495972
+    },
+    {
+      "question": "A person is stuck in the snow is buried by others. A lady talks to the camera and it goes black and white. People are mainge snow angels. we\n\nA. hear horn blowing and people get out of the rafts to go",
+      "ground_truth": "B",
+      "predicted_answer": "C",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5332664847373962,
+      "conflict": 0.08199387788772583,
+      "utility": 0.44021689891815186
+    },
+    {
+      "question": "[header] How to prune patio tomatoes [title] Start at the bottom of the plant. [step] It can be helpful to start pruning your tomato plant from the bottom and working your way up. This will allow you ",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.626785933971405,
+      "conflict": 0.10054638236761093,
+      "utility": 0.5262305736541748
+    },
+    {
+      "question": "[header] How to buy a used car off craigslist [title] Decide on a make and model. [substeps] Perform research on different car brands to determine which fits your needs. [title] Visit the \" cars & tru",
+      "ground_truth": "C",
+      "predicted_answer": "D",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.549638569355011,
+      "conflict": 0.078549325466156,
+      "utility": 0.4642985761165619
+    },
+    {
+      "question": "[header] How to choose a winter wedding dress [title] Try on gowns with sleeves. [step] Gowns with long sleeves have seen a major comeback, and you might have kate middleton to thank for that. For a w",
+      "ground_truth": "B",
+      "predicted_answer": "B",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.49389249086380005,
+      "conflict": 0.07227242738008499,
+      "utility": 0.3902537226676941
+    },
+    {
+      "question": "[header] How to prepare for hair removal [title] Find a qualified dermatologist or cosmetic surgeon to perform laser hair removal. [substeps] Ask for references and check them for positive recommendat",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.647038996219635,
+      "conflict": 0.1121646985411644,
+      "utility": 0.5259954333305359
+    },
+    {
+      "question": "[header] How to get what you want for christmas [title] Think about your family and friends. [step] They probably want to make all your christmas wishes come true, but, many wishes come with a cost an",
+      "ground_truth": "D",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.6130551099777222,
+      "conflict": 0.10231920331716537,
+      "utility": 0.49355173110961914
+    },
+    {
+      "question": "A man is skateboarding down a sidewalk. He does a flip on the skateboard. he\n\nA. falls off the skateboard onto the ground.\nB. hops off the board into the street.\nC. jumps down and run as another man d",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.515674352645874,
+      "conflict": 0.08133712410926819,
+      "utility": 0.43542489409446716
+    },
+    {
+      "question": "Two people are seen riding down a road with a dog. one person\n\nA. is riding a bike and the other a skateboard while the camera follows close behind.\nB. is seen walking down the road alone.\nC. spins ar",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5337387919425964,
+      "conflict": 0.08380046486854553,
+      "utility": 0.43280303478240967
+    },
+    {
+      "question": "[header] How to stop one bridesmaid from stressing out the others [title] Consider the bridesmaids' perspectives. [step] Present the issue to them individually and ask each one how they feel about the",
+      "ground_truth": "C",
+      "predicted_answer": "C",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.46217599511146545,
+      "conflict": 0.0635301023721695,
+      "utility": 0.21270212531089783
+    },
+    {
+      "question": "He starts mowing his lawn casually going over all the grass. His dog comes outside and starts to follow him a little while he's closer to the house. the yard\n\nA. is slowly starting to look really real",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.33532053232192993,
+      "conflict": 0.04688120633363724,
+      "utility": -0.1890076845884323
+    },
+    {
+      "question": "[header] How to do kinky twists [title] Wash and deep condition your hair as you normally would. [step] Since this style will last about 4 to 6 weeks, it would be a good idea to wash your hair and sca",
+      "ground_truth": "B",
+      "predicted_answer": "Awithanotethatitsnotdirectlyrelatedtotheprocessofdoingakinkytwistbutratherageneralstepbeforestartingthestyle",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5890869498252869,
+      "conflict": 0.0846802294254303,
+      "utility": 0.5171730518341064
+    },
+    {
+      "question": "[header] How to moisturize your body [title] Wash with gentle, moisturizing products. [step] Use separate fragrance-free and allergy-tested cleansers to wash your face and body. Select cleansers that ",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.6214222311973572,
+      "conflict": 0.0984048992395401,
+      "utility": 0.5175459384918213
+    },
+    {
+      "question": "[header] How to reverse tooth decay [title] Brush your teeth twice per day. [step] Regular daily brushing is crucial for maintaining good dental health and it may also help to reverse the decay proces",
+      "ground_truth": "B",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.7038593292236328,
+      "conflict": 0.14187785983085632,
+      "utility": 0.5522152185440063
+    },
+    {
+      "question": "[header] How to choose shampoo for scalp psoriasis [title] Know if you need coal tar shampoo. [step] Coal tar is the oldest treatment for scalp psoriasis. However, when it is used alone, it's only as ",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5091201066970825,
+      "conflict": 0.0883685052394867,
+      "utility": 0.368264764547348
+    },
+    {
+      "question": "[header] How to drive safely in heavy traffic [title] Remove all distractions. [step] In heavy traffic conditions, the road will be crowded with cars, the flow of traffic irregular, and people will st",
+      "ground_truth": "C",
+      "predicted_answer": "C",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5679262280464172,
+      "conflict": 0.07741053402423859,
+      "utility": 0.5007185935974121
+    },
+    {
+      "question": "[header] How to beat a taller and bigger opponent in a street fight [title] Don't fight unless you have to. [step] When faced with a bigger opponent, you're going to be at a disadvantage from the star",
+      "ground_truth": "C",
+      "predicted_answer": "",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5552045106887817,
+      "conflict": 0.0779302567243576,
+      "utility": 0.4858384132385254
+    },
+    {
+      "question": "[header] How to look good while growing out a short haircut [title] Pin back fly-aways. [step] If you have strands of hair that are too short to pull up but too long to let hang, try pinning them back",
+      "ground_truth": "B",
+      "predicted_answer": "B",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5296098589897156,
+      "conflict": 0.08380025625228882,
+      "utility": 0.43214094638824463
+    },
+    {
+      "question": "A little girl is in the back seat of a vehicle while eating an ice cream cone. Ice cream gets on her nose as she's licking the cone. as she\n\nA. bites the ice cream she gets in deep trouble with spread",
+      "ground_truth": "C",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5615354180335999,
+      "conflict": 0.07665795832872391,
+      "utility": 0.4932076334953308
+    },
+    {
+      "question": "The camera pans into a man and leads into shots of him running as well as pictures of him. A camera then shows a large group of people running and the camera panning around the man. more shots\n\nA. are",
+      "ground_truth": "B",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.6312830448150635,
+      "conflict": 0.09334449470043182,
+      "utility": 0.5584862232208252
+    },
+    {
+      "question": "[header] How to deal with internalized homophobia [title] Be willing to work on your problems. [step] Sometimes it may feel easier to ignore your feelings and push them away. All this really does is b",
+      "ground_truth": "B",
+      "predicted_answer": "B.Thisoptionisthemostdirectandintentionalapproachtoaddressinginternalizedhomophobia.Itacknowledgestheneedtoconfrontandeliminatethesefeelingswhichisessentialforpersonalgrowthandhealing.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.41745632886886597,
+      "conflict": 0.05090569704771042,
+      "utility": 0.1043865904211998
+    },
+    {
+      "question": "[header] How to use urban decay naked palette [title] Wash your face and apply a serum. [step] Wash your face with lukewarm water and a hydrating cream cleanser before you start applying makeup. After",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.7612496018409729,
+      "conflict": 0.19336754083633423,
+      "utility": 0.5657069087028503
+    },
+    {
+      "question": "A woman is standing in a room talking. She shows a bottle in her hand. she\n\nA. sprays something onto her face.\nB. holds a bottle of mouthwash and shakes it in her hand.\nC. pours some of the lotion ont",
+      "ground_truth": "C",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.556103527545929,
+      "conflict": 0.0755206048488617,
+      "utility": 0.48522281646728516
+    },
+    {
+      "question": "[header] How to lose weight without exercising [title] Count calories. [step] Weight loss programs usually require you to modify your total calorie intake. Counting calories and being aware of how muc",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5235127806663513,
+      "conflict": 0.08377068489789963,
+      "utility": 0.4083326756954193
+    },
+    {
+      "question": "[header] How to gently bleach your skin naturally [title] Gather your ingredients. [step] Lemons work as a natural bleach because of their acidic property. The high amount of vitamin c promotes new ce",
+      "ground_truth": "B",
+      "predicted_answer": "C",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5205212831497192,
+      "conflict": 0.08988095819950104,
+      "utility": 0.38279494643211365
+    },
+    {
+      "question": "A person wraps the box in the fabric and ties it up. We see the person wrap to bottles in the fabric together. they\n\nA. put the shirt on and the jacket on.\nB. then put two bottles in a bag and tie it.",
+      "ground_truth": "B",
+      "predicted_answer": "B",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.4711780548095703,
+      "conflict": 0.07261805236339569,
+      "utility": 0.3173377513885498
+    },
+    {
+      "question": "[header] How to stay cool and feel fresh during the summer [title] Shower every day. [step] Use exfoliating shower gel to clean off the grime. Turn the water to hot to start the shower (because it cle",
+      "ground_truth": "B",
+      "predicted_answer": "B",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.63362717628479,
+      "conflict": 0.09526341408491135,
+      "utility": 0.5455065369606018
+    },
+    {
+      "question": "An athletic woman is seen running down a track with a large group of people watching her on the sidelines. she\n\nA. flips several times before finally throwing the javelin into the air.\nB. holds the ar",
+      "ground_truth": "C",
+      "predicted_answer": "C",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.44194093346595764,
+      "conflict": 0.05651554465293884,
+      "utility": 0.18748098611831665
+    },
+    {
+      "question": "A man is outside with two dogs on leashes. he\n\nA. seems to be talking to the camera when suddenly the dogs start fighting and punching each other.\nB. puts on a show with the trained dogs.\nC. is brushi",
+      "ground_truth": "B",
+      "predicted_answer": "C",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.564033567905426,
+      "conflict": 0.08082472532987595,
+      "utility": 0.48452135920524597
+    },
+    {
+      "question": "[header] How to use the internet to promote your business [title] Create a website. [step] A visible online business presence requires having a website that users can visit for information. Luckily, y",
+      "ground_truth": "C",
+      "predicted_answer": "C",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5557060241699219,
+      "conflict": 0.07867776602506638,
+      "utility": 0.4739258289337158
+    },
+    {
+      "question": "[header] How to treat cataracts with surgery [title] Consider surgery when cataracts begin to interfere with your everyday life. [step] Cataracts generally appear in people over the age of 55. They ma",
+      "ground_truth": "B",
+      "predicted_answer": "D",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.4767991602420807,
+      "conflict": 0.06514084339141846,
+      "utility": 0.33656367659568787
+    },
+    {
+      "question": "[header] How to prepare for a new baby [title] Recognize that fear is normal. [step] A new baby can bring a lot of fear and uncertainty because they are so small and appear fragile. You may ask yourse",
+      "ground_truth": "C",
+      "predicted_answer": "B",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.6144384741783142,
+      "conflict": 0.08872486650943756,
+      "utility": 0.5397688746452332
+    },
+    {
+      "question": "[header] How to apply invisible foundation [title] Determine your skin type. [step] Choose a foundation for oily skin if your face tends to get shiny or greasy, and avoid dewy finishes. Choose a miner",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5377458333969116,
+      "conflict": 0.07967107743024826,
+      "utility": 0.4665367603302002
+    },
+    {
+      "question": "A cat sits on the bed licking its paw. it beings\n\nA. the object moves up and down.\nB. to be speaking to the camera via a audio link.\nC. to rub its face every time it takes a lick of its paw.\nD. quiet ",
+      "ground_truth": "C",
+      "predicted_answer": "A.theobjectmovesupanddown.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5640255808830261,
+      "conflict": 0.08041904121637344,
+      "utility": 0.48590582609176636
+    },
+    {
+      "question": "A camera pans out of a dirt hole and shows a man placing it down next to a tree. the camera\n\nA. pans back to an open road and more holes and fallen leaves laying on the ground.\nB. pans around people p",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5228842496871948,
+      "conflict": 0.08430054783821106,
+      "utility": 0.4258469343185425
+    },
+    {
+      "question": "[header] How to recognize a fake ralph lauren [title] Check the logo. [step] Ralph lauren shirts often contain a small stitched on graphic of a polo player riding a horse. On a fake ralph lauren, the ",
+      "ground_truth": "B",
+      "predicted_answer": "B.Thetailwillbedifficulttoseeandthehorsesrightbacklegwillbebent.Onagenuineproductthehorsestailisclearlyvisibleandtherightbacklegisstraight.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.6237930655479431,
+      "conflict": 0.11006136983633041,
+      "utility": 0.5064435005187988
+    },
+    {
+      "question": "A man walks out in front of a weighted barbell. The man prepares to lift the weight. the man\n\nA. lifts, then lowers the barbell over his head.\nB. makes a fist and prepares to throw the weight.\nC. lift",
+      "ground_truth": "C",
+      "predicted_answer": "C",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.3051222562789917,
+      "conflict": 0.03911448270082474,
+      "utility": -0.2511160373687744
+    },
+    {
+      "question": "His team member tries to follow the ball and keep it away from the opponent team player. after the blue team\n\nA. shoots at an orange ball while another team member mpers the ball.\nB. scores a goal, th",
+      "ground_truth": "B",
+      "predicted_answer": "B",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.6282292604446411,
+      "conflict": 0.09787079691886902,
+      "utility": 0.5452967882156372
+    },
+    {
+      "question": "A screen with graphics of a flag, the statue of liberty, white letters and in the center a picture of an older woman in a running outfit. the reporter\n\nA. begins with the pin name.\nB. wear a pair of w",
+      "ground_truth": "C",
+      "predicted_answer": "C",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5892398953437805,
+      "conflict": 0.08768123388290405,
+      "utility": 0.5047359466552734
+    },
+    {
+      "question": "[header] How to wear a short skirt without looking overexposed [title] Pick a flared or a-line skirt for comfort. [step] Try a short skirt that isn't fitted and flares out from your body. This will pr",
+      "ground_truth": "C",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5933630466461182,
+      "conflict": 0.0828879103064537,
+      "utility": 0.5244941711425781
+    },
+    {
+      "question": "The \"bbc news\" logo appears on screen with website addresses. A man plays a bagpipe in front of burning trucks as people thrown rocks. police\n\nA. officers stand outside of a dodge ram topic and watch ",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.58189857006073,
+      "conflict": 0.07924953103065491,
+      "utility": 0.5150822401046753
+    },
+    {
+      "question": "[header] How to train shihpoos [title] Start crate training early. [step] Since shihpoos can be stubborn, you should start training your shihpoo as soon as you bring him home. If you wait too long, hi",
+      "ground_truth": "D",
+      "predicted_answer": "D.Cratetrainingwillhelpkeepyourshihpoooutoftroublewhenyouarenothome.Itwillalsoincreasethelikelihoodofhimgoingtothebathroomoutsideratherthaninhiscrateorelsewhereinyourhome.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5691481828689575,
+      "conflict": 0.07794230431318283,
+      "utility": 0.502964198589325
+    },
+    {
+      "question": "[header] How to make a sterile bacterial smear [title] Remove all unneeded equipment and objects from the lab bench. [substeps] Leaving objects on the lab bench can get in the way or be a safety hazar",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5493878126144409,
+      "conflict": 0.07886854559183121,
+      "utility": 0.48003706336021423
+    },
+    {
+      "question": "A person is seen riding a board along the water with a kite on top. More clips are shown of the person riding back and fourth on the board. the person\n\nA. continues to ride down the river while others",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.2809722125530243,
+      "conflict": 0.02906026504933834,
+      "utility": -0.2950621545314789
+    },
+    {
+      "question": "[header] How to stain concrete floors [title] Smooth the surface. [step] Work across the floor using a sander, mechanical buffer, or floor grinder equipped with diamond bits. Focus on areas covered by",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5859307646751404,
+      "conflict": 0.08206596225500107,
+      "utility": 0.5181173086166382
+    },
+    {
+      "question": "[header] How to choose healthy snacks for your toddler [title] Serve fruit. [step] Fruit is one of the best snacks you can provide your toddler. Not only does fruit contain many vitamins that your tod",
+      "ground_truth": "B",
+      "predicted_answer": "",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5967178344726562,
+      "conflict": 0.08085226267576218,
+      "utility": 0.5382789969444275
+    },
+    {
+      "question": "[header] How to schedule your college classes effectively [title] Look at the course schedule often and early. [step] Familiarize yourself with the courses your college is offering each semester. The ",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5415639877319336,
+      "conflict": 0.08255705237388611,
+      "utility": 0.4431634545326233
+    },
+    {
+      "question": "[header] How to flavor soy milk [title] Heat \u00bc cup (59.2 ml) of soy milk in the microwave for 15 seconds. [step] Heat the soy milk in a microwave safe container. The soy milk should be steaming when y",
+      "ground_truth": "B",
+      "predicted_answer": "B",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.6168208122253418,
+      "conflict": 0.09030991047620773,
+      "utility": 0.5349993109703064
+    },
+    {
+      "question": "This woman is showing viewers how to get big bouncy curls using hot rollers. First she lets the rollers heat up and she puts them onto her hair. next she flat\n\nA. irons her hair and puts some rollers ",
+      "ground_truth": "B",
+      "predicted_answer": "D",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.4777674376964569,
+      "conflict": 0.07365346699953079,
+      "utility": 0.345365047454834
+    },
+    {
+      "question": "A man shows a video of himself training for the weightlifting events in the olympics. several times\n\nA. he practices weightlifting while someone films him and clips him outside.\nB. he is shown doing l",
+      "ground_truth": "D",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.56363445520401,
+      "conflict": 0.07776650786399841,
+      "utility": 0.4910008907318115
+    },
+    {
+      "question": "[header] How to live with migraines [title] Track the food you eat. [step] One of the most common migraine triggers is food. The exact foods that trigger migraines vary from person to person, but ther",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5488176345825195,
+      "conflict": 0.08012611418962479,
+      "utility": 0.4625019431114197
+    },
+    {
+      "question": "[header] How to highlight natural freckles [title] Match your foundation to the skin between your freckles. [step] Never match your foundation to the shade of your freckles, because it will make your ",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.47118720412254333,
+      "conflict": 0.06727060675621033,
+      "utility": 0.22869464755058289
+    },
+    {
+      "question": "[header] How to improve your facial skin [title] Wash your face. [step] You can improve your facial skin by taking good care of it every day. Get in the habit of making skin care part of your daily ro",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.43198511004447937,
+      "conflict": 0.05916218459606171,
+      "utility": 0.0886424332857132
+    },
+    {
+      "question": "[header] How to get soft lips [title] Wear a moisturizing lip balm, as needed. [step] Use a balm with shea or cocoa butter for the best results. Reapply it only when your lips feel dry.\n\nA. [title] Us",
+      "ground_truth": "B",
+      "predicted_answer": "",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5978713035583496,
+      "conflict": 0.08865313231945038,
+      "utility": 0.5176889896392822
+    },
+    {
+      "question": "[header] How to have a girls' night out with your teenage daughter [title] Know your daughter. [step] You may spend a lot of time working, or maybe your daughter spends a lot of time alone in her room",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.6658505797386169,
+      "conflict": 0.12983167171478271,
+      "utility": 0.5168605446815491
+    },
+    {
+      "question": "[header] How to decorate your home with pastel colors [title] Look for pastel accessories. [step] If you only want to add small touches of pastel to your home, then adding small accessories is the bes",
+      "ground_truth": "B",
+      "predicted_answer": "B",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5222128033638,
+      "conflict": 0.08339087665081024,
+      "utility": 0.43190091848373413
+    },
+    {
+      "question": "[header] How to get bigger hair [title] Choose a volumizing shampoo and conditioner. [step] If you have fine or thin hair, using a volumizing shampoo and conditioner can help give you bigger hair. The",
+      "ground_truth": "A",
+      "predicted_answer": "",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.6009447574615479,
+      "conflict": 0.08862879872322083,
+      "utility": 0.524537980556488
+    },
+    {
+      "question": "[header] How to get rid of a pimple with no head [title] Use a topical cream. [step] One good way to treat a pimple with no head is to use a topical cream. You can use an antibiotic cream with anti-in",
+      "ground_truth": "B",
+      "predicted_answer": "B",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5379819869995117,
+      "conflict": 0.08311118185520172,
+      "utility": 0.4426691234111786
+    },
+    {
+      "question": "[header] How to prune lilacs [title] Cut fresh flowers in the spring. [step] When lilac flowers reach their peak and are just this side of fading out, cutting them to create indoor bouquets actually h",
+      "ground_truth": "D",
+      "predicted_answer": "",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.6692619919776917,
+      "conflict": 0.1269051879644394,
+      "utility": 0.5382838845252991
+    }
+  ]
+}

@@ -1,0 +1,1017 @@
+{
+  "summary": {
+    "benchmark": "mmlu",
+    "total": 100,
+    "correct": 40,
+    "accuracy": 0.4,
+    "baseline_count": 31,
+    "baseline_correct": 20,
+    "baseline_accuracy": 0.6451612903225806,
+    "metacog_count": 69,
+    "metacog_correct": 20,
+    "metacog_accuracy": 0.2898550724637681,
+    "utility_threshold": 0.0
+  },
+  "results": [
+    {
+      "question": "Statement 1 | If H is a subgroup of G and a belongs to G then aH is a subgroup of G if and only if a is in H. Statement 2 | If H is a subgroup of G and a and b belong to G then aH = bH if and only if ",
+      "ground_truth": "C",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.6227567195892334,
+      "conflict": 0.09848465025424957,
+      "utility": 0.5366078615188599
+    },
+    {
+      "question": "Statement 1 | If a and b are elements of a group and a is not equal to b, then a^2 is not equal to b^2. Statement 2 | The set of rotations in a dihedral group form a cyclic subgroup.\n\nA. True, True\nB.",
+      "ground_truth": "D",
+      "predicted_answer": "B.FalseFalse",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.6128759980201721,
+      "conflict": 0.09712319821119308,
+      "utility": 0.5239067077636719
+    },
+    {
+      "question": "Find the degree for the given field extension Q(sqrt(2)) over Q.\n\nA. 0\nB. 2\nC. 1\nD. 3",
+      "ground_truth": "B",
+      "predicted_answer": "B",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5121529698371887,
+      "conflict": 0.08748160302639008,
+      "utility": 0.4064534604549408
+    },
+    {
+      "question": "Find all c in Z_3 such that Z_3[x]/(x^3 + cx^2 + 1) is a field.\n\nA. 0\nB. 2\nC. 1\nD. 3",
+      "ground_truth": "B",
+      "predicted_answer": "B",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.37175142765045166,
+      "conflict": 0.04949849843978882,
+      "utility": 0.06997473537921906
+    },
+    {
+      "question": "Statement 1 | A homomorphism may have an empty kernel. Statement 2 | It is not possible to have a nontrivial homomorphism of some finite group into some infinite group.\n\nA. True, True\nB. False, False\n",
+      "ground_truth": "B",
+      "predicted_answer": "C",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.6083709597587585,
+      "conflict": 0.08716627210378647,
+      "utility": 0.5367135405540466
+    },
+    {
+      "question": "Statement 1 | The image of a group of 6 elements under a homomorphism may have 12 elements. Statement 2 | There is a homomorphism of some group of 6 elements into some group of 12 elements.\n\nA. True, ",
+      "ground_truth": "D",
+      "predicted_answer": "B",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.6448054313659668,
+      "conflict": 0.10536526143550873,
+      "utility": 0.5594370365142822
+    },
+    {
+      "question": "Compute the product in the given ring. (2,3)(3,5) in Z_5 x Z_9\n\nA. (1,1)\nB. (3,1)\nC. (1,6)\nD. (3,6)",
+      "ground_truth": "C",
+      "predicted_answer": "C",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.28335025906562805,
+      "conflict": 0.03466173633933067,
+      "utility": -0.23490016162395477
+    },
+    {
+      "question": "Statement 1 | Every field is also a ring. Statement 2 | Every ring has a multiplicative identity.\n\nA. True, True\nB. False, False\nC. True, False\nD. False, True",
+      "ground_truth": "C",
+      "predicted_answer": "CTrueFalse",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.6168946623802185,
+      "conflict": 0.09712697565555573,
+      "utility": 0.5302886366844177
+    },
+    {
+      "question": "If A = (1, 2, 3, 4). Let ~= {(1, 2), (1, 3), (4, 2)}. Then ~ is\n\nA. not anti-symmetric\nB. transitive\nC. reflexive\nD. symmetric",
+      "ground_truth": "B",
+      "predicted_answer": "B",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.41864728927612305,
+      "conflict": 0.06251925230026245,
+      "utility": 0.10861432552337646
+    },
+    {
+      "question": "If A = {1, 2, 3} then relation S = {(1, 1), (2, 2)} is\n\nA. symmetric only\nB. anti-symmetric only\nC. both symmetric and anti-symmetric\nD. an equivalence relation",
+      "ground_truth": "C",
+      "predicted_answer": "D",
+      "is_correct": false,
+      "method": "baseline",
+      "p_wrong": 0.31934019923210144,
+      "conflict": 0.04462414234876633,
+      "utility": -0.1911134421825409
+    },
+    {
+      "question": "Find all zeros in the indicated finite field of the given polynomial with coefficients in that field. x^2 + 1 in Z_2\n\nA. 0\nB. 1\nC. 0,1\nD. 2",
+      "ground_truth": "B",
+      "predicted_answer": "C",
+      "is_correct": false,
+      "method": "baseline",
+      "p_wrong": 0.26385313272476196,
+      "conflict": 0.023907028138637543,
+      "utility": -0.3152185082435608
+    },
+    {
+      "question": "Statement 1 | Every homomorphic image of a group G is isomorphic to a factor group of G. Statement 2 | The homomorphic images of a group G are the same (up to isomorphism) as the factor groups of G.\n\n",
+      "ground_truth": "A",
+      "predicted_answer": "A.TrueTrue",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.627497136592865,
+      "conflict": 0.09916992485523224,
+      "utility": 0.5433099269866943
+    },
+    {
+      "question": "Find the maximum possible order for an element of S_n for n = 10.\n\nA. 6\nB. 12\nC. 30\nD. 105",
+      "ground_truth": "C",
+      "predicted_answer": "B",
+      "is_correct": false,
+      "method": "baseline",
+      "p_wrong": 0.3100345730781555,
+      "conflict": 0.036129992455244064,
+      "utility": -0.26837068796157837
+    },
+    {
+      "question": "Statement 1| Every group of order p^2 where p is prime is Abelian. Statement 2 | For a fixed prime p a Sylow p-subgroup of a group G is a normal subgroup of G if and only if it is the only Sylow p-sub",
+      "ground_truth": "A",
+      "predicted_answer": "B",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.607352077960968,
+      "conflict": 0.08296005427837372,
+      "utility": 0.5460447669029236
+    },
+    {
+      "question": "Statement 1 | The external direct product of cyclic groups is cyclic. Statement 2 | The external direct product of D_3 and D_4 is isomorphic to D_12.\n\nA. True, True\nB. False, False\nC. True, False\nD. F",
+      "ground_truth": "B",
+      "predicted_answer": "",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5562461614608765,
+      "conflict": 0.07457295060157776,
+      "utility": 0.489046186208725
+    },
+    {
+      "question": "Statement 1 | For finite groups G and H, |G + H| = |G||H|. (G + H is the internal direct product.) Statement 2 | If r divides m and s divides n then Z_m + Z_n has a subgroup isomorphic to Z_r + Z_s.\n\n",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.6349136829376221,
+      "conflict": 0.10920681804418564,
+      "utility": 0.537926435470581
+    },
+    {
+      "question": "For T: Z x Z -> Z where T(1, 0) = 3 and T(0, 1) = -5, find T(-3,2).\n\nA. -19\nB. -10\nC. 19\nD. 10",
+      "ground_truth": "A",
+      "predicted_answer": "C",
+      "is_correct": false,
+      "method": "baseline",
+      "p_wrong": 0.29212573170661926,
+      "conflict": 0.03179087117314339,
+      "utility": -0.2853187918663025
+    },
+    {
+      "question": "Statement 1 | S_n is non-Abelian for all n >= 3. Statement 2 | If a is a permutation that is an m-cycle and b is a permutation that is an n-cycle, then |ab| = lcm(m,n).\n\nA. True, True\nB. False, False\n",
+      "ground_truth": "C",
+      "predicted_answer": "B.FalseFalse",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5622060298919678,
+      "conflict": 0.0773978978395462,
+      "utility": 0.49151504039764404
+    },
+    {
+      "question": "Find the degree for the given field extension Q(sqrt(2) + sqrt(3)) over Q.\n\nA. 0\nB. 4\nC. 2\nD. 6",
+      "ground_truth": "B",
+      "predicted_answer": "C",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.42791369557380676,
+      "conflict": 0.06285282969474792,
+      "utility": 0.16002944111824036
+    },
+    {
+      "question": "Find the maximum possible order for some element of Z_8 x Z_10 x Z_24.\n\nA. 8\nB. 120\nC. 240\nD. 24",
+      "ground_truth": "B",
+      "predicted_answer": "C",
+      "is_correct": false,
+      "method": "baseline",
+      "p_wrong": 0.2816613018512726,
+      "conflict": 0.02622392773628235,
+      "utility": -0.3112020492553711
+    },
+    {
+      "question": "In a patient with a normal healthy mouth, you would expect the mucosa covering the alveolar process supporting the mandibular teeth to be\n\nA. light pink in colour on both sides of the mucogingigival j",
+      "ground_truth": "C",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "baseline",
+      "p_wrong": 0.28689754009246826,
+      "conflict": 0.03528418391942978,
+      "utility": -0.22367291152477264
+    },
+    {
+      "question": "Which one of the following brain areas is supplied by branches of the subclavian arteries?\n\nA. The frontal lobe\nB. The parietal lobe\nC. The hypothalamus\nD. The cerebellum",
+      "ground_truth": "D",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.579572856426239,
+      "conflict": 0.08723308145999908,
+      "utility": 0.4888453483581543
+    },
+    {
+      "question": "A patient is stabbed in the neck. You suspect damage to the accessory nerve in the posterior triangle. You would test nerve function by asking the patient to\n\nA. extend their neck against resistance.\n",
+      "ground_truth": "C",
+      "predicted_answer": "C.Lifttheirshouldersagainstresistance.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5174861550331116,
+      "conflict": 0.07809534668922424,
+      "utility": 0.4448753297328949
+    },
+    {
+      "question": "Which of the following best describes the structure that collects urine in the body?\n\nA. Bladder\nB. Kidney\nC. Ureter\nD. Urethra",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.28727853298187256,
+      "conflict": 0.029132816940546036,
+      "utility": -0.2963324189186096
+    },
+    {
+      "question": "Which statement concerning the atrioventricular bundle is correct?\n\nA. It is formed of autonomic nerve processes and is the only electrical connection between the atria and the ventricles.\nB. It is fo",
+      "ground_truth": "B",
+      "predicted_answer": "D",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.39960432052612305,
+      "conflict": 0.0503004752099514,
+      "utility": 0.16820143163204193
+    },
+    {
+      "question": "The respiratory tract is crossed by the isthmus of the thyroid gland at the level of the\n\nA. thyroid cartilage.\nB. cricothyroid membrane.\nC. cricoid cartilage.\nD. tracheal rings.",
+      "ground_truth": "D",
+      "predicted_answer": "C",
+      "is_correct": false,
+      "method": "baseline",
+      "p_wrong": 0.334543913602829,
+      "conflict": 0.044288840144872665,
+      "utility": -0.06804829835891724
+    },
+    {
+      "question": "The seventh cranial nerve supplies\n\nA. taste buds on the posterior third of the tongue.\nB. muscles of the soft palate.\nC. muscles of the lower lip.\nD. the parotid salivary gland.",
+      "ground_truth": "C",
+      "predicted_answer": "C.ThefacialnerveVIIsuppliesthemusclesoffacialexpressionwhichincludethemusclesofthelowerlip.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5587085485458374,
+      "conflict": 0.07314705848693848,
+      "utility": 0.49454015493392944
+    },
+    {
+      "question": "A patient sustains severe blunt trauma to the left upper abdomen and requires surgery. Which one of the following organs is most likely to be involved?\n\nA. Appendix\nB. Gallbladder\nC. Spleen\nD. Urinary",
+      "ground_truth": "C",
+      "predicted_answer": "C",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.3060656487941742,
+      "conflict": 0.03445115685462952,
+      "utility": -0.28270238637924194
+    },
+    {
+      "question": "A patient cuts a peripheral motor nerve in their wrist when they fall through a plate glass window. If the nerve does not regenerate, after about 6 months the muscles it normally innervates will show ",
+      "ground_truth": "C",
+      "predicted_answer": "",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5476545691490173,
+      "conflict": 0.08981485664844513,
+      "utility": 0.43731212615966797
+    },
+    {
+      "question": "Which of the following foramina pierce the sphenoid bone?\n\nA. The foramen ovale\nB. The foramen ovale and rotundum\nC. The foramen ovale, rotundum and spinosum\nD. The foramen ovale, rotundum and spinosu",
+      "ground_truth": "C",
+      "predicted_answer": "D.Theforaminathatpiercethesphenoidboneincludetheforamenovalerotundumspinosumandforamenlacerum.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5540667772293091,
+      "conflict": 0.08504968136548996,
+      "utility": 0.45847558975219727
+    },
+    {
+      "question": "Which of the following conditions is characterized by incompetence of the esophageal sphincter?\n\nA. Crohn's disease\nB. Esophageal varices\nC. Gastroesophageal reflux disease\nD. Pyloric stenosis",
+      "ground_truth": "C",
+      "predicted_answer": "C",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.2960902750492096,
+      "conflict": 0.031229717656970024,
+      "utility": -0.28021925687789917
+    },
+    {
+      "question": "Ectoderm gives rise to\n\nA. the neural tube.\nB. ectomesenchymal cells.\nC. dental enamel.\nD. all three structures.",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.2809230089187622,
+      "conflict": 0.034977156668901443,
+      "utility": -0.17489847540855408
+    },
+    {
+      "question": "A lesion causing compression of the facial nerve at the stylomastoid foramen will cause ipsilateral\n\nA. paralysis of the facial muscles.\nB. paralysis of the facial muscles and loss of taste.\nC. paraly",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5151494145393372,
+      "conflict": 0.0799124538898468,
+      "utility": 0.43959903717041016
+    },
+    {
+      "question": "In the brain stem, pathways for:\n\nA. nociception decussate in the medial lemniscus\nB. skilled movements decussate in the medial lemniscus\nC. skilled motor movements decussate in the pyramids.\nD. discr",
+      "ground_truth": "C",
+      "predicted_answer": "C.Skilledmotormovementsdecussateinthepyramids.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.6111891865730286,
+      "conflict": 0.09709956496953964,
+      "utility": 0.5183449983596802
+    },
+    {
+      "question": "Saliva contains an enzyme that acts upon which of the following nutrients?\n\nA. Starches\nB. Proteins\nC. Fats\nD. Minerals",
+      "ground_truth": "A",
+      "predicted_answer": "",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.49768394231796265,
+      "conflict": 0.0902622789144516,
+      "utility": 0.3477756381034851
+    },
+    {
+      "question": "The bones of the viscerocranium develop initially by\n\nA. endochondral ossification and follow the somatic growth pattern.\nB. endochondral ossification and follow the neural growth pattern.\nC. intramem",
+      "ground_truth": "C",
+      "predicted_answer": "",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.4082201421260834,
+      "conflict": 0.056096117943525314,
+      "utility": 0.23388229310512543
+    },
+    {
+      "question": "During swallowing the\n\nA. auditory tube opens.\nB. cricopharyngeus muscle contracts.\nC. rima glottis opens.\nD. gag reflex is suspended.",
+      "ground_truth": "A",
+      "predicted_answer": "B",
+      "is_correct": false,
+      "method": "baseline",
+      "p_wrong": 0.2873747944831848,
+      "conflict": 0.03598787263035774,
+      "utility": -0.2262418568134308
+    },
+    {
+      "question": "A pulse may be felt on a patient's face where the\n\nA. facial artery crosses the mandible.\nB. facial artery crosses the maxilla.\nC. superficial temporal artery crosses the maxilla.\nD. superficial tempo",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.484237939119339,
+      "conflict": 0.07752726227045059,
+      "utility": 0.40202564001083374
+    },
+    {
+      "question": "A patient suffers a CVA in the area of the left internal capsule conveying motor neurons to the right leg. The patient's leg will exhibit\n\nA. spastic paralysis.\nB. flaccid paralysis.\nC. tremor.\nD. hyp",
+      "ground_truth": "A",
+      "predicted_answer": "",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5624668002128601,
+      "conflict": 0.07938829064369202,
+      "utility": 0.48005181550979614
+    },
+    {
+      "question": "Which of the following bony structures may be palpated in a live patient?\n\nA. The supraorbital foramen\nB. The infraorbital foramen\nC. The mental foramen\nD. All of the above",
+      "ground_truth": "D",
+      "predicted_answer": "C",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5525603294372559,
+      "conflict": 0.07391326129436493,
+      "utility": 0.4921984076499939
+    },
+    {
+      "question": "Jupiter and the other jovian planets are sometimes called \"gas giants.\" In what sense is this term misleading?\n\nA. The materials they are made of are not normally gaseous in everyday experience.\nB. Th",
+      "ground_truth": "B",
+      "predicted_answer": "A.Thematerialstheyaremadeofarenotnormallygaseousineverydayexperience.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.3882370889186859,
+      "conflict": 0.051122404634952545,
+      "utility": 0.07532588392496109
+    },
+    {
+      "question": "The belts and zones of Jupiter are\n\nA. names for the layers of gaseous and metallic hydrogen deep within the planet.\nB. alternating bands of rising and falling air at different latitudes.\nC. alternati",
+      "ground_truth": "B",
+      "predicted_answer": "B.alternatingbandsofrisingandfallingairatdifferentlatitudes",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5216366052627563,
+      "conflict": 0.0887540876865387,
+      "utility": 0.4063372313976288
+    },
+    {
+      "question": "The name of the black hole in the center of our Milky Way is ...\n\nA. Altair A*\nB. Alsephina A*\nC. Fomalhaut A*\nD. Sagittarius A*",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.29502183198928833,
+      "conflict": 0.031709443777799606,
+      "utility": -0.28771376609802246
+    },
+    {
+      "question": "Which of the jovian planets have rings?\n\nA. Neptune\nB. Uranus\nC. Saturn\nD. all of the above",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.36196795105934143,
+      "conflict": 0.04806521162390709,
+      "utility": 0.00582808768376708
+    },
+    {
+      "question": "From shortest to longest wavelength which of the following correctly orders the different categories of electromagnetic radiation?\n\nA. infrared visible light ultraviolet X rays gamma rays radio\nB. rad",
+      "ground_truth": "D",
+      "predicted_answer": "C",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5266470909118652,
+      "conflict": 0.08186107873916626,
+      "utility": 0.4396331310272217
+    },
+    {
+      "question": "What is true for a type-Ia (\"type one-a\") supernova?\n\nA. This type occurs in binary systems.\nB. This type occurs in young galaxies.\nC. This type produces gamma-ray bursts.\nD. This type produces high a",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.2908729612827301,
+      "conflict": 0.03540743142366409,
+      "utility": -0.24832165241241455
+    },
+    {
+      "question": "Earth has been gradually warming over the past few decades. Based on a great deal of evidence scientists conclude that this warming is caused by ________.\n\nA. human activities that are increasing the ",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.31597432494163513,
+      "conflict": 0.03921358659863472,
+      "utility": -0.26105839014053345
+    },
+    {
+      "question": "Where are the Trojan asteroids located?\n\nA. in the center of the asteroid belt\nB. on orbits that cross Earth's orbit\nC. surrounding Jupiter\nD. along Jupiter's orbit 60\u00b0 ahead of and behind Jupiter",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.2999546229839325,
+      "conflict": 0.03563930094242096,
+      "utility": -0.2786683440208435
+    },
+    {
+      "question": "Which of the following is/are true?\n\nA. Titan is the only outer solar system moon with a thick atmosphere\nB. Titan is the only outer solar system moon with evidence for recent geologic activity\nC. Tit",
+      "ground_truth": "D",
+      "predicted_answer": "Disnotthecorrectanswer.HoweverAandCarecorrectsothecorrectanswershouldincludebothAandC.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5456965565681458,
+      "conflict": 0.08023064583539963,
+      "utility": 0.4570856988430023
+    },
+    {
+      "question": "What is the significance of the 1:2:4 resonance in the Jupiter's moons system?\n\nA. The resonance pulls Io in different directions and generates heat.\nB. It makes the orbit of Io slightly elliptical.\nC",
+      "ground_truth": "B",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "baseline",
+      "p_wrong": 0.265228271484375,
+      "conflict": 0.02368205599486828,
+      "utility": -0.3159124553203583
+    },
+    {
+      "question": "Mars has an atmosphere that is almost entirely carbon dioxide.Why isn't there a strong greenhouse effect keeping the planet warm?\n\nA. the atmosphere on Mars is too thin to trap a significant amount of",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.3120201826095581,
+      "conflict": 0.037052176892757416,
+      "utility": -0.20190322399139404
+    },
+    {
+      "question": "Pluto's extremely cold (~40 K) surface is composed of:\n\nA. mainly water ice which always remains frozen\nB. nitrogen methane and carbon monoxide ices which sublimate into an atmosphere near perihelion\n",
+      "ground_truth": "B",
+      "predicted_answer": "B",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.37051811814308167,
+      "conflict": 0.05436906963586807,
+      "utility": -0.11093109846115112
+    },
+    {
+      "question": "Why did the solar nebula heat up as it collapsed?\n\nA. Collisions among planetesimals generated friction and heat.\nB. Radiation from other nearby stars that had formed earlier heated the nebula.\nC. The",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.29290440678596497,
+      "conflict": 0.0345429852604866,
+      "utility": -0.2907795310020447
+    },
+    {
+      "question": "The Milky Way is part of a giant supercluster with a diameter of 160 Mpc. What is the name of this supercluster?\n\nA. Virgo\nB. Laniakea\nC. Sculptor\nD. Bo\u00f6tes",
+      "ground_truth": "B",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.6423436403274536,
+      "conflict": 0.1154695451259613,
+      "utility": 0.5311078429222107
+    },
+    {
+      "question": "What is the so-called bolometric luminosity in astronomy?\n\nA. The luminosity integrated over vertically polarized wavelengths.\nB. The luminosity integrated over horizontally wavelengths.\nC. The lumino",
+      "ground_truth": "D",
+      "predicted_answer": "D.Theluminosityintegratedoverallwavelengths.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.4921905994415283,
+      "conflict": 0.08272670209407806,
+      "utility": 0.39581578969955444
+    },
+    {
+      "question": "The lithosphere of a planet is the layer that consists of\n\nA. the softer rocky material of the mantle.\nB. the lava that comes out of volcanoes.\nC. material between the crust and the mantle.\nD. the rig",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.2621021270751953,
+      "conflict": 0.02506857179105282,
+      "utility": -0.30381035804748535
+    },
+    {
+      "question": "What is the Cassini division of Saturn's rings?\n\nA. a dark ring visible from Earth composed of dark dusty particles\nB. the most opaque ring of Saturn made of highly reflective ice particles\nC. the wid",
+      "ground_truth": "D",
+      "predicted_answer": "D.AlargegapvisiblefromEarthproducedbyanorbitalresonancewiththemoonMimas.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.3968726396560669,
+      "conflict": 0.05676184594631195,
+      "utility": 0.03727135807275772
+    },
+    {
+      "question": "What are the conditions necessary for a terrestrial planet to have a strong magnetic field?\n\nA. fast rotation only\nB. a rocky mantle only\nC. a molten metallic core only\nD. both a molten metallic core ",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.30837902426719666,
+      "conflict": 0.035223376005887985,
+      "utility": -0.27164798974990845
+    },
+    {
+      "question": "Which of the following is not true?\n\nA. The Earth and Venus are in a 1:1 orbital resonance (for every 1 Earth orbit there is exactly 1 Venus orbit)\nB. Neptune and Pluto are in a 3:2 orbital resonance ",
+      "ground_truth": "A",
+      "predicted_answer": "A.TheEarthandVenusarenotina11orbitalresonancebecausetheyhavedifferentorbitalperiods.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.6019803285598755,
+      "conflict": 0.10465296357870102,
+      "utility": 0.489229291677475
+    },
+    {
+      "question": "Approximately how long does it take Pluto to orbit the Sun once?\n\nA. 150 years\nB. 200 years\nC. 250 years\nD. 300 years",
+      "ground_truth": "C",
+      "predicted_answer": "C",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5624123811721802,
+      "conflict": 0.07258439064025879,
+      "utility": 0.502166211605072
+    },
+    {
+      "question": "The members of a bird species capable of nesting in treetops or on the ledges of nearby cliffs make their homes only in the treetops due to the established presence of a more aggressive bird species o",
+      "ground_truth": "B",
+      "predicted_answer": "B.Theirrealisticnicheonly.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5629203915596008,
+      "conflict": 0.07900598645210266,
+      "utility": 0.48690688610076904
+    },
+    {
+      "question": "Which of the following would be the most dependable environmental signal that a plant in a temperate ecosystem could use to initiate flowering at the correct time of the year?\n\nA. Circadian rhythm\nB. ",
+      "ground_truth": "B",
+      "predicted_answer": "B",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.31816861033439636,
+      "conflict": 0.0365716889500618,
+      "utility": -0.28136783838272095
+    },
+    {
+      "question": "In fungi, cell walls are reinforced by which of the following?\n\nA. Chitin\nB. Silica\nC. Lignin\nD. Collagen fibers",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.2955406606197357,
+      "conflict": 0.028750307857990265,
+      "utility": -0.3071204423904419
+    },
+    {
+      "question": "Which of the following would increase the rate at which a gas diffuses between the alveoli of the lung and the blood within a pulmonary capillary?\n\nA. Decreasing the partial pressure gradient of the g",
+      "ground_truth": "C",
+      "predicted_answer": "C",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5459194183349609,
+      "conflict": 0.0794253945350647,
+      "utility": 0.4587719142436981
+    },
+    {
+      "question": "Which of the following plant cells undergoes programmed cell death to become functional?\n\nA. Phloem sieve tube member\nB. Xylem vessel member\nC. Stomatal guard cell\nD. Root cap cell",
+      "ground_truth": "B",
+      "predicted_answer": "B",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5665006637573242,
+      "conflict": 0.08560805022716522,
+      "utility": 0.4772500991821289
+    },
+    {
+      "question": "A quote from a natural resources text states: \"Whenever the original ecosystem becomes restructured by man, it tends to become simplified, with a resultant disruption of the stabilizing influences of ",
+      "ground_truth": "A",
+      "predicted_answer": "A",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5703601837158203,
+      "conflict": 0.091303251683712,
+      "utility": 0.4717862606048584
+    },
+    {
+      "question": "Many marine birds drink seawater yet maintain their internal osmolarity at a constant level that is hypoosmotic to seawater. Which of the following physiological strategies best explains how the birds",
+      "ground_truth": "C",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "baseline",
+      "p_wrong": 0.3463691174983978,
+      "conflict": 0.0463692806661129,
+      "utility": -0.07611455768346786
+    },
+    {
+      "question": "Which of the following factors does NOT promote linkage disequilibrium?\n\nA. Asexual reproduction\nB. Coadapted gene complexes\nC. Epistasis\nD. Random mating",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5616975426673889,
+      "conflict": 0.09457352012395859,
+      "utility": 0.44951552152633667
+    },
+    {
+      "question": "Charles Darwin's proposed conditions for natural selection encompass all of the following with regard to a given population EXCEPT\n\nA. inheritance of both \"fit\" and \"unfit\" genes\nB. differential survi",
+      "ground_truth": "A",
+      "predicted_answer": "D",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5087428689002991,
+      "conflict": 0.09008006751537323,
+      "utility": 0.39987096190452576
+    },
+    {
+      "question": "All of the following may serve as intracellular messengers EXCEPT\n\nA. calcium ions\nB. cAMP\nC. acetylcholine\nD. inositol 1,4,5-triphosphate",
+      "ground_truth": "C",
+      "predicted_answer": "C",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.555806040763855,
+      "conflict": 0.07879915088415146,
+      "utility": 0.47629261016845703
+    },
+    {
+      "question": "In garden peas, the allele for tall plants (D) is completely dominant to the allele for dwarf plants (d) and the allele for violet flower color (W) is completely dominant to the allele for white flowe",
+      "ground_truth": "D",
+      "predicted_answer": "C",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5714356303215027,
+      "conflict": 0.08391823619604111,
+      "utility": 0.48400577902793884
+    },
+    {
+      "question": "Stabilization of the unique coiled structure of an alpha helix in a protein is primarily attributed to (A) hydrogen bonding between the peptide backbone atoms\n\nA. hydrogen bonding between the peptide ",
+      "ground_truth": "A",
+      "predicted_answer": "",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5701901316642761,
+      "conflict": 0.08523117750883102,
+      "utility": 0.4831726551055908
+    },
+    {
+      "question": "Both C4 and CAM plants employ physiological and biochemical strategies to reduce photorespiration. Which of the following is an accurate comparison of the two strategies?\n\nA. C4 plants fix CO2 as the ",
+      "ground_truth": "B",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5668725371360779,
+      "conflict": 0.07616178691387177,
+      "utility": 0.4995119571685791
+    },
+    {
+      "question": "From an evolutionary perspective, the optimality theory as applied to a given trait is best represented by the idea that\n\nA. if the benefits gained from the trait exceed the cost of the trait to the a",
+      "ground_truth": "B",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5639017820358276,
+      "conflict": 0.08950884640216827,
+      "utility": 0.46280717849731445
+    },
+    {
+      "question": "Mimicry is a strategy that has evolved through natural selection to increase the fitness of organisms to their environment. Which of the following represents a form of Batesian mimicry?\n\nA. A type of ",
+      "ground_truth": "C",
+      "predicted_answer": "C",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.34605103731155396,
+      "conflict": 0.04797835275530815,
+      "utility": -0.08923541754484177
+    },
+    {
+      "question": "A competitive inhibitor of an enzyme exerts its effect by\n\nA. irreversibly forming covalent links with the enzyme, effectively preventing the enzyme's dissociation from it\nB. irreversibly modifying so",
+      "ground_truth": "D",
+      "predicted_answer": "",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.4067009389400482,
+      "conflict": 0.05469229817390442,
+      "utility": 0.06749402731657028
+    },
+    {
+      "question": "All of the following might be found in connective tissue EXCEPT\n\nA. thrombin\nB. glycosaminoglycans\nC. collagens\nD. fibroblasts",
+      "ground_truth": "A",
+      "predicted_answer": "",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.619450569152832,
+      "conflict": 0.11182866990566254,
+      "utility": 0.5024728775024414
+    },
+    {
+      "question": "In chloroplasts, a certain protein is found in the lumen of the thylakoid (thylakoid space). It is transcribed in the nucleus and synthesized on cytoplasmic ribosomes. How many membrane bilayers must ",
+      "ground_truth": "C",
+      "predicted_answer": "B",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5533740520477295,
+      "conflict": 0.08028289675712585,
+      "utility": 0.46648699045181274
+    },
+    {
+      "question": "Monoclonal antisera are distinguished from polyclonal antisera in which of the following ways?\n\nA. Each type of antibody in a monoclonal antiserum reacts against a single region of a single antigen; e",
+      "ground_truth": "C",
+      "predicted_answer": "C",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5016480088233948,
+      "conflict": 0.08155877888202667,
+      "utility": 0.4184846878051758
+    },
+    {
+      "question": "Which of the following is a benefit that mycorrhizal fungi confer to many plants?\n\nA. They protect plant roots from desiccation in extremely dry habitats.\nB. They fix nitrogen, which is particularly i",
+      "ground_truth": "C",
+      "predicted_answer": "C",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.26680904626846313,
+      "conflict": 0.025531917810440063,
+      "utility": -0.3174842894077301
+    },
+    {
+      "question": "The equilibrium populations of the 1H energy levels of a molecule are n\u03b1 = n\u03b1eq and n\u03b2 = n\u03b2eq. What are the populations after a 5.0 \u03bcs pulse when B1 = 4.697 mT?\n\nA. n\u03b1 = n\u03b2eq and n\u03b2 = n\u03b1eq\nB. n\u03b1 = n\u03b1e",
+      "ground_truth": "A",
+      "predicted_answer": "C",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5086832642555237,
+      "conflict": 0.08193723112344742,
+      "utility": 0.4215799570083618
+    },
+    {
+      "question": "What is the maximum number of phases that can be at equilibrium with each other in a three component mixture?\n\nA. 2\nB. 3\nC. 4\nD. 5",
+      "ground_truth": "D",
+      "predicted_answer": "B",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5838218331336975,
+      "conflict": 0.08030760288238525,
+      "utility": 0.5151622295379639
+    },
+    {
+      "question": "The rotational correlation time of a spherical object of radius r immersed in a liquid with viscosity \u03b7 is given by the Stokes equation: \u03c4c = 4\u03c0\u03b7r3/3kBT. A small molecule with relative molecular mass ",
+      "ground_truth": "C",
+      "predicted_answer": "FinalAnswerA.",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.4781220853328705,
+      "conflict": 0.08024868369102478,
+      "utility": 0.3494701087474823
+    },
+    {
+      "question": "The +1 oxidation state is more stable than the +3 oxidation state for which group 13 element?\n\nA. B\nB. Al\nC. In\nD. Tl",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5296847224235535,
+      "conflict": 0.0847240686416626,
+      "utility": 0.4322466254234314
+    },
+    {
+      "question": "The Henry\u2019s law constant for CO2 dissolved in water at 25\u00b0C is 30.0 atm M^\u22121. The concentration of dissolved CO2 in a vessel pressurized with 2.0 atm of CO2 is\n\nA. 1.5 M\nB. 0.15 M\nC. 0.067 M\nD. 0.015 ",
+      "ground_truth": "C",
+      "predicted_answer": "C",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.39961308240890503,
+      "conflict": 0.0532991960644722,
+      "utility": 0.11487467586994171
+    },
+    {
+      "question": "For EDTA titrations, the analyte solution and the titrant solution are both buffered at the same pH for which of the following reasons?\nI. The conditional formation constant is affected by pH.\nII. The",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.33827874064445496,
+      "conflict": 0.04689670354127884,
+      "utility": -0.10926246643066406
+    },
+    {
+      "question": "The rate, r, of a zero-order chemical reaction A \u2192 B can be expressed as which of the following?\n\nA. r = k ln[A]\nB. r = k [A]^2\nC. r = k [A]\nD. r = k",
+      "ground_truth": "D",
+      "predicted_answer": "",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5371450781822205,
+      "conflict": 0.07709141075611115,
+      "utility": 0.46777579188346863
+    },
+    {
+      "question": "Which of the following statements most accurately explains why the T1 of a nucleus is sometimes longer than its T2?\n\nA. T1, unlike T2, is sensitive to very low-frequency molecular motions.\nB. T2, unli",
+      "ground_truth": "D",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5570181608200073,
+      "conflict": 0.07497964799404144,
+      "utility": 0.48448318243026733
+    },
+    {
+      "question": "During a delay, spins with an offset frequency \u03a9 = 250 rad s-1 precess through an angle of 60\u00b0. How long is the delay?\n\nA. 4.19 ms\nB. 26.3 ms\nC. 240 ms\nD. 1510 ms",
+      "ground_truth": "A",
+      "predicted_answer": "C",
+      "is_correct": false,
+      "method": "baseline",
+      "p_wrong": 0.30200859904289246,
+      "conflict": 0.03910168260335922,
+      "utility": -0.21746020019054413
+    },
+    {
+      "question": "Which of the following metal ions cannot be used as a paramagnetic quencher?\n\nA. Ti3+\nB. Cr3+\nC. Fe3+\nD. Zn2+",
+      "ground_truth": "B",
+      "predicted_answer": "D.Zn2",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.6046584248542786,
+      "conflict": 0.08754695951938629,
+      "utility": 0.5300498008728027
+    },
+    {
+      "question": "Which of the following is required for both paramagnetism and ferromagnetism?\n\nA. Strong oxidizing conditions\nB. Low-spin electron configuration\nC. Metallic physical properties\nD. Unpaired electrons",
+      "ground_truth": "D",
+      "predicted_answer": "D.Unpairedelectrons",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.4631147086620331,
+      "conflict": 0.07557785511016846,
+      "utility": 0.24874910712242126
+    },
+    {
+      "question": "The 1H spectrum of a mixture of dimethylsulphoxide (DMSO) and acetonitrile (AN) contains lines with relative intensities \u03b1 and 3\u03b1, respectively. What is the ratio of the two concentrations, [DMSO]:[AN",
+      "ground_truth": "C",
+      "predicted_answer": "B",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5215698480606079,
+      "conflict": 0.082832470536232,
+      "utility": 0.42913469672203064
+    },
+    {
+      "question": "The equation \u0394H = \u0394U + P\u0394V is applicable\n\nA. always\nB. only for constant pressure processes\nC. only for constant temperature processes\nD. only for constant volume processes",
+      "ground_truth": "B",
+      "predicted_answer": "B",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.4644777178764343,
+      "conflict": 0.07267411053180695,
+      "utility": 0.29726821184158325
+    },
+    {
+      "question": "The strongest base in liquid ammonia is\n\nA. NH3\nB. NH2\u2212\nC. NH4+\nD. N2H4",
+      "ground_truth": "B",
+      "predicted_answer": "B",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5563528537750244,
+      "conflict": 0.07949914038181305,
+      "utility": 0.4758089780807495
+    },
+    {
+      "question": "When the Heisenberg uncertainty principle is applied to a quantum mechanical particle in the lowest energy level of a one-dimensional box, which of the following is true?\n\nA. Momentum is known exactly",
+      "ground_truth": "D",
+      "predicted_answer": "D",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5759382247924805,
+      "conflict": 0.07524487376213074,
+      "utility": 0.5162643194198608
+    },
+    {
+      "question": "A student performs five titrations and obtains a mean result of 0.110 M, with a standard deviation of 0.001 M. If the actual concentration of the titrated solution is 0.100 M, which of the following i",
+      "ground_truth": "B",
+      "predicted_answer": "B",
+      "is_correct": true,
+      "method": "metacog",
+      "p_wrong": 0.5708348751068115,
+      "conflict": 0.08433759212493896,
+      "utility": 0.48452529311180115
+    },
+    {
+      "question": "Calculate the spin angular momentum of 43Ca. [I = 7\u20442]\n\nA. 2.166 x 10^-34 J s\nB. 3.691 x 10^-34 J s\nC. 4.185 x 10^-34 J s\nD. 5.493 x 10^-34 J s",
+      "ground_truth": "C",
+      "predicted_answer": "C",
+      "is_correct": true,
+      "method": "baseline",
+      "p_wrong": 0.27890774607658386,
+      "conflict": 0.031018298119306564,
+      "utility": -0.24747052788734436
+    },
+    {
+      "question": "A PO3- radical produces a pair of lines separated by 280 MHz with giso = 2.005. Calculate the expected resonant field positions of both lines in the X-band EPR spectrum (\u03bd = 9.5 GHz).\n\nA. Bres for mI ",
+      "ground_truth": "D",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5002776980400085,
+      "conflict": 0.0794939324259758,
+      "utility": 0.42971211671829224
+    },
+    {
+      "question": "The magnetic moment (\u03bcI) of an unknown nuclide is 2.884 x 10^-27 J T-1. Given the nuclear spin is known to be 1, identify the unknown nuclide.\n\nA. 14N\nB. 2H\nC. 19F\nD. 6Li",
+      "ground_truth": "B",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.5538454651832581,
+      "conflict": 0.0825749933719635,
+      "utility": 0.46352720260620117
+    },
+    {
+      "question": "A single line is seen in the 31P spectrum of a solution of sodium phosphate. The 31P chemical shifts of H2PO4\u203e and HPO42\u2013 are 3.42 ppm and 5.82 ppm respectively. What is the chemical shift when the pH",
+      "ground_truth": "D",
+      "predicted_answer": "A",
+      "is_correct": false,
+      "method": "metacog",
+      "p_wrong": 0.548949122428894,
+      "conflict": 0.08057674765586853,
+      "utility": 0.45834240317344666
+    }
+  ]
+}
