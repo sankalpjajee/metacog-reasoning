@@ -256,11 +256,14 @@ def compute_layer_entropy_logit_lens(
             entropies.append(0.0)
             continue
 
-        h = hidden_states[key].to(lm_head.weight.device).float()
+        h = hidden_states[key].to(lm_head.weight.device)
 
         # Apply layer norm if model has one
         if hasattr(model, 'model') and hasattr(model.model, 'norm'):
             h = model.model.norm(h.unsqueeze(0)).squeeze(0)
+
+        # Convert to same dtype as lm_head weights
+        h = h.to(lm_head.weight.dtype)
 
         with torch.no_grad():
             logits = lm_head(h)
