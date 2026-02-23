@@ -31,6 +31,7 @@ Usage:
 import argparse
 import json
 import os
+import sys
 from typing import Dict, List, Tuple
 
 import numpy as np
@@ -38,6 +39,10 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.data import DataLoader, TensorDataset
+
+# Import the sanitize_and_normalize function from the training script
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from train_acc_probe_v5 import sanitize_and_normalize
 
 
 # ============================================================
@@ -348,6 +353,18 @@ def main():
     print(f"Feature dimensions: {features.shape[1]}")
     print(f"Wrong rate: {wrong_labels.mean():.3f}")
     print(f"Utility positive rate: {(utility_labels > 0).float().mean():.3f}")
+
+    # Sanitize and normalize — same preprocessing as training script
+    # This prevents NaN loss from propagating through all ablation experiments
+    combined = sanitize_and_normalize(
+        {'features': features, 'wrong_labels': wrong_labels,
+         'conflict_labels': torch.zeros_like(wrong_labels),
+         'utility_labels': utility_labels},
+        verbose=True
+    )
+    features = combined['features']
+    wrong_labels = combined['wrong_labels']
+    utility_labels = combined['utility_labels']
 
     results = {}
 
