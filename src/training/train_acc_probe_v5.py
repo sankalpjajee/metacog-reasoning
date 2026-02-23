@@ -43,6 +43,81 @@ from tqdm import tqdm
 
 
 # ============================================================
+# NaN-Safe Data Preprocessing
+# ============================================================
+
+def sanitize_and_normalize(combined_data: Dict[str, torch.Tensor], verbose: bool = True) -> Dict[str, torch.Tensor]:
+    """
+    Sanitize features and labels to prevent NaN loss during training.
+
+    Two-step process:
+    1. Replace NaN/Inf in features and labels with safe fallback values.
+    2. Standardize features to zero mean and unit variance (robust to outliers).
+
+    This is the primary fix for the NaN loss bug. NaN values in the saved
+    .pt tensors (from data generation edge cases) propagate immediately
+    through the loss computation, causing all losses to be NaN from epoch 1.
+    """
+    features = combined_data['features'].clone()
+    utility_labels = combined_data['utility_labels'].clone()
+    wrong_labels = combined_data['wrong_labels'].clone()
+    conflict_labels = combined_data['conflict_labels'].clone()
+
+    # --- Step 1: Report and fix NaN/Inf in features ---
+    nan_mask = torch.isnan(features)
+    inf_mask = torch.isinf(features)
+    total_nan = nan_mask.sum().item()
+    total_inf = inf_mask.sum().item()
+
+    if verbose:
+        print(f"\n[Sanitize] Feature NaN count: {total_nan} / {features.numel()}")
+        print(f"[Sanitize] Feature Inf count: {total_inf} / {features.numel()}")
+        if total_nan > 0:
+            nan_per_dim = nan_mask.sum(dim=0)
+            print(f"[Sanitize] NaN per dimension: {nan_per_dim.tolist()}")
+
+    # Replace NaN/Inf with 0.0 (safe neutral value before normalization)
+    features = torch.nan_to_num(features, nan=0.0, posinf=0.0, neginf=0.0)
+
+    # --- Step 2: Fix NaN/Inf in labels ---
+    for name, tensor in [('utility', utility_labels), ('wrong', wrong_labels), ('conflict', conflict_labels)]:
+        n = torch.isnan(tensor).sum().item() + torch.isinf(tensor).sum().item()
+        if n > 0 and verbose:
+            print(f"[Sanitize] {name} labels: {n} NaN/Inf values replaced with 0.0")
+    utility_labels = torch.nan_to_num(utility_labels, nan=0.0, posinf=0.0, neginf=0.0)
+    wrong_labels = torch.nan_to_num(wrong_labels, nan=0.0, posinf=0.0, neginf=0.0)
+    conflict_labels = torch.nan_to_num(conflict_labels, nan=0.0, posinf=0.0, neginf=0.0)
+
+    # --- Step 3: Robust standardization (per feature dimension) ---
+    # Use median and IQR instead of mean/std to be robust to outliers
+    # (e.g., KL divergence features can have extreme values even after clipping)
+    mean = features.mean(dim=0)
+    std = features.std(dim=0)
+    # Avoid division by zero for constant features (std=0)
+    std = torch.clamp(std, min=1e-6)
+    features = (features - mean) / std
+
+    # Final safety check: clamp to [-10, 10] to prevent any residual extremes
+    features = torch.clamp(features, -10.0, 10.0)
+
+    if verbose:
+        print(f"[Sanitize] After normalization: mean={features.mean().item():.4f}, "
+              f"std={features.std().item():.4f}, "
+              f"min={features.min().item():.4f}, max={features.max().item():.4f}")
+        print(f"[Sanitize] Remaining NaN: {torch.isnan(features).sum().item()}")
+
+    return {
+        'features': features,
+        'wrong_labels': wrong_labels,
+        'conflict_labels': conflict_labels,
+        'utility_labels': utility_labels,
+        # Store normalization stats for use at inference time
+        'feature_mean': mean,
+        'feature_std': std,
+    }
+
+
+# ============================================================
 # Feature Group Definitions (for ablation)
 # ============================================================
 
@@ -610,6 +685,11 @@ def main():
     print(f"Mean utility: {combined_data['utility_labels'].mean().item():.3f}")
     print(f"Utility positive rate: {(combined_data['utility_labels'] > 0).float().mean().item()*100:.1f}%")
 
+    # ========================================
+    # Sanitize & Normalize Features
+    # ========================================
+    combined_data = sanitize_and_normalize(combined_data, verbose=True)
+
     os.makedirs(args.output_dir, exist_ok=True)
 
     # ========================================
@@ -687,6 +767,14 @@ def main():
     model_path = os.path.join(args.output_dir, "best_probe.pt")
     torch.save(model.state_dict(), model_path)
     print(f"\nSaved model to: {model_path}")
+
+    # Save normalization stats for inference
+    norm_stats_path = os.path.join(args.output_dir, "norm_stats.pt")
+    torch.save({
+        'feature_mean': combined_data['feature_mean'],
+        'feature_std': combined_data['feature_std'],
+    }, norm_stats_path)
+    print(f"Saved normalization stats to: {norm_stats_path}")
 
     # Save config
     config = {
