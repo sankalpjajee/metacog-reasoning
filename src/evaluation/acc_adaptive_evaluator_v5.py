@@ -166,7 +166,7 @@ def compute_layer_entropy_logit_lens(
         if key not in hidden_states:
             entropies.append(0.0)
             continue
-        h = hidden_states[key].to(lm_head.weight.device).float()
+        h = hidden_states[key].to(lm_head.weight.device).to(lm_head.weight.dtype)
         if hasattr(model, 'model') and hasattr(model.model, 'norm'):
             h = model.model.norm(h.unsqueeze(0)).squeeze(0)
         with torch.no_grad():
