@@ -247,11 +247,14 @@ class FOKAdaptiveEvaluator:
         probe_path: str,
         probe_config_path: str,
         calibration_dir: Optional[str] = None,
+        norm_stats_path: Optional[str] = None,
         utility_threshold: float = 0.0,
         layers: List[int] = [8, 16, 24, 32],
     ):
         self.utility_threshold = utility_threshold
         self.layers = layers
+        self.feature_mean = None
+        self.feature_std = None
 
         # Load LLM
         print(f"Loading model: {model_path}")
@@ -287,6 +290,19 @@ class FOKAdaptiveEvaluator:
         self.probe.load_state_dict(torch.load(probe_path, map_location='cpu'))
         self.probe.eval()
         self.probe.to(self.device)
+
+        # Load normalization stats (REQUIRED: features must be normalized the same way as training)
+        if norm_stats_path and os.path.exists(norm_stats_path):
+            print(f"Loading normalization stats: {norm_stats_path}")
+            norm_stats = torch.load(norm_stats_path, map_location='cpu')
+            self.feature_mean = norm_stats['feature_mean'].to(self.device)
+            self.feature_std = norm_stats['feature_std'].to(self.device)
+            print(f"  Feature mean range: [{self.feature_mean.min().item():.4f}, {self.feature_mean.max().item():.4f}]")
+            print(f"  Feature std range:  [{self.feature_std.min().item():.4f}, {self.feature_std.max().item():.4f}]")
+        else:
+            print("WARNING: No norm_stats_path provided. Features will NOT be normalized.")
+            print("         This will cause the probe to produce near-zero utility scores (zero-routing bug).")
+            print("         Pass --norm_stats_path models/acc_v5_final/norm_stats.pt to fix this.")
 
         # Load calibration data (KNN)
         self.knn_index = None
@@ -487,6 +503,12 @@ class FOKAdaptiveEvaluator:
         """Predict utility gain using all 45 FOK features."""
         features = self.extract_all_features(question, benchmark)
         features = features.unsqueeze(0).to(self.device)
+
+        # Apply the same normalization used during training (critical for correct routing)
+        if self.feature_mean is not None and self.feature_std is not None:
+            features = (features - self.feature_mean) / self.feature_std
+            features = torch.nan_to_num(features, nan=0.0, posinf=0.0, neginf=0.0)
+            features = torch.clamp(features, -10.0, 10.0)
 
         with torch.no_grad():
             wrong_logits, conflict_score, utility_score = self.probe(features)
@@ -712,6 +734,9 @@ def main():
     parser.add_argument("--probe_config_path", type=str, required=True)
     parser.add_argument("--calibration_dir", type=str, default=None,
                         help="Directory containing training embeddings and metadata for KNN calibration")
+    parser.add_argument("--norm_stats_path", type=str, default=None,
+                        help="Path to norm_stats.pt from training (e.g. models/acc_v5_final/norm_stats.pt). "
+                             "Required for correct routing — without this, probe outputs near-zero utility for all samples.")
     parser.add_argument("--benchmarks", nargs="+", default=["gsm8k", "mmlu", "hellaswag"])
     parser.add_argument("--num_samples", type=int, default=1000)
     parser.add_argument("--utility_threshold", type=float, default=0.0)
@@ -731,6 +756,7 @@ def main():
         probe_path=args.probe_path,
         probe_config_path=args.probe_config_path,
         calibration_dir=args.calibration_dir,
+        norm_stats_path=args.norm_stats_path,
         utility_threshold=args.utility_threshold,
     )
 
