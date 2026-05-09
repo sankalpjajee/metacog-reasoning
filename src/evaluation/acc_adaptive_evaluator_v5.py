@@ -623,6 +623,11 @@ Final Answer: [letter A, B, C, or D]"""
     def evaluate_sample(self, question: str, ground_truth: str, benchmark: str) -> Dict:
         """Evaluate a single sample with FOK-based routing."""
         p_wrong, conflict, utility = self.predict_utility(question, benchmark)
+        # Route to metacog when predicted utility is ABOVE the threshold.
+        # utility_gain labels: +0.7 = baseline wrong, metacog correct (use metacog)
+        #                      -0.3 = both correct (skip metacog, save compute)
+        #                      -1.3 = baseline correct, metacog wrong (definitely skip)
+        # With threshold=0.0 the probe routes samples where metacog is expected to help.
         use_metacog = utility > self.utility_threshold
 
         if use_metacog:
@@ -739,7 +744,13 @@ def main():
                              "Required for correct routing — without this, probe outputs near-zero utility for all samples.")
     parser.add_argument("--benchmarks", nargs="+", default=["gsm8k", "mmlu", "hellaswag"])
     parser.add_argument("--num_samples", type=int, default=1000)
-    parser.add_argument("--utility_threshold", type=float, default=0.0)
+    parser.add_argument("--utility_threshold", type=float, default=0.0,
+                        help="Route to metacog when predicted utility > threshold. "
+                             "Use --routing_percentile instead to auto-set threshold from data.")
+    parser.add_argument("--routing_percentile", type=float, default=None,
+                        help="If set, auto-calibrate threshold so that this fraction of samples "
+                             "are routed to metacog (e.g. 0.30 routes the top-30%% by predicted utility). "
+                             "Overrides --utility_threshold. Requires --calibration_samples > 0.")
     parser.add_argument("--output_dir", type=str, required=True)
     parser.add_argument("--seed", type=int, default=42)
 
@@ -759,6 +770,36 @@ def main():
         norm_stats_path=args.norm_stats_path,
         utility_threshold=args.utility_threshold,
     )
+
+    # Auto-calibrate threshold using routing_percentile
+    # This samples 200 questions from the first benchmark and sets the threshold
+    # so that exactly routing_percentile fraction of samples are routed to metacog.
+    if args.routing_percentile is not None:
+        print(f"\nAuto-calibrating threshold for {args.routing_percentile*100:.0f}% routing rate...")
+        from datasets import load_dataset as _load_ds
+        _cal_benchmark = args.benchmarks[0]
+        if _cal_benchmark == 'gsm8k':
+            _ds = _load_ds('gsm8k', 'main', split='train')
+            _cal_qs = [_ds[i]['question'] for i in random.sample(range(len(_ds)), min(200, len(_ds)))]
+        elif _cal_benchmark == 'mmlu':
+            _ds = _load_ds('cais/mmlu', 'all', split='validation')
+            _cal_qs = [_ds[i]['question'] for i in random.sample(range(len(_ds)), min(200, len(_ds)))]
+        else:
+            _ds = _load_ds('Rowan/hellaswag', split='validation')
+            _cal_qs = [_ds[i]['ctx'] for i in random.sample(range(len(_ds)), min(200, len(_ds)))]
+        _cal_utilities = []
+        print(f"  Scoring {len(_cal_qs)} calibration samples from {_cal_benchmark}...")
+        for _q in tqdm(_cal_qs, desc='Calibrating threshold'):
+            _, _, _u = evaluator.predict_utility(_q, _cal_benchmark)
+            _cal_utilities.append(_u)
+        _cal_utilities.sort()
+        _threshold_idx = int((1.0 - args.routing_percentile) * len(_cal_utilities))
+        _threshold_idx = max(0, min(_threshold_idx, len(_cal_utilities) - 1))
+        auto_threshold = _cal_utilities[_threshold_idx]
+        evaluator.utility_threshold = auto_threshold
+        print(f"  Utility scores: min={min(_cal_utilities):.4f}, median={np.median(_cal_utilities):.4f}, max={max(_cal_utilities):.4f}")
+        print(f"  Auto-calibrated threshold: {auto_threshold:.4f} (targets {args.routing_percentile*100:.0f}% routing)")
+        args.utility_threshold = auto_threshold
 
     all_summaries = []
 
